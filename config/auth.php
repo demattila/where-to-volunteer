@@ -46,11 +46,16 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'web_organization' => [
+            'driver' => 'session',
+            'provider' => 'organizations',
+        ]
     ],
 
     /*
     |--------------------------------------------------------------------------
-    | User Providers
+    | Volunteer Providers
     |--------------------------------------------------------------------------
     |
     | All authentication drivers have a user provider. This defines how the
@@ -68,9 +73,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Volunteer::class,
         ],
 
+        'organizations' => [
+            'driver' => 'eloquent',
+            'model' => App\Organization::class,
+        ],
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
@@ -95,6 +104,13 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'organizations' => [
+            'provider' => 'organizations',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
