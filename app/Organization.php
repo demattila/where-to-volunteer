@@ -21,4 +21,19 @@ class Organization extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'type_id');
+    }
+
+    public function fields()
+    {
+        return $this->belongsToMany(Field::class, 'organization_fields');
+    }
 }

@@ -18,6 +18,9 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            if ('web_organization' === $guard) {
+                return redirect('/');
+            }
             return redirect('/home');
         }
 

@@ -36,4 +36,9 @@ class Volunteer extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function applies()
+    {
+        return $this->belongsToMany(Event::class, 'applies')->withPivot('id','status_id')->withTimestamps();
+    }
 }

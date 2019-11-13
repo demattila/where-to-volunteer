@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/events', 'EventsController@index')->name('events');
+Route::get('/events', 'EventController@index')->name('events');
 
 Route::prefix('/organization')->name('organization.')->namespace('Organization')->group(function(){
 

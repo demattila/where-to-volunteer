@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Index</title>
+    <title>Where To Volunteer?</title>
     @include('layouts.head')
 </head>
 
@@ -23,6 +23,7 @@
                     itself upon you'll dominion waters man second good you they're divided upon winged were replenish night
                 </p>
                 {{--<a class="primary_btn mr-20" href="#">Donate Now</a>--}}
+                <a class="primary_btn yellow_btn text-white" href={{route('events')}}>See Causes</a>
                 <a class="primary_btn yellow_btn text-white" href={{route('events')}}>See Causes</a>
             </div>
         </div>
