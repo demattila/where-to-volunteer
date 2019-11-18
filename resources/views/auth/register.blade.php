@@ -19,7 +19,6 @@
     </div>
 </section>
 
-{{--@section('content')--}}
 <section class="event_area section_gap_top">
     <div class="container">
         <div class="row justify-content-center">
@@ -96,7 +95,6 @@
     </div>
 
 </section>
-{{--@endsection--}}
 
 @include('layouts.footer')
 @include('layouts.scripts')

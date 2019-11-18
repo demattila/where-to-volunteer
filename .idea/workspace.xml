@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="825c70a6-2c87-4415-acb7-76c878d8bd35" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,14 +29,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="README.md" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="34">
-                <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
-              </first_editor>
-              <second_editor />
+      <file leaf-file-name="register.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/auth/register.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1581">
+              <caret line="93" column="14" lean-forward="true" selection-start-line="93" selection-start-column="14" selection-end-line="93" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="54" column="38" lean-forward="true" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -95,6 +102,7 @@
       <find>url</find>
       <find>backgr</find>
       <find>center</find>
+      <find>scrip</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -103,8 +111,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/views/auth/register.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/auth/login.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/events.blade.php" />
         <option value="$PROJECT_DIR$/public/scss/_breadcrumb.scss" />
         <option value="$PROJECT_DIR$/resources/views/organization/auth/login.blade.php" />
@@ -154,6 +160,8 @@
         <option value="$PROJECT_DIR$/database/seeds/VolunteersTableSeeder.php" />
         <option value="$PROJECT_DIR$/resources/views/dashboard.blade.php" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/resources/views/auth/register.blade.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
       </list>
     </option>
   </component>
@@ -316,14 +324,7 @@
               <item name="WTVolunteer" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="event" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="WTVolunteer" type="b2602c69:ProjectViewProjectNode" />
-              <item name="WTVolunteer" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="WTVolunteer" type="b2602c69:ProjectViewProjectNode" />
@@ -412,12 +413,12 @@
       <workItem from="1573987450270" duration="3318000" />
       <workItem from="1573996382293" duration="27215000" />
       <workItem from="1574064489137" duration="3164000" />
-      <workItem from="1574073446103" duration="17700000" />
+      <workItem from="1574073446103" duration="19070000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="194218000" />
+    <option name="totallyTimeSpent" value="195588000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="886" extended-state="6" />
@@ -486,12 +487,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/seeds/CategoriesTableSeeder.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Providers/AuthServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -811,6 +806,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="34">
+            <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Volunteer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -821,13 +826,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="34">
-            <caret line="2" column="44" selection-start-line="2" selection-start-column="44" selection-end-line="2" selection-end-column="44" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/resources/views/auth/register.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1581">
+          <caret line="93" column="14" lean-forward="true" selection-start-line="93" selection-start-column="14" selection-end-line="93" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="54" column="38" lean-forward="true" selection-start-line="54" selection-start-column="38" selection-end-line="54" selection-end-column="38" />
         </state>
       </provider>
     </entry>
