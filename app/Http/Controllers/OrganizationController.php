@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
-use App\Favorite;
+use App\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EventController extends Controller
+class OrganizationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,28 +15,19 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
-        return view('event.index', ['events' => $events]);
+        if(Auth::guard('web_organization')->check() ){
+            return redirect()->route('organization.dashboard');
+        }
+        else{
+            return view('organization.index');
+        }
     }
 
-    public function favorite(Event $event){
-        $volunteer_id = Auth::guard('web')->user()->id;
-        $event_id = $event->id;
-        dump($event->id);
-        Favorite::create([
-            'volunteer_id' => $volunteer_id,
-            'event_id' => $event_id
-        ]);
-        return redirect()->back();
+    public function dashboard()
+    {
+        return view('organization.dashboard');
     }
 
-    public function unfavorite(Event $event){
-        $user_id = Auth::guard('web')->user()->id;
-        $favorite = Favorite::where('volunteer_id',$user_id)->where('event_id',$event->id)->first();
-//        dump($favorite);
-        $favorite->delete();
-        return redirect()->back();
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -62,22 +52,21 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Event  $event
+     * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Organization $organization)
     {
-        //dump($event);
-        return view('event.details', ['event' => $event]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Event  $event
+     * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit(Organization $organization)
     {
         //
     }
@@ -86,10 +75,10 @@ class EventController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Event  $event
+     * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, Organization $organization)
     {
         //
     }
@@ -97,10 +86,10 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Event  $event
+     * @param  \App\Organization  $organization
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(Organization $organization)
     {
         //
     }

@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/organization';
 
     /**
      * Create a new controller instance.
@@ -68,5 +68,10 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    protected function guard()
+    {
+        return auth()->guard('web_organization');
     }
 }

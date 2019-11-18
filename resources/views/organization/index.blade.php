@@ -7,21 +7,21 @@
 </head>
 
 <body>
-    @include('layouts.header')
+@include('layouts.header')
 
 <!--================ Home Banner Area =================-->
 <section class="home_banner_area">
     <div class="banner_inner">
         <div class="container">
             <div class="banner_content">
-                <p class="upper_text">Give a hand</p>
-                <h2>to make the better world</h2>
+                <p class="upper_text">Advertise your events</p>
+                <h2>to find helping people</h2>
                 <p>
                     That don't lights. Blessed land spirit creature divide our made two
                     itself upon you'll dominion waters man second good you they're divided upon winged were replenish night
                 </p>
-                <a class="primary_btn yellow_btn text-white"  href={{route('register')}}>Register</a>
-                <a class="primary_btn mr-20" href={{route('login')}}>Log in<span class="lnr lnr-arrow-right"></span></a>
+                <a class="primary_btn yellow_btn text-white" href={{route('organization.register')}}>Register</a>
+                <a class="primary_btn mr-20" href={{route('organization.login')}}>Log in<span class="lnr lnr-arrow-right"></span></a>
             </div>
         </div>
     </div>
@@ -213,6 +213,19 @@
 @include('layouts.footer')
 <!--================ End footer Area  =================-->
 
-@include('layouts.scripts')
+{{--@include('layouts.scripts')--}}
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/stellar.js"></script>
+<script src="vendors/lightbox/simpleLightbox.min.js"></script>
+<script src="vendors/nice-select/js/jquery.nice-select.min.js"></script>
+<script src="js/jquery.ajaxchimp.min.js"></script>
+<script src="js/mail-script.js"></script>
+<script src="js/countdown.js"></script>
+<!--gmaps Js-->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"></script>
+<script src="js/gmaps.min.js"></script>
+<script src="js/theme.js"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@
             </div>
         </section>
 
-    {{--@section('content')--}}
+    <section class="event_area section_gap_top">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -90,9 +90,10 @@
                 </div>
             </div>
         </div>
-    {{--@endsection--}}
+    </section>
 
-    {{--@include('layouts.footer')--}}
+    @include('layouts.footer')
+
     @include('layouts.scripts')
 
     </body>

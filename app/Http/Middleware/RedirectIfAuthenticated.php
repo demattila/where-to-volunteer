@@ -19,9 +19,9 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check()) {
             if ('web_organization' === $guard) {
-                return redirect('/');
+                return redirect('/organization/dashboard');
             }
-            return redirect('/home');
+            return redirect('/dashboard');
         }
 
         return $next($request);

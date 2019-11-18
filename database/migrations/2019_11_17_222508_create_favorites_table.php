@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppliesTable extends Migration
+class CreateFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateAppliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('applies', function (Blueprint $table) {
+        Schema::create('favorites', function (Blueprint $table) {
             $table->unsignedBigInteger('volunteer_id');
             $table->unsignedBigInteger('event_id');
             $table->bigIncrements('id');
-            $table->unsignedTinyInteger('status');
             $table->timestamps();
-
 
             $table->foreign('volunteer_id')->references('id')->on('volunteers')->onDelete('cascade');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
+
         });
     }
 
@@ -33,6 +32,6 @@ class CreateAppliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('applies');
+        Schema::dropIfExists('favorites');
     }
 }

@@ -16,7 +16,14 @@ class OrganizationsTableSeeder extends Seeder
             'name' => 'Wizz Air',
             'email' => 'wizz@air.ro',
             'password' => bcrypt('1234asdf'),
-
+            'type_id' => 1
+        ]);
+        DB::table('organizations')->insert([
+            'id' => 2,
+            'name' => 'Yuppi Camp',
+            'email' => 'yuppi@laravel.com',
+            'password' => bcrypt('1234asdf'),
+            'type_id' => 1
         ]);
 
     }

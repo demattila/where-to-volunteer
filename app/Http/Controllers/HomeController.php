@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:web')->except('index');
+//        $this->middleware('auth:web')->except('index');
     }
 
     /**
@@ -22,12 +22,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
-    {
-//        dump('User vol: '.Auth::guard('web')->user());
-//        dump('User org: '.Auth::guard('web_organization')->user());
-        return view('index');
-    }
+
 
     public function home()
     {

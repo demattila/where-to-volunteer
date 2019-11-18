@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Event;
-use App\Favorite;
+use App\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class EventController extends Controller
+class VolunteerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,28 +15,26 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::all();
-        return view('event.index', ['events' => $events]);
+//        dump('User vol: '.Auth::guard('web')->user());
+//        dump('User org: '.Auth::guard('web_organization')->user());
+//        dump(Auth::guard('web')->check());
+//        if(Auth::guard('web')->check() ){
+////            redirect()->;
+//            return redirect()->route('dashboard');
+//        }
+//        else{
+//            return view('index');
+//        }
+        return view('index');
+
     }
 
-    public function favorite(Event $event){
-        $volunteer_id = Auth::guard('web')->user()->id;
-        $event_id = $event->id;
-        dump($event->id);
-        Favorite::create([
-            'volunteer_id' => $volunteer_id,
-            'event_id' => $event_id
-        ]);
-        return redirect()->back();
+    public function dashboard()
+    {
+        return view('dashboard',['user' => Auth::guard('web')->user()] );
     }
 
-    public function unfavorite(Event $event){
-        $user_id = Auth::guard('web')->user()->id;
-        $favorite = Favorite::where('volunteer_id',$user_id)->where('event_id',$event->id)->first();
-//        dump($favorite);
-        $favorite->delete();
-        return redirect()->back();
-    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -62,22 +59,21 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Event  $event
+     * @param  \App\Volunteer  $volunteer
      * @return \Illuminate\Http\Response
      */
-    public function show(Event $event)
+    public function show(Volunteer $volunteer)
     {
-        //dump($event);
-        return view('event.details', ['event' => $event]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Event  $event
+     * @param  \App\Volunteer  $volunteer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Event $event)
+    public function edit(Volunteer $volunteer)
     {
         //
     }
@@ -86,10 +82,10 @@ class EventController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Event  $event
+     * @param  \App\Volunteer  $volunteer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Event $event)
+    public function update(Request $request, Volunteer $volunteer)
     {
         //
     }
@@ -97,10 +93,10 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Event  $event
+     * @param  \App\Volunteer  $volunteer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Event $event)
+    public function destroy(Volunteer $volunteer)
     {
         //
     }

@@ -33,7 +33,7 @@
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'Laravel') }}
             </a>
-            <a class="navbar-brand" href="{{route('events')}}">
+            <a class="navbar-brand" href="{{route('events.index')}}">
                 Events
             </a>
             <a class="navbar-brand" href="{{ url('/about') }}">

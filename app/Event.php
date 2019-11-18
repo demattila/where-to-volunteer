@@ -17,12 +17,17 @@ class Event extends Model
 
     public function owner()
     {
-        return $this->belongsTo(Organization::class, 'owner_id');
+        return $this->belongsTo(Organization::class);
     }
 
     public function applies()
     {
-        return $this->belongsToMany(Volunteer::class, 'applies')->withPivot('id','status_id')->withTimestamps();
+        return $this->belongsToMany(Volunteer::class, 'applies')->withPivot('id','status')->withTimestamps();
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Volunteer::class, 'favorites')->withTimestamps();
     }
 
 }

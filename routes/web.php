@@ -17,11 +17,25 @@
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('index');
+Route::get('/', 'VolunteerController@index')->name('index')->middleware('guest');
+Route::get('/dashboard', 'VolunteerController@dashboard')->name('dashboard')->middleware('auth:web');
+
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
-Route::get('/events', 'EventController@index')->name('events');
 
+Route::resource('events', 'EventController');
+Route::post('/events/favorite/{event}', 'EventController@favorite')->name('events.favorite');
+Route::delete('/events/unfavorite/{event}', 'EventController@unfavorite')->name('events.unfavorite');
+//Route::get('/events', 'EventController@index')->name('events');
+//Route::get('/events/{event}', 'EventController@show')->name('events.show');
+
+//Route::get('/applies', 'ApplyController@index')->name('apply.index');
+Route::post('/applies/{event}', 'ApplyController@apply')->name('apply')->middleware('auth:web');
+Route::delete('/applies/{event}', 'ApplyController@cancel')->name('apply.cancel')->middleware('auth:web');
+
+
+Route::get('/organization', 'OrganizationController@index')->name('organization.index')->middleware('guest');
+Route::get('/organization/dashboard', 'OrganizationController@dashboard')->name('organization.dashboard')->middleware('auth:web_organization');
 Route::prefix('/organization')->name('organization.')->namespace('Organization')->group(function(){
 
     Route::namespace('Auth')->group(function(){
@@ -40,5 +54,4 @@ Route::prefix('/organization')->name('organization.')->namespace('Organization')
         Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
         Route::post('register', 'RegisterController@register');
     });
-
 });

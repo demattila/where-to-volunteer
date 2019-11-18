@@ -24,7 +24,7 @@ class Organization extends Authenticatable
 
     public function events()
     {
-        return $this->hasMany(Event::class);
+        return $this->hasMany(Event::class, 'owner_id');
     }
 
     public function type()
