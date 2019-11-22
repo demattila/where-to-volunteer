@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Traits\UploadTrait;
 use App\Volunteer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -22,6 +24,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use UploadTrait;
 
     /**
      * Where to redirect users after registration.
@@ -52,6 +55,15 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:volunteers'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'posy' => ['nullable','string', 'max:255'],
+            'mobile' => ['nullable','string','min:5' ,'max:20'],
+            'city' => ['required', 'string', 'max:255'],
+            'region' => ['required', 'string', 'max:255'],
+            'works_at' => ['nullable','string', 'max:255'],
+            'birth' => ['required','date','date_format:Y-m-d'],
+//            'image' => ['image','mimes:jpeg,png,jpg,gif','max:2048'],
+            'sex' => ['required'],
+            'driving_licence' => ['required'],
         ]);
     }
 
@@ -63,11 +75,31 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+//        dump($data);
+//        if($data['image']===NULL){
+//            $image='default.png';
+//        }else{
+//            $image=$data['image'];
+//            $name =time();
+//            $folder = '/img/volunteer/';
+//            $filePath =$name. '.' . $image->getClientOriginalExtension();
+//            $this->uploadOne($image, $folder, 'public', $name);
+//        }
+
+//        dd($data['sex']);
         return Volunteer::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'image' => 'default.png'
+            'posy' => $data['posy'],
+            'mobile' => $data['mobile'],
+            'city' => $data['city'],
+            'region' => $data['region'],
+            'works_at' => $data['works_at'],
+            'birth' => $data['birth'],
+//            'image' => $filePath
+            'sex' => $data['sex'],
+            'driving_licence' => ($data['driving_licence'] == 'true') ? 1 : 0,
         ]);
     }
 }

@@ -7,10 +7,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Session;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\File;
 
-class Volunteer extends Authenticatable
+class Volunteer extends Authenticatable implements HasMedia
 {
-    use Notifiable;
+    use Notifiable,HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +21,7 @@ class Volunteer extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name','email','password','posy','mobile','city','region','works_at','birth','image','sex','driving_licence',
     ];
 
     /**
@@ -50,6 +53,20 @@ class Volunteer extends Authenticatable
     public function favorites()
     {
         return $this->belongsToMany(Event::class, 'favorites')->withPivot('id')->withTimestamps();
+    }
+
+    public function getProfileImagePath(){
+        $image_url = $this->getFirstMediaUrl('volunteer_profile_images');
+
+        if($image_url == Null){
+            if($this->sex == 'M'){
+                return(url('/storage/default_male.jpg'));
+            }
+            else{
+                return(url('/storage/default_female.jpg'));
+            }
+        }
+        return $image_url;
     }
 
     public function historyEvents(){
@@ -92,6 +109,14 @@ class Volunteer extends Authenticatable
             return true;
         }
         return false;
+    }
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('volunteer_profile_images')->singleFile()
+             ->acceptsFile(function (File $file) {
+            return $file->mimeType === 'image/jpeg';
+        });;
     }
 
 }

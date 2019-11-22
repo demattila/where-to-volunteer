@@ -67,25 +67,27 @@
                                 <div class="content_wrapper">
                                     <h3 class="title">
                                         <a href="{{route('events.show',$event)}}">{{$event->title}}</a>
-                                        @if( auth()->user()->isFavorite($event) )
-                                            <button type="button" class="btn" onclick="event.preventDefault();
-                                                document.getElementById('unfavorite-form-{{$event->id}}').submit();">
-                                                <span class="fas fa-star"></span>
-                                            </button>
-                                            <form id="unfavorite-form-{{$event->id}}" action="{{route('events.unfavorite', $event)}}" method="POST" style="display: none;">
-                                                @method('delete')
-                                                @csrf
-                                            </form>
-                                        @else
-                                            <button type="button" class="btn" onclick="event.preventDefault();
-                                                    document.getElementById('favorite-form-{{$event->id}}').submit();">
-                                                <span class="far fa-star"></span>
-                                            </button>
-                                            {{--{{dump(route('events.favorite', $event))}}--}}
-                                            {{--{{dump(route('events.unfavorite', $event))}}--}}
-                                            <form id="favorite-form-{{$event->id}}" action="{{route('events.favorite', $event)}}" method="POST" style="display: none;">
-                                                @csrf
-                                            </form>
+                                        @if(auth()->guard('web')->check())
+                                            @if( auth()->user()->isFavorite($event) )
+                                                <button type="button" class="btn" onclick="event.preventDefault();
+                                                    document.getElementById('unfavorite-form-{{$event->id}}').submit();">
+                                                    <span class="fas fa-star"></span>
+                                                </button>
+                                                <form id="unfavorite-form-{{$event->id}}" action="{{route('events.unfavorite', $event)}}" method="POST" style="display: none;">
+                                                    @method('delete')
+                                                    @csrf
+                                                </form>
+                                            @else
+                                                <button type="button" class="btn" onclick="event.preventDefault();
+                                                        document.getElementById('favorite-form-{{$event->id}}').submit();">
+                                                    <span class="far fa-star"></span>
+                                                </button>
+                                                {{--{{dump(route('events.favorite', $event))}}--}}
+                                                {{--{{dump(route('events.unfavorite', $event))}}--}}
+                                                <form id="favorite-form-{{$event->id}}" action="{{route('events.favorite', $event)}}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            @endif
                                         @endif
                                     </h3>
                                     <p>

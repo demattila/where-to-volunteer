@@ -43,12 +43,7 @@ class ApplyController extends Controller
     public function cancel(Request $request, Event $event)
     {
         $apply = Apply::where('volunteer_id',auth()->user()->id)->where('event_id', $event->id)->first();
-        $apply1 = Apply::where('volunteer_id',auth()->user()->id)->where('event_id', $event->id)->get();
-
-
         $apply->delete();
-
-
         $request->session()->flash('message', 'Successfully canceled!');
 
         return redirect()->back();

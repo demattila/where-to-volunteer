@@ -5,14 +5,11 @@ namespace App\Http\Controllers;
 use App\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class VolunteerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
 //        dump('User vol: '.Auth::guard('web')->user());
@@ -25,36 +22,16 @@ class VolunteerController extends Controller
 //        else{
 //            return view('index');
 //        }
-        return view('index');
+        return view('volunteer.index');
 
     }
 
     public function dashboard()
     {
-        return view('dashboard',['user' => Auth::guard('web')->user()] );
+        $user = Volunteer::findOrFail(auth()->user()->id);
+        return view('volunteer.dashboard',['user' => $user] );
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -73,9 +50,11 @@ class VolunteerController extends Controller
      * @param  \App\Volunteer  $volunteer
      * @return \Illuminate\Http\Response
      */
-    public function edit(Volunteer $volunteer)
+    public function edit()
     {
-        //
+        $volunteer = Auth::guard('web')->user();
+//        dump(Auth::guard('web')->user());
+        return view('volunteer.edit',['user' => $volunteer]);
     }
 
     /**
@@ -85,9 +64,41 @@ class VolunteerController extends Controller
      * @param  \App\Volunteer  $volunteer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Volunteer $volunteer)
+    public function update(Request $request)
     {
-        //
+//        $request->validate([
+//            'name' => 'required|min:3|max:255',
+//            'description' => 'required|min:3|max:255',
+//        ]);
+        $update = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'posy' => ['nullable','string', 'max:255'],
+            'mobile' => ['nullable','string','min:5' ,'max:20'],
+            'city' => ['required', 'string', 'max:255'],
+            'region' => ['required', 'string', 'max:255'],
+            'works_at' => ['nullable','string', 'max:255'],
+            'birth' => ['required','date','date_format:Y-m-d'],
+//          'image' => ['image','mimes:jpeg,png,jpg,gif','max:2048'],
+            'sex' => ['required'],
+            'driving_licence' => ['required'],
+        ])->validate();
+
+        $update = [
+            'name' => $request->name,
+            'posy' => $request->posy,
+            'mobile' =>$request->mobile,
+            'city' =>$request->city,
+            'region' =>$request->region,
+            'works_at' =>$request->works_at,
+            'birth' =>$request->birth,
+            'sex' =>$request->sex,
+            'driving_licence' => ($request['driving_licence'] == 'true') ? 1 : 0,
+        ];
+
+        Volunteer::find(auth()->user()->id)->update($update);
+
+        $request->session()->flash('message', 'Successfully updated your profile!');
+        return redirect('/dashboard');
     }
 
     /**

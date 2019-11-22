@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\FileUnacceptableForCollection;
+use Spatie\MediaLibrary\Exceptions\FileCannotBeAdded\UnknownType;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +48,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof FileUnacceptableForCollection){
+            return redirect()->back()->withErrors('Only jpeg file type is accepted!');
+        }
+        if($exception instanceof UnknownType){
+            return redirect()->back()->withErrors('Upload a picture first!');
+        }
         return parent::render($request, $exception);
     }
 

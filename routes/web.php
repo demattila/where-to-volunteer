@@ -19,6 +19,8 @@ Auth::routes();
 
 Route::get('/', 'VolunteerController@index')->name('index')->middleware('guest');
 Route::get('/dashboard', 'VolunteerController@dashboard')->name('dashboard')->middleware('auth:web');
+Route::get('/volunteer/edit','VolunteerController@edit')->name('profile.edit')->middleware('auth:web');
+Route::patch('/volunteer/update','VolunteerController@update')->name('profile.update')->middleware('auth:web');
 
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
@@ -32,6 +34,16 @@ Route::delete('/events/unfavorite/{event}', 'EventController@unfavorite')->name(
 //Route::get('/applies', 'ApplyController@index')->name('apply.index');
 Route::post('/applies/{event}', 'ApplyController@apply')->name('apply')->middleware('auth:web');
 Route::delete('/applies/{event}', 'ApplyController@cancel')->name('apply.cancel')->middleware('auth:web');
+
+Route::get('/image','ImageController@index')->name('image.index');
+Route::get('/image/create','ImageController@create')->name('image.create');
+Route::get('image/{image}','ImageController@show')->name('image.show');
+Route::post('/image','ImageController@store')->name('image.store')->middleware('auth:web');
+Route::get('/volunteer/image/edit','ImageController@edit')->name('image.edit')->middleware('auth:web');
+Route::patch('image/{image}','ImageController@update')->name('image.update');
+Route::delete('/image/{image}','ImageController@destroy')->name('image.destroy');
+//Route::resource('image','ImageController');
+
 
 
 Route::get('/organization', 'OrganizationController@index')->name('organization.index')->middleware('guest');

@@ -9,6 +9,7 @@
 <body>
 @include('layouts.header')
 
+
 <!--================ Home Banner Area =================-->
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center">
@@ -27,24 +28,33 @@
 <div class="section-top-border">
     <div class="container">
         <div class="row border border-light rounded" style="background-color: #e3e2db">
-            <div class="col-md-3" align="middle" style="padding: 10px">
+            <div class="col-md-3"  style="padding: 10px">
                 <div class="panel panel-default" >
                     <div class="panel-heading" align="left">
                         <h5>Account</h5><hr>
                     </div>
-
                     <div class="panel-body">
-                        <img class="rounded" style="width: 10rem;" src="img/volunteer/{{Auth::guard('web')->user()->image}}" alt="user image">
-                        {{--<div class="card-body">--}}
-                        <div class="text-block">
-                            <h6 style="padding-top: 1rem">{{Auth::guard('web')->user()->name}}</h6>
+                        <img class="rounded" style="width: 10rem;" src="{{$user->getProfileImagePath()}}" alt="user image">
+                        <div class="col-lg-12">
+                            <h6 class=" mt-2">{{Auth::guard('web')->user()->name}}</h6>
                             <p>{{Auth::guard('web')->user()->email}}</p>
                             <p class="card-text"><i>{{Auth::guard('web')->user()->posy}}</i></p>
-                            <a href="#" class="genric-btn info medium">Edit</a>
-                            <a href="#" class="genric-btn danger medium" onclick="event.preventDefault();
+                            {{--<a href="#" class="genric-btn info medium">Edit</a>--}}
+                            <div class="row" align="center">
+                                <div class="dropdown">
+                                    <a class="genric-btn info medium mr-1 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Edit
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" href="{{route('profile.edit')}}">Edit profile data</a>
+                                        <a class="dropdown-item" href="#">Change password</a>
+                                        <a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>
+                                    </div>
+                                </div>
+                                <a href="#" class="genric-btn danger medium" onclick="event.preventDefault();
                        document.getElementById('logout-form').submit();">{{ __('Logout') }}{{--<span class="lnr lnr-arrow-right"></span>--}}</a>
-                        </div>
-
+                            </div>
+                            </div>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -124,20 +134,20 @@
 <section class="section">
     <div class="container">
     <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" style="padding-right: 5px">
-            <a class="genric-btn primary medium nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">History</a>
+        <li class="nav-item">
+            <a class="genric-btn primary medium mr-1 nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">History</a>
         </li>
-        <li class="nav-item" style="padding-right: 5px">
-            <a class="genric-btn primary medium nav-link" id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing" aria-selected="false">Ongoing</a>
+        <li class="nav-item">
+            <a class="genric-btn primary medium mr-1 nav-link " id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing" aria-selected="false">Ongoing</a>
         </li>
-        <li class="nav-item" style="padding-right: 5px">
-            <a class="genric-btn primary medium nav-link" id="accepted-tab" data-toggle="tab" href="#accepted" role="tab" aria-controls="accepted" aria-selected="false">Accepted</a>
+        <li class="nav-item">
+            <a class="genric-btn primary medium mr-1 nav-link" id="accepted-tab" data-toggle="tab" href="#accepted" role="tab" aria-controls="accepted" aria-selected="false">Accepted</a>
         </li>
-        <li class="nav-item" style="padding-right: 5px">
-            <a class="genric-btn primary medium nav-link" id="rejected-tab" data-toggle="tab" href="#rejected" role="tab" aria-controls="rejected" aria-selected="false">Rejected</a>
+        <li class="nav-item">
+            <a class="genric-btn primary medium mr-1 nav-link" id="rejected-tab" data-toggle="tab" href="#rejected" role="tab" aria-controls="rejected" aria-selected="false">Rejected</a>
         </li>
-        <li class="nav-item" style="padding-right: 5px">
-            <a class="genric-btn primary medium nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">Favorites</a>
+        <li class="nav-item">
+            <a class="genric-btn primary medium mr-1 nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">Favorites</a>
         </li>
     </ul>
     <div class="tab-content" id="myTabContent">
