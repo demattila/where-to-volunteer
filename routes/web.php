@@ -44,7 +44,7 @@ Route::patch('image/{image}','ImageController@update')->name('image.update');
 Route::delete('/image/{image}','ImageController@destroy')->name('image.destroy');
 //Route::resource('image','ImageController');
 
-
+Route::post('/events/filter', 'FilterController@filter')->name('event.filter');
 
 Route::get('/organization', 'OrganizationController@index')->name('organization.index')->middleware('guest');
 Route::get('/organization/dashboard', 'OrganizationController@dashboard')->name('organization.dashboard')->middleware('auth:web_organization');
@@ -63,7 +63,7 @@ Route::prefix('/organization')->name('organization.')->namespace('Organization')
         Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
 
         // Registration Routes...
-        Route::get('register', 'RegisterController@showRegistrationForm')->name('register');
-        Route::post('register', 'RegisterController@register');
+        Route::get('register', 'RegisterController@showRegistrationForm');
+        Route::post('register', 'RegisterController@register')->name('register');
     });
 });

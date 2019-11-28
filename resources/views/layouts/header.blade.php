@@ -22,31 +22,25 @@
                             <li class="nav-item {{Request::path() ==='events' ? 'active' : ''}}"><a class="nav-link" href={{route('events.index')}}>Events</a></li>
                             <li class="nav-item {{Request::path() ==='about' ? 'active' : ''}}"><a class="nav-link" href={{route('about')}}>About</a></li>
 
-                            {{--@guest--}}
-                                {{--<li class="nav-item">--}}
-                                    {{--<a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>--}}
-                                {{--</li>--}}
-                                {{--@if (Route::has('register'))--}}
-                                    {{--<li class="nav-item">--}}
-                                        {{--<a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>--}}
-                                    {{--</li>--}}
-                                {{--@endif--}}
-                            {{--@else--}}
-                                {{--<li class="nav-item submenu dropdown">--}}
-                                    {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">--}}
-                                        {{--Logged in as: {{ Auth::user()->name }} <span class="caret"></span></a>--}}
-                                    {{--<div class="dropdown-menu">--}}
-                                        {{--<a class="nav-item"><a class="nav-link" href="{{ route('logout') }}"--}}
-                                                                {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                                            {{--{{ __('Logout') }}</a>--}}
-                                        {{--</a>--}}
-                                        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                            {{--@csrf--}}
-                                        {{--</form>--}}
-                                    {{--</div>--}}
-                                {{--</li>--}}
-                            {{--@endguest--}}
+                            @auth()
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        @if(auth()->user()->avatar_url)
+                                            <img src="{{auth()->guard('web')->user()->avatar_url}}" alt="avatar" class="rounded-circle">
+                                        @endif
+                                        <i>{{ Auth::user()->name }} </i><span class="caret"></span></a>
+                                    <div class="dropdown-menu">
+                                        <a class="nav-item"><a class="nav-link" href="{{ route('logout') }}"
+                                                                onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            {{ __('Logout') }}</a>
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endauth
 
                         </ul>
                     </div>

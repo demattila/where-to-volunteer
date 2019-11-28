@@ -26,10 +26,10 @@ class HomeController extends Controller
 
     public function home()
     {
-        return view('home');
+        return view('shared.home');
     }
 
     public function about(){
-        return view('about');
+        return view('shared.about');
     }
 }

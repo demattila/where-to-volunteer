@@ -52,6 +52,14 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:organizations'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'contact_person' => ['required','string', 'max:255'],
+            'description' => ['nullable','string', 'max:255'],
+            'founded_at' => ['required','date','date_format:Y-m-d'],
+            'address' => ['nullable','string', 'max:255'],
+            'city' => ['required','string', 'max:255'],
+            'region' => ['required','string', 'max:255'],
+            'site' => ['nullable','string', 'max:255'],
+            'type' => ['required']
         ]);
     }
 
@@ -67,6 +75,14 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'contact_person' => $data['contact_person'],
+            'description' => $data['description'],
+            'founded_at' => $data['founded_at'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'region' => $data['region'],
+            'site' => $data['site'],
+            'type_id' => $data['type']
         ]);
     }
 

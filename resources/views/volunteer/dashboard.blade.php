@@ -27,20 +27,20 @@
 <!--================ End Story Area =================-->
 <div class="section-top-border">
     <div class="container">
-        <div class="row border border-light rounded" style="background-color: #e3e2db">
+        <div class="row border border-light rounded" style="background-color: #ffffed">
             <div class="col-md-3"  style="padding: 10px">
                 <div class="panel panel-default" >
                     <div class="panel-heading" align="left">
                         <h5>Account</h5><hr>
                     </div>
-                    <div class="panel-body">
-                        <img class="rounded" style="width: 10rem;" src="{{$user->getProfileImagePath()}}" alt="user image">
+                    <div class="panel-body" align="middle">
+                        <img class="rounded" style="width: 10rem;" src="{{$user->image_url}}" alt="user image">
                         <div class="col-lg-12">
-                            <h6 class=" mt-2">{{Auth::guard('web')->user()->name}}</h6>
-                            <p>{{Auth::guard('web')->user()->email}}</p>
-                            <p class="card-text"><i>{{Auth::guard('web')->user()->posy}}</i></p>
+                            <h6 class=" mt-3">{{$user->name}}</h6>
+                            <p>{{$user->email}}</p>
+                            <p class="card-text"><i>{{$user->posy}}</i></p>
                             {{--<a href="#" class="genric-btn info medium">Edit</a>--}}
-                            <div class="row" align="center">
+                            <div class="row justify-content-center">
                                 <div class="dropdown">
                                     <a class="genric-btn info medium mr-1 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Edit
@@ -55,7 +55,6 @@
                        document.getElementById('logout-form').submit();">{{ __('Logout') }}{{--<span class="lnr lnr-arrow-right"></span>--}}</a>
                             </div>
                             </div>
-
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
                         </form>
@@ -68,16 +67,16 @@
                     <div class="panel-heading" align="left"><h5>Profile</h5><hr></div>
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-sm-4" align="middle" >
+                                <div class="col-md-4" align="middle" >
                                     <p><i class="fas fa-address-card fa-2x"></i></p>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-md-6">
                                     <p>{{$user->city}}, {{$user->region}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4" align="middle" >
+                                <div class="col-md-4" align="middle" >
                                     <p>
                                         @if($user->sex === 'M')
                                             <i class="fas fa-mars fa-2x"></i>
@@ -86,7 +85,7 @@
                                         @endif
                                     </p>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-md-6">
                                     <p>
                                         @if($user->sex === 'M')
                                             Male
@@ -97,20 +96,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4" align="middle" >
+                                <div class="col-md-4" align="middle" >
                                     <p><i class="fas fa-mobile-alt fa-2x"></i></p>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-md-6">
                                     <p>{{$user->mobile}}</p>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-4" align="middle" >
+                                <div class="col-md-4" align="middle" >
                                     <p><i class="fas fa-briefcase fa-2x"></i></p>
                                 </div>
 
-                                <div class="col-sm-6">
+                                <div class="col-md-6">
                                     <p>{{$user->works_at}}</p>
                                 </div>
                             </div>

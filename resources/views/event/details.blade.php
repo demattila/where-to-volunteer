@@ -64,7 +64,7 @@
                         @if(auth()->user()->isApplied($event))
                             <a href="{{ route('apply.cancel', $event) }}" class="genric-btn danger" onclick="event.preventDefault();
                                                                    document.getElementById('cancel-form').submit();">
-                                Cancel
+                                Cancel the apply
                             </a>
                             <div class="alert alert-success">
                                 You applied!

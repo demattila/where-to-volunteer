@@ -52,7 +52,7 @@ class Handler extends ExceptionHandler
             return redirect()->back()->withErrors('Only jpeg file type is accepted!');
         }
         if($exception instanceof UnknownType){
-            return redirect()->back()->withErrors('Upload a picture first!');
+            return redirect()->back()->withErrors('Choose an image first!');
         }
         return parent::render($request, $exception);
     }

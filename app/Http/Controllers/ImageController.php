@@ -35,8 +35,9 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $user=auth()->user();
-        $user->addMedia($request->image)->toMediaCollection('volunteer_profile_images');
+        $user=auth()->guard('web')->user();
+        $new_image = $user->addMedia($request->image)->toMediaCollection('volunteer_profile_images');
+        $user->update(['image_id' => $new_image->id]);
 
         $request->session()->flash('message', 'Successfully uploaded the image!');
         return redirect()->back();
@@ -64,7 +65,7 @@ class ImageController extends Controller
         $user = auth()->guard('web')->user();
         return view('shared.edit_image',[
             'user' => $user,
-            'image' => $user->getProfileImagePath(),
+            'image' => $user->image_url,
         ]);
     }
 

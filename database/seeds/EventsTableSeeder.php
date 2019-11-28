@@ -41,5 +41,66 @@ class EventsTableSeeder extends Seeder
             'created_at'=> now(),
             'updated_at'=> now(),
         ]);
+        DB::table('events')->insert([
+            'id' => 3,
+            'owner_id' => 1,
+            'title' => 'EVENT 3',
+            'description' => 'Yuppi este prima tabără din România care utilizează metoda revoluţionară numită terapie prin experienţă, recunoscută și aplicată în întreaga lume.',
+            'starts_at'=> now(),
+            'ends_at'=> now(),
+            'reward' => 'food,water, etc.',
+            'image' => 'yuppi.jpg',
+            'address' => 'Tabara Saulia Str. Ses, Nr. 58 A, Saulia',
+            'city' => 'Targu Mures',
+            'region' => 'MS',
+            'created_at'=> now(),
+            'updated_at'=> now(),
+        ]);
+        DB::table('events')->insert([
+            'id' => 4,
+            'owner_id' => 1,
+            'title' => 'EVENT 4',
+            'description' => 'Yuppi este prima tabără din România care utilizează metoda revoluţionară numită terapie prin experienţă, recunoscută și aplicată în întreaga lume.',
+            'starts_at'=> now(),
+            'ends_at'=> now(),
+            'reward' => 'food,water, etc.',
+            'image' => 'yuppi.jpg',
+            'address' => 'Tabara Saulia Str. Ses, Nr. 58 A, Saulia',
+            'city' => 'Targu Mures',
+            'region' => 'MS',
+            'created_at'=> now(),
+            'updated_at'=> now(),
+        ]);
+        DB::table('events')->insert([
+            'id' => 5,
+            'owner_id' => 1,
+            'title' => 'EVENT 5',
+            'description' => 'Yuppi este prima tabără din România care utilizează metoda revoluţionară numită terapie prin experienţă, recunoscută și aplicată în întreaga lume.',
+            'starts_at'=> now(),
+            'ends_at'=> now(),
+            'reward' => 'food,water, etc.',
+            'image' => 'yuppi.jpg',
+            'address' => 'Tabara Saulia Str. Ses, Nr. 58 A, Saulia',
+            'city' => 'Targu Mures',
+            'region' => 'MS',
+            'created_at'=> now(),
+            'updated_at'=> now(),
+        ]);
+
+        DB::table('events')->insert([
+            'id' => 6,
+            'owner_id' => 1,
+            'title' => 'EVENT 6',
+            'description' => 'Yuppi este prima tabără din România care utilizează metoda revoluţionară numită terapie prin experienţă, recunoscută și aplicată în întreaga lume.',
+            'starts_at'=> now(),
+            'ends_at'=> now(),
+            'reward' => 'food,water, etc.',
+            'image' => 'yuppi.jpg',
+            'address' => 'Tabara Saulia Str. Ses, Nr. 58 A, Saulia',
+            'city' => 'Targu Mures',
+            'region' => 'MS',
+            'created_at'=> now(),
+            'updated_at'=> now(),
+        ]);
     }
 }

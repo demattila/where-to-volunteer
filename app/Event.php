@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Filters\EventFilter;
+use Illuminate\Database\Eloquent\Builder;
 
 class Event extends Model
 {
@@ -30,4 +32,8 @@ class Event extends Model
         return $this->belongsToMany(Volunteer::class, 'favorites')->withTimestamps();
     }
 
+//    public function scopeFilter(Builder $builder, $request)
+//    {
+//        return (new EventFilter($request))->filter($builder);
+//    }
 }

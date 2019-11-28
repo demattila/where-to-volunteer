@@ -24,7 +24,6 @@ class VolunteersTableSeeder extends Seeder
             'driving_licence' => true,
             'birth' => '1997-05-16',
             'works_at' =>'Sapientia EMTE',
-            'image' => 'v1.jpg',
         ]);
         DB::table('volunteers')->insert([
             'id' => 2,
@@ -39,7 +38,6 @@ class VolunteersTableSeeder extends Seeder
             'driving_licence' => true,
             'birth' => '1996-03-26',
             'works_at' =>'Leading Soft',
-            'image' => 'v2.jpg',
             ]);
     }
 }

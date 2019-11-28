@@ -15,17 +15,19 @@ class OrganizationController extends Controller
      */
     public function index()
     {
-        if(Auth::guard('web_organization')->check() ){
-            return redirect()->route('organization.dashboard');
-        }
-        else{
-            return view('organization.index');
-        }
+//        if(Auth::guard('web_organization')->check() ){
+//            return redirect()->route('organization.dashboard');
+//        }
+//        else{
+//            return view('organization.index');
+//        }
+        return view('organization.index');
     }
 
     public function dashboard()
     {
-        return view('organization.dashboard');
+        $user = Organization::findOrFail(auth()->user()->id);
+        return view('organization.dashboard',['user' => $user]);
     }
 
     /**
@@ -34,17 +36,6 @@ class OrganizationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
     {
         //
     }

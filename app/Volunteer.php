@@ -7,9 +7,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Session;
+use Spatie\Image\Exceptions\InvalidManipulation;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\File;
+use Spatie\MediaLibrary\Models\Media;
 
 class Volunteer extends Authenticatable implements HasMedia
 {
@@ -21,7 +23,7 @@ class Volunteer extends Authenticatable implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'name','email','password','posy','mobile','city','region','works_at','birth','image','sex','driving_licence',
+        'name','email','password','posy','mobile','city','region','works_at','birth','image_id','sex','driving_licence',
     ];
 
     /**
@@ -55,19 +57,6 @@ class Volunteer extends Authenticatable implements HasMedia
         return $this->belongsToMany(Event::class, 'favorites')->withPivot('id')->withTimestamps();
     }
 
-    public function getProfileImagePath(){
-        $image_url = $this->getFirstMediaUrl('volunteer_profile_images');
-
-        if($image_url == Null){
-            if($this->sex == 'M'){
-                return(url('/storage/default_male.jpg'));
-            }
-            else{
-                return(url('/storage/default_female.jpg'));
-            }
-        }
-        return $image_url;
-    }
 
     public function historyEvents(){
         $applies = $this->applies()->wherePivot('status', 1)->where('ends_at','<',now())->get();
@@ -111,12 +100,48 @@ class Volunteer extends Authenticatable implements HasMedia
         return false;
     }
 
+    public function image(){
+        return $this->hasOne(Media::class,'id','image_id');
+    }
+
+    public function getImageUrlAttribute(){
+//        $image_url = $this->getFirstMediaUrl('volunteer_profile_images');
+        $image = $this->image;
+
+        if($image == Null){
+            if($this->sex == 'M'){
+                return(url('/storage/default_male.jpg'));
+            }
+            else{
+                return(url('/storage/default_female.jpg'));
+            }
+        }
+        return $image->getUrl();
+    }
+
+    public function getAvatarUrlAttribute(){
+        $image = $this->image;
+        if($image == Null) {
+            return null;
+        }
+        return $this->image->getUrl('avatar');
+    }
+
     public function registerMediaCollections()
     {
         $this->addMediaCollection('volunteer_profile_images')->singleFile()
              ->acceptsFile(function (File $file) {
             return $file->mimeType === 'image/jpeg';
-        });;
+        });
     }
 
+    public function registerMediaConversions(Media $media = null)
+    {
+        try {
+            $this->addMediaConversion('avatar')
+                ->width(50)
+                ->height(50);
+        } catch (InvalidManipulation $e) {
+        }
+    }
 }

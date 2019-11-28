@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Event;
 use App\Favorite;
+use App\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +16,17 @@ class EventController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Event $events)
     {
-        $events = Event::all();
-        return view('event.index', ['events' => $events]);
+        $events = Event::paginate(4);
+        $regions = Region::all()->pluck('name');
+        $categories = Category::all()->pluck('name');
+//      $events = Event::filter($request)->get();
+        return view('event.index',[
+            'events' => $events,
+            'regions' => $regions,
+            'categories' => $categories,
+        ]);
     }
 
     public function favorite(Event $event){
@@ -28,7 +37,7 @@ class EventController extends Controller
             'volunteer_id' => $volunteer_id,
             'event_id' => $event_id
         ]);
-        return redirect()->back();
+        return redirect()->route('events.index');
     }
 
     public function unfavorite(Event $event){
@@ -36,7 +45,7 @@ class EventController extends Controller
         $favorite = Favorite::where('volunteer_id',$user_id)->where('event_id',$event->id)->first();
 //        dump($favorite);
         $favorite->delete();
-        return redirect()->back();
+        return redirect()->route('events.index');
     }
     /**
      * Show the form for creating a new resource.

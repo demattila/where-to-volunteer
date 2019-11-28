@@ -27,9 +27,11 @@ class CreateVolunteersTable extends Migration
             $table->boolean('driving_licence')->nullable();
             $table->date('birth')->nullable();
             $table->string('works_at')->nullable();
-            $table->string('image',255)->default('default.png');
+            $table->unsignedBigInteger('image_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+//            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
         });
     }
 

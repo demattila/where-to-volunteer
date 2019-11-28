@@ -81,45 +81,45 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="posy" class="col-md-4 col-form-label text-md-right">{{ __('Motto') }}</label>
+                                <label for="posy" class="col-md-4 col-form-label text-md-right @error('password') is-invalid @enderror">{{ __('Motto') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="posy" type="text" class="form-control @error('name') is-invalid @enderror" name="posy"  autocomplete="posy">
+                                    <input id="posy" type="text" class="form-control @error('posy') is-invalid @enderror" name="posy" value="{{ old('posy') }}" autocomplete="posy">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="mobile" type="text" class="form-control @error('name') is-invalid @enderror" name="mobile"  autocomplete="mobile">
+                                    <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" autocomplete="mobile">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City*') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="city" type="text" class="form-control @error('name') is-invalid @enderror" name="city"  autocomplete="city">
+                                    <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" autocomplete="city">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="region" class="col-md-4 col-form-label text-md-right">{{ __('Region*') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="region" type="text" class="form-control @error('name') is-invalid @enderror" name="region"  autocomplete="region">
+                                    <input id="region" type="text" class="form-control @error('region') is-invalid @enderror" name="region" value="{{ old('region') }}" autocomplete="region">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="works_at" class="col-md-4 col-form-label text-md-right">{{ __('Workplace') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="works_at" type="text" class="form-control @error('name') is-invalid @enderror" name="works_at"  autocomplete="works_at">
+                                    <input id="works_at" type="text" class="form-control @error('works_at') is-invalid @enderror" name="works_at" value="{{ old('works_at') }}" autocomplete="works_at">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label for="birth" class="col-md-4 col-form-label text-md-right">{{ __('Birthday*') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="birth" type="date" class="form-control @error('name') is-invalid @enderror" name="birth"  autocomplete="date">
+                                    <input id="birth" type="date" class="form-control @error('birth') is-invalid @enderror" name="birth" value="{{ old('birth') }}" autocomplete="date">
                                 </div>
                             </div>
                             {{--<div class="form-group row">--}}
@@ -133,13 +133,13 @@
                                 <label for="sex1" class="col-md-4 col-form-label text-md-right">{{ __('Gender*') }}</label>
                                 <div class="col-md-6">
                                     <div class="form-check mr-2">
-                                        <input class="form-check-input " type="radio" name="sex" id="sex1" value="M">
+                                        <input class="form-check-input @error('sex') is-invalid @enderror" type="radio" name="sex" id="sex1" value="M" @if(old('sex') == 'M') checked @endif>
                                         <label class="form-check-label" for="sex1">
                                             Male
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="sex" id="sex2" value="F">
+                                        <input class="form-check-input @error('sex') is-invalid @enderror" type="radio" name="sex" id="sex2" value="F" @if(old('sex') == 'F') checked @endif>
                                         <label class="form-check-label" for="sex2">
                                             Female
                                         </label>
@@ -151,13 +151,13 @@
                                 <label for="driving_licence" class="col-md-4 col-form-label text-md-right">{{ __('Driving Licence') }}</label>
                                 <div class="col-md-6">
                                     <div class="form-check mr-2">
-                                        <input class="form-check-input" type="radio" name="driving_licence" id="driving_licence1" value="true">
+                                        <input class="form-check-input @error('driving_licence') is-invalid @enderror" type="radio" name="driving_licence" id="driving_licence1" value="true" @if(old('driving_licence') == 'true') checked @endif>
                                         <label class="form-check-label" for="driving_licence1">
                                             Yes
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="driving_licence" id="driving_licence2" value="false">
+                                        <input class="form-check-input @error('driving_licence') is-invalid @enderror"  type="radio" name="driving_licence" id="driving_licence2" value="false" @if(old('sex') == 'false') checked @endif>
                                         <label class="form-check-label" for="driving_licence2">
                                             No
                                         </label>

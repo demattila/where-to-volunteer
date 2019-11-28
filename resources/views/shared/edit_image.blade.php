@@ -40,10 +40,10 @@
                 <form action="{{route('image.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="input-group">
-                        <input type="submit" value="Upload Image" class="btn btn-primary m-2">
+                        <button type="submit" class="btn btn-primary m-2">Upload</button>
                         <div class="custom-file">
                             <input type="file" name="image" class="custom-file-input" id="inputGroupFile01">
-                            <label class="custom-file-label m-2" for="inputGroupFile01" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                            <label class="custom-file-label m-2" for="inputGroupFile01" aria-describedby="inputGroupFileAddon02">Choose image</label>
                         </div>
                     </div>
                 </form>
@@ -51,12 +51,12 @@
                     <form action="{{route('image.destroy',$user->getMedia('volunteer_profile_images')->first())}}" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger m-2" type="submit" >Delete Image</button>
+                        <button class="btn btn-danger m-2" type="submit" >Delete</button>
                     </form>
                 @endif
             </div>
             <div class="col-md-2">
-                <a class="btn btn-danger m-2" href="{{ route('dashboard') }}" >Go Back</a>
+                <a class="btn btn-danger m-2" href="{{ route('dashboard') }}" >Back</a>
             </div>
         </div>
 
