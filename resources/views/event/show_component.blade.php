@@ -20,8 +20,8 @@
 
             @endswitch
         </div>
-
     @endif
+
         <div class="row">
             @foreach($events as $event)
                 <div class="col-lg-6">

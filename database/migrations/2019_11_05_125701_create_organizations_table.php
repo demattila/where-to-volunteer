@@ -26,8 +26,9 @@ class CreateOrganizationsTable extends Migration
             $table->string('city')->nullable();
             $table->string('region')->nullable();
             $table->string('address')->nullable();
+            $table->string('mobile')->nullable();
             $table->string('site')->nullable();
-            $table->string('image',255)->default('default.png');
+            $table->unsignedBigInteger('image_id')->nullable();
             $table->timestamps();
         });
     }

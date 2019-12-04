@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Event;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\Models\Media;
 
@@ -35,9 +36,26 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $user=auth()->guard('web')->user();
-        $new_image = $user->addMedia($request->image)->toMediaCollection('volunteer_profile_images');
+        if(auth()->guard('web')->check()){
+            $user= auth()->guard('web')->user();
+            $new_image = $user->addMedia($request->image)->toMediaCollection('volunteer_profile_images');
+
+        }
+        if(auth()->guard('web_organization')->check()){
+            $user= auth()->guard('web_organization')->user();
+            $new_image = $user->addMedia($request->image)->toMediaCollection('organization_profile_images');
+
+        }
         $user->update(['image_id' => $new_image->id]);
+
+        $request->session()->flash('message', 'Successfully uploaded the image!');
+        return redirect()->back();
+    }
+
+    public function event_store(Request $request,Event $event)
+    {
+        $new_image = $event->addMedia($request->image)->toMediaCollection('event_profile_images');
+        $event->update(['image_id' => $new_image->id]);
 
         $request->session()->flash('message', 'Successfully uploaded the image!');
         return redirect()->back();
@@ -62,11 +80,24 @@ class ImageController extends Controller
      */
     public function edit()
     {
-        $user = auth()->guard('web')->user();
+        $type='volunteer';
+        $user=auth()->user();
+//        dump(auth()->guard('web_organization')->check());
+//        dump(auth()->guard('web')->check());
+//        dump($type);
+//        if(auth()->guard('web_organization')->check()){
+//            $user= auth()->guard('web_organization')->user();
+//            $type='organization';
+//        }
         return view('shared.edit_image',[
             'user' => $user,
             'image' => $user->image_url,
+            'type' => $type
         ]);
+    }
+
+    public function event_edit(){
+
     }
 
     /**

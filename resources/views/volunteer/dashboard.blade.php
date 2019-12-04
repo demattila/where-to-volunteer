@@ -1,14 +1,11 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <title>Dashboard</title>
     @include('layouts.head')
 </head>
-
-<body>
-@include('layouts.header')
-
+<body onload="scroll()">
+@include('layouts.header', ['user' =>$user])
 
 <!--================ Home Banner Area =================-->
 <section class="banner_area">
@@ -23,48 +20,47 @@
     </div>
 </section>
 <!--================ End Home Banner Area =================-->
-
-<!--================ End Story Area =================-->
-<div class="section-top-border">
-    <div class="container">
-        <div class="row border border-light rounded" style="background-color: #ffffed">
-            <div class="col-md-3"  style="padding: 10px">
-                <div class="panel panel-default" >
-                    <div class="panel-heading" align="left">
-                        <h5>Account</h5><hr>
-                    </div>
-                    <div class="panel-body" align="middle">
-                        <img class="rounded" style="width: 10rem;" src="{{$user->image_url}}" alt="user image">
-                        <div class="col-lg-12">
-                            <h6 class=" mt-3">{{$user->name}}</h6>
-                            <p>{{$user->email}}</p>
-                            <p class="card-text"><i>{{$user->posy}}</i></p>
-                            {{--<a href="#" class="genric-btn info medium">Edit</a>--}}
-                            <div class="row justify-content-center">
-                                <div class="dropdown">
-                                    <a class="genric-btn info medium mr-1 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Edit
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="{{route('profile.edit')}}">Edit profile data</a>
-                                        <a class="dropdown-item" href="#">Change password</a>
-                                        <a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>
+<section class="section-content">
+    <div class="section-top-border">
+        <div class="container">
+            <div class="row border border-light rounded" style="background-color: #ffffed">
+                <div class="col-md-3 border border-dark mr-2" style="padding: 10px">
+                    <div class="panel panel-default" >
+                        <div class="panel-heading" align="left">
+                            <h5>Account</h5><hr>
+                        </div>
+                        <div class="panel-body" align="middle">
+                            <img class="rounded" style="width: 10rem;" src="{{$user->image_url}}" alt="user image">
+                            <div class="col-lg-12">
+                                <h6 class=" mt-3">{{$user->name}}</h6>
+                                <p>{{$user->email}}</p>
+                                <p class="card-text"><i>{{$user->posy}}</i></p>
+                                {{--<a href="#" class="genric-btn info medium">Edit</a>--}}
+                                <div class="row justify-content-center">
+                                    <div class="dropdown">
+                                        <a class="genric-btn info medium mr-1 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Edit
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                            <a class="dropdown-item" href="{{route('profile.edit')}}">Edit profile data</a>
+                                            <a class="dropdown-item" href="#">Change password</a>
+                                            <a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>
+                                        </div>
                                     </div>
+                                    <a href="#" class="genric-btn danger medium" onclick="event.preventDefault();
+                               document.getElementById('logout-form').submit();">{{ __('Logout') }}{{--<span class="lnr lnr-arrow-right"></span>--}}</a>
                                 </div>
-                                <a href="#" class="genric-btn danger medium" onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();">{{ __('Logout') }}{{--<span class="lnr lnr-arrow-right"></span>--}}</a>
                             </div>
-                            </div>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-md-4" style="padding: 10px">
-                <div class="panel panel-default">
-                    <div class="panel-heading" align="left"><h5>Profile</h5><hr></div>
+                <div class="col-md-4  border border-dark mr-2" style="padding: 10px">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" align="left"><h5>Profile</h5><hr></div>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-4" align="middle" >
@@ -116,56 +112,93 @@
                         </div>
                     </div>
                 </div>
-            <div class="col-md-4" style="padding: 10px">
-                <div class="panel panel-default">
-                    <div class="panel-heading" align="left"><h5>Something</h5><hr></div>
-                    <div class="panel-body">
+                <div class="col-md border border-dark" style="padding: 10px">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" align="left"><h5>Something</h5><hr></div>
+                        <div class="panel-body">
 
+                        </div>
                     </div>
+                    .col-md-4
                 </div>
-                .col-md-4
             </div>
         </div>
     </div>
-</div>
-
+</section>
 
 <section class="section">
     <div class="container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-            <a class="genric-btn primary medium mr-1 nav-link active" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">History</a>
-        </li>
-        <li class="nav-item">
-            <a class="genric-btn primary medium mr-1 nav-link " id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing" aria-selected="false">Ongoing</a>
-        </li>
-        <li class="nav-item">
-            <a class="genric-btn primary medium mr-1 nav-link" id="accepted-tab" data-toggle="tab" href="#accepted" role="tab" aria-controls="accepted" aria-selected="false">Accepted</a>
-        </li>
-        <li class="nav-item">
-            <a class="genric-btn primary medium mr-1 nav-link" id="rejected-tab" data-toggle="tab" href="#rejected" role="tab" aria-controls="rejected" aria-selected="false">Rejected</a>
-        </li>
-        <li class="nav-item">
-            <a class="genric-btn primary medium mr-1 nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">Favorites</a>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="history" role="tabpanel" aria-labelledby="history-tab">
-            @include('event.show_component',['events' => Auth::user()->historyEvents(), 'type' => 'history'])
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="genric-btn primary medium mr-1 nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">
+                    <i class="fas fa-history fa-2x"></i> Volunteering History
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="genric-btn primary medium mr-1 nav-link show active " id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing" aria-selected="false">
+                    <i class="far fa-calendar-alt fa-2x"></i> Ongoing Events
+                </a>
+            </li>
+            {{--<li class="nav-item">--}}
+                {{--<a class="genric-btn primary medium mr-1 nav-link" id="accepted-tab" data-toggle="tab" href="#accepted" role="tab" aria-controls="accepted" aria-selected="false">Accepted</a>--}}
+            {{--</li>--}}
+            {{--<li class="nav-item">--}}
+                {{--<a class="genric-btn primary medium mr-1 nav-link" id="rejected-tab" data-toggle="tab" href="#rejected" role="tab" aria-controls="rejected" aria-selected="false">Rejected</a>--}}
+            {{--</li>--}}
+            <li class="nav-item">
+                <a class="genric-btn primary medium mr-1 nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">
+                    <i class="far fa-star fa-2x"></i> Saved Events
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade" id="history" role="tabpanel" aria-labelledby="history-tab">
+                @include('event.show_component',['events' => $user->historyEvents(), 'type' => 'history'])
+            </div>
+
+            <div class="tab-pane fade show active" id="ongoing" role="tabpanel" aria-labelledby="ongoing-tab">
+              {{--new tabs appear--}}
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link show active" style="color: #091b27" id="ongoing-tab"  data-toggle="tab" href="#ongoing-events" role="tab" aria-controls="ongoing-events" aria-selected="true">
+                            In progress
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #091b27" id="accepted-tab" data-toggle="tab" href="#accepted" role="tab" aria-controls="accepted" aria-selected="false">
+                            Accepted
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #091b27" id="rejected-tab" data-toggle="tab" href="#rejected" role="tab" aria-controls="rejected" aria-selected="false">
+                            Rejected
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="ongoing-events" role="tabpanel" aria-labelledby="home-tab">
+                        @include('event.show_component',['events' => $user->ongoingApplies(),'type' => 'ongoing'])
+                    </div>
+                    <div class="tab-pane fade" id="accepted" role="tabpanel" aria-labelledby="profile-tab">
+                        @include('event.show_component',['events' => $user->acceptedApplies(),'type' => 'accepted'])
+                    </div>
+                    <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="contact-tab">
+                        @include('event.show_component',['events' => $user->rejectedApplies(),'type' => 'rejected'])
+                    </div>
+                </div>
+            </div>
+
+            {{--<div class="tab-pane fade" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">--}}
+                {{--@include('event.show_component',['events' => Auth::user()->acceptedApplies(),'type' => 'accepted'])--}}
+            {{--</div>--}}
+            {{--<div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">--}}
+                {{--@include('event.show_component',['events' => Auth::user()->rejectedApplies(),'type' => 'rejected'])--}}
+            {{--</div>--}}
+            <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
+                @include('event.show_component',['events' => Auth::user()->favorites()->get(),'type' => 'favorite'])
+            </div>
+
         </div>
-        <div class="tab-pane fade" id="ongoing" role="tabpanel" aria-labelledby="ongoing-tab">
-            @include('event.show_component',['events' => Auth::user()->ongoingApplies(),'type' => 'ongoing'])
-        </div>
-        <div class="tab-pane fade" id="accepted" role="tabpanel" aria-labelledby="accepted-tab">
-            @include('event.show_component',['events' => Auth::user()->acceptedApplies(),'type' => 'accepted'])
-        </div>
-        <div class="tab-pane fade" id="rejected" role="tabpanel" aria-labelledby="rejected-tab">
-            @include('event.show_component',['events' => Auth::user()->rejectedApplies(),'type' => 'rejected'])
-        </div>
-        <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
-            @include('event.show_component',['events' => Auth::user()->favorites()->get(),'type' => 'favorite'])
-        </div>
-    </div>
     </div>
 </section>
 
@@ -174,7 +207,11 @@
 {{--@include('layouts.footer')--}}
 @include('layouts.footer_bottom')
 <!--================ End footer Area  =================-->
-
+<script>
+    function scroll() {
+        window.scrollTo(0,450);
+    }
+</script>
 @include('layouts.scripts')
 </body>
 </html>

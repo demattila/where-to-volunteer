@@ -16,7 +16,7 @@ class CreateEventCategoriesTable extends Migration
         Schema::create('event_categories', function (Blueprint $table) {
             $table->unsignedBigInteger('event_id');
             $table->unsignedTinyInteger('category_id');
-
+            $table->timestamps();
 
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');

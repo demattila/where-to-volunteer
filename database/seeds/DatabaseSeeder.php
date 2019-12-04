@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AppliesTableSeeder::class);
         $this->call(EventCategoriesTableSeeder::class);
         $this->call(RegionsTableSeeder::class);
+//        $this->call(MediaTableSeeder::class);
     }
 }

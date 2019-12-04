@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/organization';
+    protected $redirectTo = '/organization/dashboard';
 
     /**
      * Create a new controller instance.
@@ -52,12 +52,13 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:organizations'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'contact_person' => ['required','string', 'max:255'],
-            'description' => ['nullable','string', 'max:255'],
+            'contact_person' => ['required','string','min:3','max:255'],
+            'description' => ['nullable','min:3','max:1000'],
             'founded_at' => ['required','date','date_format:Y-m-d'],
             'address' => ['nullable','string', 'max:255'],
-            'city' => ['required','string', 'max:255'],
-            'region' => ['required','string', 'max:255'],
+            'city' => ['required','string','min:3', 'max:255'],
+            'region' => ['required','string','min:3', 'max:255'],
+            'mobile' => ['required','string','min:6', 'max:20'],
             'site' => ['nullable','string', 'max:255'],
             'type' => ['required']
         ]);
@@ -81,6 +82,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'city' => $data['city'],
             'region' => $data['region'],
+            'mobile' => $data['site'],
             'site' => $data['site'],
             'type_id' => $data['type']
         ]);

@@ -110,10 +110,10 @@ class Volunteer extends Authenticatable implements HasMedia
 
         if($image == Null){
             if($this->sex == 'M'){
-                return(url('/storage/default_male.jpg'));
+                return(url('/storage/default/male.jpg'));
             }
             else{
-                return(url('/storage/default_female.jpg'));
+                return(url('/storage/default/female.jpg'));
             }
         }
         return $image->getUrl();
@@ -121,10 +121,15 @@ class Volunteer extends Authenticatable implements HasMedia
 
     public function getAvatarUrlAttribute(){
         $image = $this->image;
-        if($image == Null) {
-            return null;
+        if($image == Null){
+            if($this->sex == 'M'){
+                return(url('/storage/default/male_avatar.jpg'));
+            }
+            else{
+                return(url('/storage/default/female_avatar.jpg'));
+            }
         }
-        return $this->image->getUrl('avatar');
+        return $image->getUrl('avatar');
     }
 
     public function registerMediaCollections()
@@ -135,13 +140,15 @@ class Volunteer extends Authenticatable implements HasMedia
         });
     }
 
+
+    /**
+     * @param Media|null $media
+     * @throws InvalidManipulation
+     */
     public function registerMediaConversions(Media $media = null)
     {
-        try {
-            $this->addMediaConversion('avatar')
-                ->width(50)
-                ->height(50);
-        } catch (InvalidManipulation $e) {
-        }
+        $this->addMediaConversion('avatar')
+            ->width(50)
+            ->height(50);
     }
 }

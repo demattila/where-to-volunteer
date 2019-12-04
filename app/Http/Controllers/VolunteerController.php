@@ -28,7 +28,12 @@ class VolunteerController extends Controller
 
     public function dashboard()
     {
-        $user = Volunteer::findOrFail(auth()->user()->id);
+        if(auth()->guard('web')->check()){
+            $user = auth()->guard('web')->user();
+        }else{
+            $user = null;
+        }
+
         return view('volunteer.dashboard',['user' => $user] );
     }
 

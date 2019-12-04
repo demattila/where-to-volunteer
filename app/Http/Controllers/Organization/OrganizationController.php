@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Organization;
 
 use App\Organization;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,7 @@ class OrganizationController extends Controller
 
     public function dashboard()
     {
-        $user = Organization::findOrFail(auth()->user()->id);
+        $user = auth()->guard('web_organization')->user();
         return view('organization.dashboard',['user' => $user]);
     }
 

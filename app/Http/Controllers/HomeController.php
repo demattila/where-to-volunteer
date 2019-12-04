@@ -30,6 +30,12 @@ class HomeController extends Controller
     }
 
     public function about(){
-        return view('shared.about');
+        if(auth()->guard('web')->check()){
+            $user = auth()->guard('web')->user();
+        }
+        if(auth()->guard('web_organization')->check()){
+            $user = auth()->guard('web_organization')->user();
+        }
+        return view('shared.about',['user' => $user]);
     }
 }

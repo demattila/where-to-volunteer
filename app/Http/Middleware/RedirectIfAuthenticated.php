@@ -17,6 +17,7 @@ class RedirectIfAuthenticated
      */
     public function handle($request, Closure $next, $guard = null)
     {
+//        dump($guard);
         if (Auth::guard($guard)->check()) {
             if ('web_organization' === $guard) {
                 return redirect('/organization/dashboard');

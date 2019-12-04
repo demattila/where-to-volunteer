@@ -24,7 +24,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Register') }}</div>
+                    <h5 class="card-header">{{ __('Register') }}</h5>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('organization.register') }}">
@@ -129,6 +129,14 @@
                             </div>
 
                             <div class="form-group row">
+                                <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile') }}*</label>
+
+                                <div class="col-md-6">
+                                    <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" autocomplete="mobile">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
                                 <label for="site" class="col-md-4 col-form-label text-md-right">{{ __('Site') }}</label>
 
                                 <div class="col-md-6">
@@ -137,31 +145,31 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Type') }}*</label>
+                                <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Organization Type') }}*</label>
                                 <div class="col-md-3">
                                     <select class="nice-select"  name="type" id="type">
-                                        <option value="1" class="option selected focus">Federation</option>
+                                        <option value="1" class="option">Federation</option>
                                         <option value="2" class="option">Foundation</option>
-                                        <option value="3" class="option">Foundation</option>
-                                        <option value="4" class="option">Institution</option>
-                                        <option value="5" class="option">Trade</option>
-                                        <option value="6" class="option">Union</option>
-                                        <option value="7" class="option">Association</option>
-                                        <option value="8" class="option">Other</option>
+                                        <option value="3" class="option">Institution</option>
+                                        <option value="4" class="option">Trade</option>
+                                        <option value="5" class="option">Union</option>
+                                        <option value="6" class="option">Association</option>
+                                        <option value="7" class="option">Other</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="form-group row mt-5">
+
+                            <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="genric-btn primary">
                                         {{ __('Register') }}
                                     </button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
+                    @include('layouts.errors')
                 </div>
             </div>
         </div>

@@ -3,14 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Filters\EventFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\File;
+use Spatie\MediaLibrary\Models\Media;
 
-class Event extends Model
+class Event extends Model implements HasMedia
 {
-    protected $fillable = [
-        'id','owner_id','title','description','starts_at','ends_at','reward'
-    ];
+    use HasMediaTrait;
+//    protected $fillable = [
+//        'id','owner_id','title','description','starts_at','ends_at','reward'
+//    ];
+//
+    protected $guarded = [];
 
     public function categories()
     {
@@ -32,8 +38,45 @@ class Event extends Model
         return $this->belongsToMany(Volunteer::class, 'favorites')->withTimestamps();
     }
 
-//    public function scopeFilter(Builder $builder, $request)
-//    {
-//        return (new EventFilter($request))->filter($builder);
-//    }
+    public function image(){
+        return $this->hasOne(Media::class,'id','image_id');
+    }
+
+    public function getImageUrlAttribute(){
+//        $image_url = $this->getFirstMediaUrl('volunteer_profile_images');
+        $image = $this->image;
+
+        if($image == Null){
+            return(url('/storage/default/event.jpg'));
+        }
+        return $image->getUrl();
+    }
+
+    public function getAvatarUrlAttribute(){
+        $image = $this->image;
+        if($image == Null){
+            return(url('/storage/default/male_avatar.jpg'));
+        }
+
+        return $image->getUrl('avatar');
+    }
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('event_profile_images')->singleFile()
+            ->acceptsFile(function (File $file) {
+                return $file->mimeType === 'image/jpeg';
+            });
+    }
+
+    /**
+     * @param Media|null $media
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
+    public function registerMediaConversions(Media $media = null)
+    {
+            $this->addMediaConversion('avatar')
+                ->width(50)
+                ->height(50);
+    }
 }

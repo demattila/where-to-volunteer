@@ -16,32 +16,77 @@
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav ml-auto">
                             {{--{{dump(Request::path())}}--}}
-                            <li class="nav-item {{Request::path() ==='/' ? 'active' : ''}}"><a class="nav-link" href={{route('index')}}>Volunteer</a></li>
-                            <li class="nav-item {{Request::path() ==='organization' ? 'active' : ''}}"><a class="nav-link" href={{route('organization.index')}}>Organization</a></li>
+                            <li style="display: @if(auth()->guard('web_organization')->check()) none @endif"
+                                class="nav-item {{Request::path() ==='/' ? 'active' : ''}}
+                                                {{Request::path() ==='dashboard' ? 'active' : ''}}
+                                                {{Request::path() ==='login' ? 'active' : ''}}">
+                                <a class="nav-link" href={{route('index')}}>
+                                    @if(auth()->guard('web')->check())
+                                        Dashboard
+                                    @else
+                                        Volunteer
+                                    @endif
+                                </a>
+                            </li>
+                            <li style="display: @if(auth()->guard('web')->check()) none @endif"
+                                class="nav-item {{Request::path() ==='organization' ? 'active' : ''}}
+                                                {{Request::path() ==='organization/dashboard' ? 'active' : ''}}
+                                                {{Request::path() ==='organization/login' ? 'active' : ''}}">
+                                <a class="nav-link" href={{route('organization.index')}}>
+                                    @if(auth()->guard('web_organization')->check())
+                                        Dashboard
+                                    @else
+                                        Organization
+                                    @endif
+                                </a>
+                            </li>
                             {{--<li class="nav-item {{Request::path() ==='/' ? 'active' : ''}}"><a class="nav-link" href={{route('volunteer.index')}}>Home</a></li>--}}
                             <li class="nav-item {{Request::path() ==='events' ? 'active' : ''}}"><a class="nav-link" href={{route('events.index')}}>Events</a></li>
                             <li class="nav-item {{Request::path() ==='about' ? 'active' : ''}}"><a class="nav-link" href={{route('about')}}>About</a></li>
+                            @if(!empty($user))
 
-                            @auth()
-                                <li class="nav-item submenu dropdown">
+                            @auth('web')
+                                <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        @if(auth()->user()->avatar_url)
-                                            <img src="{{auth()->guard('web')->user()->avatar_url}}" alt="avatar" class="rounded-circle">
-                                        @endif
-                                        <i>{{ Auth::user()->name }} </i><span class="caret"></span></a>
+                                        {{--@if($user->avatar_url)--}}
+                                        {{--{{dump($user->avatar_url)}}--}}
+                                            <img src="{{$user->avatar_url}}" alt="avatar" class="rounded-circle">
+                                        {{--@endif--}}
+                                    </a>
                                     <div class="dropdown-menu">
-                                        <a class="nav-item"><a class="nav-link" href="{{ route('logout') }}"
-                                                                onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                        <a class="dropdown-item" href="{{route('dashboard')}}"><h6>{{$user->name }}</h6></a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                                                 onclick="event.preventDefault();
+                                                                          document.getElementById('logout-form-1').submit();">
                                             {{ __('Logout') }}</a>
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+
+                                        <form id="logout-form-1" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endauth
+                            @auth('web_organization')
+                                <li class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        @if($user->avatar_url)
+                                            <img src="{{$user->avatar_url}}" alt="avatar" class="rounded-circle">
+                                        @endif
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="{{route('organization.dashboard')}}"><h6>{{ $user->name }}</h6></a>
+                                        <a class="dropdown-item" href="{{ route('organization.logout') }}"
+                                                                 onclick="event.preventDefault();
+                                                                          document.getElementById('logout-form-2').submit();">
+                                            {{ __('Logout') }}</a>
+                                        <form id="logout-form-2" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
                                         </form>
                                     </div>
                                 </li>
                             @endauth
 
+                            @endif
                         </ul>
                     </div>
                 </div>

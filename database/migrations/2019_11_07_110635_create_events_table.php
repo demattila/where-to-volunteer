@@ -21,10 +21,12 @@ class CreateEventsTable extends Migration
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
             $table->string('reward');
-            $table->string('image',255)->default('default_event.png');
+            $table->string('image_id')->nullable();
             $table->string('city')->nullable();
             $table->string('region')->nullable();
             $table->string('address')->nullable();
+            $table->string('mission')->nullable();
+            $table->string('info')->nullable();
             $table->timestamps();
 
             $table->foreign('owner_id')->references('id')->on('organizations')->onDelete('cascade');

@@ -11,44 +11,51 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('index');
-//})->name('index');
-
-Auth::routes();
-
-Route::get('/', 'VolunteerController@index')->name('index')->middleware('guest');
-Route::get('/dashboard', 'VolunteerController@dashboard')->name('dashboard')->middleware('auth:web');
-Route::get('/volunteer/edit','VolunteerController@edit')->name('profile.edit')->middleware('auth:web');
-Route::patch('/volunteer/update','VolunteerController@update')->name('profile.update')->middleware('auth:web');
 
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 
+//Volunteer Routes
+Auth::routes();
+Route::get('/', 'VolunteerController@index')->name('index')->middleware('guest:web_organization')->middleware('guest:web');
+Route::get('/dashboard', 'VolunteerController@dashboard')->name('dashboard')->middleware('auth:web');
+Route::get('/volunteer/edit','VolunteerController@edit')->name('profile.edit')->middleware('auth:web');
+Route::patch('/volunteer/update','VolunteerController@update')->name('profile.update')->middleware('auth:web');
+
+//Image Routes
+//Route::get('/image','ImageController@index')->name('image.index');
+//Route::get('/image/create','ImageController@create')->name('image.create');
+//Route::get('image/{image}','ImageController@show')->name('image.show');
+Route::post('/image/volunteer','ImageController@store')->name('image.store');
+Route::post('/image/event','ImageController@event_store')->name('event.image.store');
+Route::get('/volunteer/image/edit','ImageController@edit')->name('image.edit');
+Route::get('/event/image/edit','ImageController@event_edit')->name('event.image.edit');
+//Route::patch('image/{image}','ImageController@update')->name('image.update');
+Route::delete('/image/volunteer/{image}','ImageController@destroy')->name('image.destroy');
+Route::delete('/image/event/{image}','ImageController@event_destroy')->name('event.image.destroy');
+
+
+//Event Routes
 Route::resource('events', 'EventController');
-Route::post('/events/favorite/{event}', 'EventController@favorite')->name('events.favorite');
-Route::delete('/events/unfavorite/{event}', 'EventController@unfavorite')->name('events.unfavorite');
-//Route::get('/events', 'EventController@index')->name('events');
+//Route::get('events', 'EventController@index')->name('events.index');
+//Route::get('/events/create', 'EventController@create')->name('events.create');
 //Route::get('/events/{event}', 'EventController@show')->name('events.show');
 
+Route::post('/events/favorite/{event}', 'EventController@favorite')->name('events.favorite');
+Route::delete('/events/unfavorite/{event}', 'EventController@unfavorite')->name('events.unfavorite');
+
+//Apply routes
 //Route::get('/applies', 'ApplyController@index')->name('apply.index');
 Route::post('/applies/{event}', 'ApplyController@apply')->name('apply')->middleware('auth:web');
 Route::delete('/applies/{event}', 'ApplyController@cancel')->name('apply.cancel')->middleware('auth:web');
 
-Route::get('/image','ImageController@index')->name('image.index');
-Route::get('/image/create','ImageController@create')->name('image.create');
-Route::get('image/{image}','ImageController@show')->name('image.show');
-Route::post('/image','ImageController@store')->name('image.store')->middleware('auth:web');
-Route::get('/volunteer/image/edit','ImageController@edit')->name('image.edit')->middleware('auth:web');
-Route::patch('image/{image}','ImageController@update')->name('image.update');
-Route::delete('/image/{image}','ImageController@destroy')->name('image.destroy');
-//Route::resource('image','ImageController');
 
-Route::post('/events/filter', 'FilterController@filter')->name('event.filter');
 
-Route::get('/organization', 'OrganizationController@index')->name('organization.index')->middleware('guest');
-Route::get('/organization/dashboard', 'OrganizationController@dashboard')->name('organization.dashboard')->middleware('auth:web_organization');
+
+//Organization Routes
 Route::prefix('/organization')->name('organization.')->namespace('Organization')->group(function(){
+    Route::get('/', 'OrganizationController@index')->name('index')->middleware('guest:web_organization')->middleware('guest:web');
+    Route::get('/dashboard', 'OrganizationController@dashboard')->name('dashboard')->middleware('auth:web_organization');
 
     Route::namespace('Auth')->group(function(){
         //Login Routes
