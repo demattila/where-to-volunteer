@@ -14,11 +14,10 @@
     <div class="banner_inner">
         <div class="container">
             <div class="banner_content">
-                <p class="upper_text">Give a hand</p>
-                <h2>to make the better world</h2>
+                <p class="upper_text">{{__('Give a hand')}}</p>
+                <h2>{{__('to make the better world')}}</h2>
                 <p>
-                    That don't lights. Blessed land spirit creature divide our made two
-                    itself upon you'll dominion waters man second good you they're divided upon winged were replenish night
+                    {{__('That don\'t lights. Blessed land spirit creature divide our made two itself upon you\'ll dominion waters man second good you they\'re divided upon winged were replenish night')}}
                 </p>
                 <a class="primary_btn yellow_btn text-white"  href={{route('register')}}>{{ __('Register') }}</a>
                 <a class="primary_btn mr-20" href={{route('login')}}>{{ __('Log in') }}<span class="lnr lnr-arrow-right"></span></a>
@@ -27,7 +26,6 @@
     </div>
 </section>
 <!--================ End Home Banner Area =================-->
-{{dump(App::getLocale())}}
 <!--================ Start CTA Area =================-->
 {{--<div class="cta-area section_gap overlay">--}}
     {{--<div class="container">--}}
@@ -93,9 +91,9 @@
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="main_title">
-                    <h2>Our latest Story</h2>
+                    <h2>@lang('Our latest Story')</h2>
                     <p>
-                        Open lesser winged midst wherein may morning
+                        @lang('Open lesser winged midst wherein may morning')
                     </p>
                 </div>
             </div>

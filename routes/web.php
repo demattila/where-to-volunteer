@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\App;
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 
-Route::get('/{locale}','LocalizationController@index');
+Route::get('/lang/{locale}','LocalizationController@index');
 
 //Volunteer Routes
 Auth::routes();

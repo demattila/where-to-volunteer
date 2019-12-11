@@ -1,11 +1,12 @@
 <footer style="margin-top: 20rem">
     <div class="footer-area">
         <div class="container">
+            <div>szia</div>
             <div class="row section_gap">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-footer-widget tp_widgets">
                         <h4 class="footer_title large_title">Our Mission</h4>
-                        <p>
+                        <p class="footer-p">
                             So seed seed green that winged cattle in. Gathering thing made fly you're no
                             divided deep moved us lan Gathering thing us land years living.
                         </p>
@@ -29,15 +30,12 @@
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-6">
                     <div class="single-footer-widget instafeed">
-                        <h4 class="footer_title">Gallery</h4>
-                            <ul class="list instafeed d-flex flex-wrap">
-                                <li><img src={{url('img/gallery/g1.jpg')}}"" alt=""></li>
-                                <li><img src={{url('img/gallery/g2.jpg')}}"" alt=""></li>
-                                <li><img src={{url('img/gallery/g3.jpg')}}"" alt=""></li>
-                                <li><img src={{url('img/gallery/g4.jpg')}}"" alt=""></li>
-                                <li><img src={{url('img/gallery/g5.jpg')}}"" alt=""></li>
-                                <li><img src={{url('img/gallery/g6.jpg')}}"" alt=""></li>
-                            </ul>
+                        <h4 class="footer_title">Language</h4>
+                        <ul class="list">
+                            <li><a class="text-white" href="{{url('/lang/en')}}">English</a></li>
+                            <li><a class="text-white" href="{{url('/lang/ro')}}">Română</a></li>
+                            <li><a class="text-white" href="{{url('/lang/hu')}}">Magyar</a></li>
+                        </ul>
                     </div>
                 </div>
                 <div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
