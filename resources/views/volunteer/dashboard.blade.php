@@ -23,12 +23,23 @@
 <section class="section-content">
     <div class="section-top-border">
         <div class="container">
-            <div class="row border border-light rounded" style="background-color: #ffffed">
-                <div class="col-md-3 border border-dark mr-2" style="padding: 10px">
+            <div class="row border border-light rounded" style="background-color: #f5f5f5">
+                <div class="col-md-3 mr-2" style="padding: 10px">
                     <div class="panel panel-default" >
-                        <div class="panel-heading" align="left">
-                            <h5>Account</h5><hr>
+                        <div class="row m-2">
+                            <h5 class="mr-2">Profile</h5>
+                            <div class="dropdown">
+                                <a class=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="{{route('profile.edit')}}">Edit profile data</a>
+                                    <a class="dropdown-item" href="#">Change password</a>
+                                    <a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>
+                                </div>
+                            </div>
                         </div>
+                        <hr>
                         <div class="panel-body" align="middle">
                             <img class="rounded" style="width: 10rem;" src="{{$user->image_url}}" alt="user image">
                             <div class="col-lg-12">
@@ -36,20 +47,20 @@
                                 <p>{{$user->email}}</p>
                                 <p class="card-text"><i>{{$user->posy}}</i></p>
                                 {{--<a href="#" class="genric-btn info medium">Edit</a>--}}
-                                <div class="row justify-content-center">
-                                    <div class="dropdown">
-                                        <a class="genric-btn info medium mr-1 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Edit
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                            <a class="dropdown-item" href="{{route('profile.edit')}}">Edit profile data</a>
-                                            <a class="dropdown-item" href="#">Change password</a>
-                                            <a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="genric-btn danger medium" onclick="event.preventDefault();
-                               document.getElementById('logout-form').submit();">{{ __('Logout') }}{{--<span class="lnr lnr-arrow-right"></span>--}}</a>
-                                </div>
+                                {{--<div class="row justify-content-center">--}}
+                                    {{--<div class="dropdown">--}}
+                                        {{--<a class="genric-btn info medium mr-1 dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+                                            {{--Edit--}}
+                                        {{--</a>--}}
+                                        {{--<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">--}}
+                                            {{--<a class="dropdown-item" href="{{route('profile.edit')}}">Edit profile data</a>--}}
+                                            {{--<a class="dropdown-item" href="#">Change password</a>--}}
+                                            {{--<a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--<a href="#" class="genric-btn danger medium" onclick="event.preventDefault();--}}
+                               {{--document.getElementById('logout-form').submit();">{{ __('Logout') }}--}}{{--<span class="lnr lnr-arrow-right"></span>--}}{{--</a>--}}
+                                {{--</div>--}}
                             </div>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -58,9 +69,9 @@
                     </div>
                 </div>
 
-                <div class="col-md-4  border border-dark mr-2" style="padding: 10px">
+                <div class="col-md-4 mr-2" style="padding: 10px">
                     <div class="panel panel-default">
-                        <div class="panel-heading" align="left"><h5>Profile</h5><hr></div>
+                        <div class="row m-2" align="left"><h5>Data</h5></div><hr>
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-4" align="middle" >
@@ -75,7 +86,7 @@
                                 <div class="col-md-4" align="middle" >
                                     <p>
                                         @if($user->sex === 'M')
-                                            <i class="fas fa-mars fa-2x"></i>
+                                            <i class="fas fa-mars"></i>
                                         @elseif($user->sex === 'F')
                                             <i class="fas fa-venus fa-2x"></i>
                                         @endif
@@ -112,9 +123,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md border border-dark" style="padding: 10px">
+                <div class="col-md" style="padding: 10px">
                     <div class="panel panel-default">
-                        <div class="panel-heading" align="left"><h5>Something</h5><hr></div>
+                        <div class="row m-2" align="left"><h5>Notifications</h5></div><hr>
                         <div class="panel-body">
 
                         </div>
@@ -177,7 +188,9 @@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="ongoing-events" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="container">
                         @include('event.show_component',['events' => $user->ongoingApplies(),'type' => 'ongoing'])
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="accepted" role="tabpanel" aria-labelledby="profile-tab">
                         @include('event.show_component',['events' => $user->acceptedApplies(),'type' => 'accepted'])

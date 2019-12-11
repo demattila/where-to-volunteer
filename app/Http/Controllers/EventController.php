@@ -46,7 +46,7 @@ class EventController extends Controller
             $perPage=$request->get('per_page');
         }
 
-        $events = $event->paginate($perPage);
+        $events = $event->orderBy('id','desc')->paginate($perPage);
         $regions = Region::all()->pluck('name');
         $categories = Category::all()->pluck('name');
 
@@ -61,7 +61,7 @@ class EventController extends Controller
     public function favorite(Event $event){
         $volunteer_id = Auth::guard('web')->user()->id;
         $event_id = $event->id;
-        dump($event->id);
+//        dump($event->id);
         Favorite::create([
             'volunteer_id' => $volunteer_id,
             'event_id' => $event_id
@@ -130,7 +130,7 @@ class EventController extends Controller
                 'category_id' => $category
             ]);
         }
-//        return redirect()->route('event.image.edit')->with('new', 'Step Two');
+        return redirect()->route('event.image.edit',['event' => $event])->with('isRedirected',1);
     }
 
     /**
@@ -145,6 +145,11 @@ class EventController extends Controller
         return view('event.details', ['event' => $event]);
     }
 
+    public function orgOngoingDetails(Event $event){
+        return view('organization.ongoing_details',[
+            'event' => $event->load('applies')
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -171,11 +176,16 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Event  $event
+     * @param Request $request
+     * @param  \App\Event $event
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy(Event $event)
+    public function destroy(Request $request, Event $event)
     {
-        //
+      $event->delete();
+
+        $request->session()->flash('message', 'Successfully deleted the event!');
+        return redirect()->back();
     }
 }

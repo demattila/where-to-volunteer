@@ -25,16 +25,10 @@
 <section class="section-top-border">
     <div class="container">
         @include('layouts.errors')
-        @if (session()->has('message'))
-            <div class="alert alert-success">
-                <ul>
-                        <li>{{session()->get('message')}}</li>
-                </ul>
-            </div>
-        @endif
+        @include('layouts.message')
         <div class="row">
             <div class="col-md-4">
-                <img class="rounded" style="width: 20rem;" src="{{$image}}" alt="user image">
+                <img class="rounded" style="width: 20rem;" src="{{$user->image_url}}" alt="user image">
             </div>
             <div class="col-md-6">
                 <form action="{{route('image.store')}}" method="post" enctype="multipart/form-data">

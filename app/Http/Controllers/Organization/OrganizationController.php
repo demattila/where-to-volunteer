@@ -6,6 +6,7 @@ use App\Organization;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class OrganizationController extends Controller
 {

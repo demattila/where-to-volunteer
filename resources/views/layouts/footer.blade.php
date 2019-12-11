@@ -1,4 +1,4 @@
-<footer>
+<footer style="margin-top: 20rem">
     <div class="footer-area">
         <div class="container">
             <div class="row section_gap">

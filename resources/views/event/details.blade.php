@@ -34,7 +34,7 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-6 col-md-8 col-sm-10">
                 <div class="condition-left">
-                    <img class="img-fluid" src="/img/event/{{$event->image}}" alt="">
+                    <img class="img-fluid" src="{{$event->image_url}}" alt="">
                 </div>
             </div>
             <div class="offset-lg-1 col-lg-5">

@@ -22,8 +22,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
+                <h5>First step-></h5>
                 <div class="card">
-                    <h5 class="card-header">{{ __('New Event - First step') }}</h5>
+                    <h5 class="card-header">{{ __('New Event') }}</h5>
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('events.store') }}">
@@ -108,10 +109,10 @@
 
                                     <div class="col-md-4">
                                         @foreach($categories as $category)
-                                        <div class="switch-wrap d-flex justify-content-between">
+                                        <div class="switch-wrap d-flex justify-content-between" required>
                                             <p>{{$category->name}}</p>
                                             <div class="primary-checkbox">
-                                                <input type="checkbox" id="default-checkbox{{$category->id}}" name="categoriesArray[]" value="{{$category->id}}">
+                                                <input type="checkbox" id="default-checkbox{{$category->id}}" name="categoriesArray[]" value="{{$category->id}}" >
                                                 <label for="default-checkbox{{$category->id}}"></label>
                                             </div>
                                         </div>

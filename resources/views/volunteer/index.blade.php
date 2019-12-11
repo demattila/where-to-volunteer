@@ -20,14 +20,14 @@
                     That don't lights. Blessed land spirit creature divide our made two
                     itself upon you'll dominion waters man second good you they're divided upon winged were replenish night
                 </p>
-                <a class="primary_btn yellow_btn text-white"  href={{route('register')}}>Register</a>
-                <a class="primary_btn mr-20" href={{route('login')}}>Log in<span class="lnr lnr-arrow-right"></span></a>
+                <a class="primary_btn yellow_btn text-white"  href={{route('register')}}>{{ __('Register') }}</a>
+                <a class="primary_btn mr-20" href={{route('login')}}>{{ __('Log in') }}<span class="lnr lnr-arrow-right"></span></a>
             </div>
         </div>
     </div>
 </section>
 <!--================ End Home Banner Area =================-->
-
+{{dump(App::getLocale())}}
 <!--================ Start CTA Area =================-->
 {{--<div class="cta-area section_gap overlay">--}}
     {{--<div class="container">--}}

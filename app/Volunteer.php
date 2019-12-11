@@ -52,11 +52,19 @@ class Volunteer extends Authenticatable implements HasMedia
         return $this->belongsToMany(Event::class, 'applies')->withPivot('id','status')->withTimestamps();
     }
 
+    public function applyStatus(Event $event)
+    {
+//        dump($event);
+//        $a = $this->applies()->where('events.id','=', $event->id)->pivot;
+        $a = $this->applies()->where('events.id','=',$event->id)->first()->pivot->status;
+//        dd($a);
+        return $a;
+    }
+
     public function favorites()
     {
         return $this->belongsToMany(Event::class, 'favorites')->withPivot('id')->withTimestamps();
     }
-
 
     public function historyEvents(){
         $applies = $this->applies()->wherePivot('status', 1)->where('ends_at','<',now())->get();

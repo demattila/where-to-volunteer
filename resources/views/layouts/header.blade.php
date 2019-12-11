@@ -43,6 +43,10 @@
                             {{--<li class="nav-item {{Request::path() ==='/' ? 'active' : ''}}"><a class="nav-link" href={{route('volunteer.index')}}>Home</a></li>--}}
                             <li class="nav-item {{Request::path() ==='events' ? 'active' : ''}}"><a class="nav-link" href={{route('events.index')}}>Events</a></li>
                             <li class="nav-item {{Request::path() ==='about' ? 'active' : ''}}"><a class="nav-link" href={{route('about')}}>About</a></li>
+                            @if (App::isLocale('en'))
+                            <li class="nav-item"><a class="nav-link">English</a></li>
+                            @endif
+
                             @if(!empty($user))
 
                             @auth('web')

@@ -66,7 +66,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6 col-md-6">
                                 <figure>
-                                    <img class="img-fluid w-100" src="/img/event/{{$event->image}}" alt="">
+                                    <img class="img-fluid w-100" src="{{$event->image_url}}" alt="">
                                     <div class="img-overlay"></div>
                                 </figure>
                             </div>

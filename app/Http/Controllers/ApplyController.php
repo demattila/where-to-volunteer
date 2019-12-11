@@ -7,6 +7,7 @@ use App\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Apply;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ApplyController extends Controller
 {
@@ -46,6 +47,37 @@ class ApplyController extends Controller
         $apply->delete();
         $request->session()->flash('message', 'Successfully canceled!');
 
+        return redirect()->back();
+    }
+
+    /**
+     * @param Request $request
+     * @param Event $event
+     * @param Volunteer $volunteer
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function accept(Request $request, Event $event, Volunteer $volunteer){
+        $apply = Apply::where('volunteer_id',$volunteer->id)->where('event_id',$event->id)->first();
+        $apply->update([
+            'status' => 1,
+        ]);
+//        dd($apply);
+        Alert::success('SuccessAlert','Volunteer successfully accepted.');
+        return redirect()->back();
+    }
+
+    /**
+     * @param Request $request
+     * @param Event $event
+     * @param Volunteer $volunteer
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function reject(Request $request, Event $event, Volunteer $volunteer){
+        $apply = Apply::where('volunteer_id',$volunteer->id)->where('event_id',$event->id)->first();
+        $apply->update([
+            'status' => 2,
+        ]);
+        alert()->success('SuccessAlert','Volunteer successfully rejected.');
         return redirect()->back();
     }
 }

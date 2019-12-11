@@ -18,6 +18,10 @@ class Event extends Model implements HasMedia
 //
     protected $guarded = [];
 
+    protected $dates = [
+        'starts_at','ends_at'
+    ];
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'event_categories');
@@ -33,6 +37,11 @@ class Event extends Model implements HasMedia
         return $this->belongsToMany(Volunteer::class, 'applies')->withPivot('id','status')->withTimestamps();
     }
 
+    public function ongoingApplies(){
+            $applies = $this->applies()->wherePivot('status', '=',0)->get();
+            return $applies;
+    }
+
     public function favorites()
     {
         return $this->belongsToMany(Volunteer::class, 'favorites')->withTimestamps();
@@ -42,9 +51,7 @@ class Event extends Model implements HasMedia
         return $this->hasOne(Media::class,'id','image_id');
     }
 
-    public function getImageUrlAttribute(){
-//        $image_url = $this->getFirstMediaUrl('volunteer_profile_images');
-        $image = $this->image;
+    public function getImageUrlAttribute(){$image = $this->image;
 
         if($image == Null){
             return(url('/storage/default/event.jpg'));

@@ -33,6 +33,17 @@ class Organization extends Authenticatable implements HasMedia
         return $this->hasMany(Event::class, 'owner_id');
     }
 
+    public function historyEvents(){
+        $events = $this->events()->where('ends_at','<',now())->get();
+//        dd($applies);
+        return $events;
+    }
+    public function ongoingEvents(){
+        $events = $this->events()->where('ends_at','>',now())->get();
+//        dd($applies);
+        return $events;
+    }
+
     public function type()
     {
         return $this->belongsTo(Type::class, 'type_id');

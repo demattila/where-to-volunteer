@@ -15,7 +15,7 @@
         <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
         <div class="container">
             <div class="banner_content text-center">
-                <h2>Edit profile image</h2>
+                <h2>Edit event image</h2>
                 <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
@@ -25,20 +25,20 @@
 <section class="section-top-border">
     <div class="container">
         @include('layouts.errors')
-        @if (session()->has('message'))
-            <div class="alert alert-success">
-                <ul>
-                        <li>{{session()->get('message')}}</li>
-                </ul>
-            </div>
+        @include('layouts.message')
+        @if (session()->has('isRedirected'))
+            <h5>First step->Second step</h5>
         @endif
         <div class="row">
             <div class="col-md-4">
-                <img class="rounded" style="width: 20rem;" src="{{$image}}" alt="user image">
+                <img class="rounded" style="width: 20rem;" src="{{$event->image_url}}" alt="user image">
             </div>
             <div class="col-md-6">
-                <form action="{{route('image.store')}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('event.image.store',['event' => $event])}}" method="post" enctype="multipart/form-data">
                     @csrf
+                    @if (session()->has('isRedirected'))
+                        <input type="hidden" name="isRedirected" value="1">
+                    @endif
                     <div class="input-group">
                         <button type="submit" class="btn btn-primary m-2">Upload</button>
                         <div class="custom-file">
@@ -47,34 +47,20 @@
                         </div>
                     </div>
                 </form>
-                @if($type == 'volunteer')
-                    @if($user->getMedia('volunteer_profile_images')->first() != null)
-                        <form action="{{route('image.destroy',$user->getMedia('volunteer_profile_images')->first())}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger m-2" type="submit" >Delete</button>
-                        </form>
-                    @endif
-                @endif
-                @if($type == 'organization')
-                    @if($user->getMedia('organization_profile_images')->first() != null)
-                        <form action="{{route('image.destroy',$user->getMedia('organization_profile_images')->first())}}" method="post" enctype="multipart/form-data">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger m-2" type="submit" >Delete</button>
-                        </form>
-                    @endif
+                @if($event->getMedia('event_profile_images')->first() != null)
+                    <form action="{{route('event.image.destroy',$event->getMedia('event_profile_images')->first())}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger m-2" type="submit" >Delete</button>
+                    </form>
                 @endif
             </div>
             <div class="col-md-2">
-                <a class="btn btn-danger m-2"
-                   href="@if($type == 'volunteer') {{route('dashboard')}}
-                        @elseif($type=='organization'){{ route('organization.dashboard')}} @endif" >
-                    Back
+                <a class="btn btn-danger m-2" href="{{ route('organization.dashboard') }}">
+                  Back
                 </a>
             </div>
         </div>
-
     </div>
 </section>
 

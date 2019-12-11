@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Event;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\MediaLibrary\Models\Media;
 
 class ImageController extends Controller
@@ -54,8 +55,16 @@ class ImageController extends Controller
 
     public function event_store(Request $request,Event $event)
     {
+
         $new_image = $event->addMedia($request->image)->toMediaCollection('event_profile_images');
         $event->update(['image_id' => $new_image->id]);
+
+//        dump($request->has('isRedirected'));
+
+        if($request->get('isRedirected')){
+            $request->session()->flash('message', 'New event successfully created! Look at your events!');
+            return redirect()->route('organization.dashboard');
+        }
 
         $request->session()->flash('message', 'Successfully uploaded the image!');
         return redirect()->back();
@@ -81,23 +90,24 @@ class ImageController extends Controller
     public function edit()
     {
         $type='volunteer';
-        $user=auth()->user();
+        $user=auth()->guard('web')->user();
 //        dump(auth()->guard('web_organization')->check());
 //        dump(auth()->guard('web')->check());
 //        dump($type);
-//        if(auth()->guard('web_organization')->check()){
-//            $user= auth()->guard('web_organization')->user();
-//            $type='organization';
-//        }
+        if(auth()->guard('web_organization')->check()){
+            $user= auth()->guard('web_organization')->user();
+            $type='organization';
+        }
         return view('shared.edit_image',[
             'user' => $user,
-            'image' => $user->image_url,
             'type' => $type
         ]);
     }
 
-    public function event_edit(){
-
+    public function event_edit(Event $event){
+        return view('event.edit_image',[
+            'event' => $event
+        ]);
     }
 
     /**
@@ -116,9 +126,14 @@ class ImageController extends Controller
     {
 //        dd($id);
         $media = Media::find($id);
-        try {
-            $media->delete();
-        } catch (\Exception $e){}
+        $media->delete();
+        $request->session()->flash('message', 'Successfully deleted the image!');
+        return redirect()->back();
+    }
+
+    public function event_destroy(Request $request,$id){
+        $media = Media::find($id);
+        $media->delete();
         $request->session()->flash('message', 'Successfully deleted the image!');
         return redirect()->back();
     }
