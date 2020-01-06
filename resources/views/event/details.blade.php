@@ -42,6 +42,12 @@
                     <h2 class="mb-20">
                         {{$event->title}}
                     </h2>
+                    <div>
+                    <favorite
+                            :event=1
+                            :favorited=true
+                    ></favorite>
+                    </div>
                     <p>
                         If you are looking at blank cassettes on the web, you may be very confused at the difference in price You may
                         see some for as low as each. If you are looking at blank cassettes on the web, you may be very confused at the

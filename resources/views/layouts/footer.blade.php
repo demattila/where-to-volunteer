@@ -1,4 +1,4 @@
-<footer style="margin-top: 20rem">
+<footer style="margin-top: 15rem">
     <div class="footer-area">
         <div class="container">
             <div>szia</div>
@@ -29,12 +29,12 @@
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 col-sm-6">
-                    <div class="single-footer-widget instafeed">
+                    <div class="single-footer-widget">
                         <h4 class="footer_title">Language</h4>
                         <ul class="list">
-                            <li><a class="text-white" href="{{url('/lang/en')}}">English</a></li>
-                            <li><a class="text-white" href="{{url('/lang/ro')}}">Română</a></li>
-                            <li><a class="text-white" href="{{url('/lang/hu')}}">Magyar</a></li>
+                            <li><img style="width: 2rem" src="{{url('/storage/lang/uk.svg')}}"><a class="text-white ml-2" href="{{url('/lang/en')}}">English</a></li>
+                            <li><img style="width: 2rem" src="{{url('/storage/lang/ro.svg')}}"><a class="text-white ml-2" href="{{url('/lang/ro')}}">Română</a></li>
+                            <li><img style="width: 2rem" src="{{url('/storage/lang/hu.svg')}}"><a class="text-white ml-2" href="{{url('/lang/hu')}}">Magyar</a></li>
                         </ul>
                     </div>
                 </div>

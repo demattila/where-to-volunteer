@@ -12,21 +12,32 @@
 */
 
 
+use App\Events\MyEvent;
 use Illuminate\Support\Facades\App;
+
+
+Route::get('test', function () {
+    event(new \App\Events\ApplyAccepted('Levente'));
+    return "Event has been sent!";
+});
 
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
 
+//Localization
 Route::get('/lang/{locale}','LocalizationController@index');
 
-//Volunteer Routes
+//Stories
+Route::get('/stories','StoriesController@index')->name('stories.index');
+
+//Volunteer
 Auth::routes();
 Route::get('/', 'VolunteerController@index')->name('index')->middleware('guest:web_organization')->middleware('guest:web');
 Route::get('/dashboard', 'VolunteerController@dashboard')->name('dashboard')->middleware('auth:web');
 Route::get('/volunteer/edit','VolunteerController@edit')->name('profile.edit')->middleware('auth:web');
 Route::patch('/volunteer/update','VolunteerController@update')->name('profile.update')->middleware('auth:web');
 
-//Image Routes
+//Image
 //Route::get('/image','ImageController@index')->name('image.index');
 //Route::get('/image/create','ImageController@create')->name('image.create');
 //Route::get('image/{image}','ImageController@show')->name('image.show');
@@ -41,16 +52,19 @@ Route::delete('/image/event/{image}','ImageController@event_destroy')->name('eve
 
 
 
-//Event Routes
+//Event
+Route::post('/events/fetch', 'EventController@fetch')->name('events.fetch');
 Route::resource('events', 'EventController');
-Route::get('/organization/events/ongoing/{event}','EventController@orgOngoingDetails')->name('events.ongoing_show');
 //Route::get('events', 'EventController@index')->name('events.index');
 //Route::get('/events/create', 'EventController@create')->name('events.create');
 //Route::get('/events/{event}', 'EventController@show')->name('events.show');
-Route::post('/events/favorite/{event}', 'EventController@favorite')->name('events.favorite');
-Route::delete('/events/unfavorite/{event}', 'EventController@unfavorite')->name('events.unfavorite');
+//Route::post('/events/favorite/{event}', 'EventController@favorite')->name('events.favorite');
+//Route::delete('/events/unfavorite/{event}', 'EventController@unfavorite')->name('events.unfavorite');
+Route::post('/event/favorite', 'EventController@fav')->name('events.favorite');
+Route::post('/event/unfavorite', 'EventController@unfav')->name('events.unfavorite');
 
-//Apply routes
+
+//Apply
 //Route::get('/applies', 'ApplyController@index')->name('apply.index');
 Route::post('/applies/{event}', 'ApplyController@apply')->name('apply')->middleware('auth:web');
 Route::delete('/applies/{event}', 'ApplyController@cancel')->name('apply.cancel')->middleware('auth:web');
@@ -58,11 +72,13 @@ Route::post('/applies/{event}/accept/{volunteer}', 'ApplyController@accept')->na
 Route::post('applies/{event}/reject/{volunteer}', 'ApplyController@reject')->name('apply.reject')->middleware('auth:web_organization');
 
 
-//Organization Routes
+Route::get('/organization/events/ongoing/{event}','EventController@orgOngoingDetails')->name('events.ongoing_show');
+//Organization
 Route::prefix('/organization')->name('organization.')->namespace('Organization')->group(function(){
     Route::get('/', 'OrganizationController@index')->name('index')->middleware('guest:web_organization')->middleware('guest:web');
     Route::get('/dashboard', 'OrganizationController@dashboard')->name('dashboard')->middleware('auth:web_organization');
     Route::get('/edit','OrganizationController@edit')->name('profile.edit')->middleware('auth:web_organization');
+
     Route::namespace('Auth')->group(function(){
         //Login Routes
         Route::get('/login','LoginController@showLoginForm')->name('login');

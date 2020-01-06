@@ -28,8 +28,8 @@ class OrganizationController extends Controller
 
     public function dashboard()
     {
-        $user = auth()->guard('web_organization')->user();
-        return view('organization.dashboard',['user' => $user]);
+//        $user = auth()->guard('web_organization')->user();
+        return view('organization.dashboard');
     }
 
     /**

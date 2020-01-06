@@ -21,9 +21,9 @@
                                                 {{Request::path() ==='login' ? 'active' : ''}}">
                                 <a class="nav-link" href={{route('index')}}>
                                     @if(auth()->guard('web')->check())
-                                        Dashboard
+                                        {{__('Dashboard')}}
                                     @else
-                                        Volunteer
+                                        {{__('Volunteer')}}
                                     @endif
                                 </a>
                             </li>
@@ -33,22 +33,23 @@
                                                 {{Request::path() ==='organization/login' ? 'active' : ''}}">
                                 <a class="nav-link" href={{route('organization.index')}}>
                                     @if(auth()->guard('web_organization')->check())
-                                        Dashboard
+                                        {{__('Dashboard')}}
                                     @else
-                                        Organization
+                                        {{__('Organization')}}
                                     @endif
                                 </a>
                             </li>
                             {{--<li class="nav-item {{Request::path() ==='/' ? 'active' : ''}}"><a class="nav-link" href={{route('volunteer.index')}}>Home</a></li>--}}
-                            <li class="nav-item {{Request::path() ==='events' ? 'active' : ''}}"><a class="nav-link" href={{route('events.index')}}>Events</a></li>
-                            <li class="nav-item {{Request::path() ==='about' ? 'active' : ''}}"><a class="nav-link" href={{route('about')}}>About</a></li>
+                            <li class="nav-item {{Request::path() ==='events' ? 'active' : ''}}"><a class="nav-link" href={{route('events.index')}}>{{__('Events')}}</a></li>
+                            <li class="nav-item {{Request::path() ==='stories' ? 'active' : ''}}"><a class="nav-link" href={{route('stories.index')}}>{{__('Stories')}}</a></li>
+                            <li class="nav-item {{Request::path() ==='about' ? 'active' : ''}}"><a class="nav-link" href={{route('about')}}>{{__('About')}}</a></li>
 
                             {{--@if (App::isLocale('en'))--}}
                             {{--<li class="nav-item"><a class="nav-link">English</a></li>--}}
                             {{--@endif--}}
 
-                            @if(!empty($user))
-
+{{--                            @if(!empty($user))--}}
+{{--                            {{dd($user)}}--}}
                             @auth('web')
                                 <li class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -90,7 +91,7 @@
                                 </li>
                             @endauth
 
-                            @endif
+                            {{--@endif--}}
                         </ul>
                     </div>
                 </div>

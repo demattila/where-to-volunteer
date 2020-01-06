@@ -42,9 +42,18 @@ class Event extends Model implements HasMedia
             return $applies;
     }
 
-    public function favorites()
+    public function favoritedBy()
     {
         return $this->belongsToMany(Volunteer::class, 'favorites')->withTimestamps();
+    }
+
+    public function favorited()
+    {
+        return (bool) Favorite::where('volunteer_id', auth()->guard('web')->id())
+            ->where('event_id', $this->id)
+            ->first();
+
+//        return true;
     }
 
     public function image(){

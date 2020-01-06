@@ -28,13 +28,12 @@ class VolunteerController extends Controller
 
     public function dashboard()
     {
-        if(auth()->guard('web')->check()){
-            $user = auth()->guard('web')->user();
-        }else{
-            $user = null;
-        }
-
-        return view('volunteer.dashboard',['user' => $user] );
+//        if(auth()->guard('web')->check()){
+//            $user = auth()->guard('web')->user();
+//        }else{
+//            $user = null;
+//        }
+        return view('volunteer.dashboard' );
     }
 
 

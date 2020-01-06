@@ -6,7 +6,7 @@
 </head>
 <body>
 
-@include('layouts.header')
+@include('layouts.header',['user' => $user])
 
 <!--================ Home Banner Area =================-->
 <section class="banner_area">
@@ -64,7 +64,7 @@
 
 <section>
     <div class="container">
-        <h4 style="margin-bottom: 2rem">Subscribed volunteers:</h4>
+        <h4 style="margin-bottom: 2rem">Manage subscribed volunteers:</h4>
 
         <table style="width:100%">
             <tr>

@@ -47,8 +47,10 @@ class LoginController extends Controller
     {
         $this->guard()->logout();
 
+        $locale =session()->get('locale', 'en');
         $request->session()->invalidate();
 
+        session()->put('locale',$locale);
         return redirect()->route('index');
     }
 }

@@ -72,19 +72,19 @@ class Volunteer extends Authenticatable implements HasMedia
         return $applies;
     }
     public function ongoingApplies(){
-        $applies = $this->applies()->wherePivot('status', 0)->get();
+        $applies = $this->applies()->wherePivot('status', 0)->where('ends_at','>=',now())->get();
 //        $applies = $this->applies()->pivot->w(isOngoing(),'true')->get();
 //        dd($applies);
         return $applies;
     }
     public function acceptedApplies(){
-        $applies = $this->applies()->wherePivot('status', 1)->get();
+        $applies = $this->applies()->wherePivot('status', 1)->where('ends_at','>=',now())->get();
 //        $applies = $this->applies()->wherePivot(isAccepted(),'true')->get();
 //        dd($applies);
         return $applies;
     }
     public function rejectedApplies(){
-        $applies = $this->applies()->wherePivot('status', 2)->get();
+        $applies = $this->applies()->wherePivot('status', 2)->where('ends_at','>=',now())->get();
 //        $applies = $this->applies()->wherePivot(isRejected(),'true')->get();
 //        dd($applies);
         return $applies;

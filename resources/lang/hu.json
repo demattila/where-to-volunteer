@@ -1,10 +1,22 @@
 {
   "Register" : "Regisztráció",
   "Log in" : "Bejelentkezés",
+  "Login" : "Belépés",
+  "Password" : "Jelszó",
+  "E-Mail Address" : "E-Mail cím",
+  "Remember Me" : "Emlékezz rám",
+  "Forgot Your Password?" : "Elfelejtetted a jelszavad?",
   "Give a hand" : "Nyújts segítséget",
   "to make the better world" : "Egy jobb világért",
   "That don't lights. Blessed land spirit creature divide our made two itself upon you'll dominion waters man second good you they're divided upon winged were replenish night"
   : "Az nem világít. Áldott föld szellemi teremtmény ossza meg kettőnk saját magát, ha uralkodni vizek ember másodszor jó, hogy megoszlanak szárnyas volt feltöltő éjszaka",
   "Our latest Story" : "Legújabb történeteink",
-  "Open lesser winged midst wherein may morning" : "Nyissa meg a kevésbé szárnyas közepet, ahol reggel is lehet"
+  "Open lesser winged midst wherein may morning" : "Nyissa meg a kevésbé szárnyas közepet, ahol reggel is lehet",
+  "Dashboard" : "Irányítópult",
+  "Volunteer" : "Önkéntes",
+  "Organization" : "Szervezet",
+  "Events" : "Események",
+  "Stories" : "Történetek",
+  "About" : "Rólunk",
+  "Logout" : "Kijelentkezés"
 }

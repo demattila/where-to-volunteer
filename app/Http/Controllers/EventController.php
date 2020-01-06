@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class EventController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -22,12 +23,12 @@ class EventController extends Controller
      */
     public function index(Request $request, Event $event)
     {
-        if(auth()->guard('web')->check()){
-            $user = auth()->guard('web')->user();
-        }
-        if(auth()->guard('web_organization')->check()){
-            $user = auth()->guard('web_organization')->user();
-        }
+//        if(auth()->guard('web')->check()){
+//            $user = auth()->guard('web')->user();
+//        }
+//        if(auth()->guard('web_organization')->check()){
+//            $user = auth()->guard('web_organization')->user();
+//        }
 //        $events = Event::all();
         $event = $event->newQuery();
         $perPage = 6;
@@ -52,10 +53,60 @@ class EventController extends Controller
 
         return view('event.index',[
             'events' => $events,
-            'regions' => $regions,
-            'categories' => $categories,
-            'user' => $user ?? null,
+//            'regions' => $regions,
+//            'categories' => $categories,
+//            'user' => $user ?? null,
         ]);
+    }
+
+    public function fetch(Request $request)
+    {
+//        dd($request->get('query'));
+        if($request->get('query'))
+        {
+            $query = $request->get('query');
+            $data = Event::where('title', 'LIKE', "%{$query}%")->get();
+            $output = '<ul class="dropdown-menu list" style="display:block; position:relative">';
+            foreach($data as $event)
+            {
+                $id = $event->id;
+                $output .= '<li class="option"><a href="/events/'.$id.'">'.$event->title.'</a></li>';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
+
+    public function fav(Request $request){
+        if(auth()->guard('web')->check()){
+            $user = auth()->guard('web')->user();
+        }
+        if(auth()->guard('web_organization')->check()){
+            $user = auth()->guard('web_organization')->user();
+        }
+        if($request->get('item_id')){
+            $event = Event::findOrFail($request->get('item_id'));
+//            Favorite::create([
+//                'volunteer_id' => $user,
+//                'event_id' => $event
+//            ]);
+            $user->favorites()->attach($event);
+        }
+        return null;
+    }
+
+    public function unfav(Request $request){
+        if(auth()->guard('web')->check()){
+            $user = auth()->guard('web')->user();
+        }
+        if(auth()->guard('web_organization')->check()){
+            $user = auth()->guard('web_organization')->user();
+        }
+        if($request->get('item_id')){
+            $event = Event::findOrFail($request->get('item_id'));
+            $user->favorites()->detach($event);
+        }
+        return null;
     }
 
     public function favorite(Event $event){

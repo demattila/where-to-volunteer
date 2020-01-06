@@ -4,8 +4,8 @@
     <title>Dashboard</title>
     @include('layouts.head')
 </head>
-<body onload="scroll()">
-@include('layouts.header',['user' => $user])
+<body>
+@include('layouts.header')
 
 <section class="banner_area">
     <div class="banner_inner d-flex align-items-center">
@@ -24,7 +24,7 @@
     <div class="container">
         @include('layouts.message')
         {{--<div class="jumbotron"></div>--}}
-        <div class="row border border-light rounded" style="background-color: #f5f5f5">
+        <div class="row border border-light rounded" style="background-color: #f5f5f5;box-shadow: 10px 10px 5px grey">
 
             <div class="col-md-3"  style="padding: 10px">
                 <div class="panel panel-default" >
@@ -45,7 +45,7 @@
                         <hr>
                     </div>
                     <div class="panel-body" align="middle">
-                        <a href="{{route('image.edit')}}"><img src="{{$user->image_url}}" style="width: 10rem;" ></a>
+                        <a href="{{route('image.edit')}}"><img src="{{$user->image_url}}" style="width: 10rem;"></a>
                         {{--<img class="rounded" style="width: 10rem;" src="{{$user->image_url}}" alt="user image">--}}
                         <div class="col-lg-12">
                             <h6 class=" mt-3">{{$user->name}} </h6>

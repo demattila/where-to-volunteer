@@ -7,7 +7,7 @@
             <select class="m-2" id="region" name="region" >
                 <option disabled selected value> -- select -- </option>
                 @foreach($regions as $region)
-                    <option value="{{$region}}">{{$region}}</option>
+                    <option value="{{$region->name}}">{{$region->name}}</option>
                 @endforeach
             </select>
 
@@ -15,14 +15,14 @@
             <select class="m-2" id="category" name="category" >
                 <option disabled selected value> -- select -- </option>
                 @foreach($categories as $category)
-                    <option value="{{$category}}">{{$category}}</option>
+                    <option value="{{$category->name}}">{{$category->name}}</option>
                 @endforeach
             </select>
 
             <label class="m-2" for="per_page">{{ __('Items on page') }}:</label>
             <input id="per_page" type="number" name="per_page" style="width: 3rem">
 
-            <button type="submit" class="genric-btn primary m-2">{{ __('Search') }}</button>
+            <button type="submit" class="genric-btn primary m-2">{{ __('Filter') }}</button>
         </form>
     </div>
     <div class="col-sm-1"></div>
