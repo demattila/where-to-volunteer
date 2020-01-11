@@ -6,7 +6,7 @@
 </head>
 <body>
 
-@include('layouts.header',['user' => $user])
+@include('layouts.header')
 
 <!--================ Home Banner Area =================-->
 <section class="banner_area">

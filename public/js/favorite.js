@@ -93,15 +93,15 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function addToFavourites(itemid) {
-  // var user_id = userid;
+window.addToFavourites = function (itemid) {
   var item_id = itemid;
   $.ajax({
     type: 'post',
     url: '/event/favorite',
     data: {
       // 'user_id': user_id,
-      'item_id': item_id
+      'item_id': item_id,
+      _token: '{{csrf_token()}}'
     },
     success: function success() {
       // hide add button
@@ -112,17 +112,41 @@ function addToFavourites(itemid) {
     error: function error(XMLHttpRequest) {// handle error
     }
   });
-}
+}; //
+// function addToFavourites(itemid) {
+//     // var user_id = userid;
+//     var item_id = itemid;
+//
+//     $.ajax({
+//         type: 'post',
+//         url: '/event/favorite',
+//         data: {
+//             // 'user_id': user_id,
+//             'item_id': item_id,
+//             _token: '{{csrf_token()}}'
+//         },
+//         success: function () {
+//             // hide add button
+//             $('#addfavourites' + item_id).hide();
+//             // show delete button
+//             $('#deletefavourite' + item_id).show();
+//         },
+//         error: function (XMLHttpRequest) {
+//             // handle error
+//         }
+//     });
+// }
 
-function deleteFromFavourites(itemid) {
-  // var user_id = userid;
+
+window.deleteFromFavourites = function (itemid) {
   var item_id = itemid;
   $.ajax({
     type: 'post',
     url: '/event/unfavorite',
     data: {
       // 'user_id': user_id,
-      'item_id': item_id
+      'item_id': item_id,
+      _token: '{{csrf_token()}}'
     },
     success: function success() {
       // show add button
@@ -133,7 +157,29 @@ function deleteFromFavourites(itemid) {
     error: function error(XMLHttpRequest) {// handle error
     }
   });
-}
+}; // function deleteFromFavourites(itemid) {
+//     // var user_id = userid;
+//     var item_id = itemid;
+//
+//     $.ajax({
+//         type: 'post',
+//         url: '/event/unfavorite',
+//         data: {
+//             // 'user_id': user_id,
+//             'item_id': item_id,
+//             _token: '{{csrf_token()}}'
+//         },
+//         success: function () {
+//             // show add button
+//             $('#addfavourites' + item_id).show();
+//             // hide delete button
+//             $('#deletefavourite' + item_id).hide();
+//         },
+//         error: function (XMLHttpRequest) {
+//             // handle error
+//         }
+//     });
+// }
 
 /***/ }),
 

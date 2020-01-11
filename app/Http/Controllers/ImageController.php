@@ -55,7 +55,6 @@ class ImageController extends Controller
 
     public function event_store(Request $request,Event $event)
     {
-
         $new_image = $event->addMedia($request->image)->toMediaCollection('event_profile_images');
         $event->update(['image_id' => $new_image->id]);
 

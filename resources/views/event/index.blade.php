@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{asset('css/fav.css')}}">
 </head>
 
-<body>
+<body onload="scrolll()">
 
 <!--================ Start Header Menu Area =================-->
 @include('layouts.header')
@@ -106,8 +106,7 @@
                                                     onClick="deleteFromFavourites({{$event->id}})"
                                                     name="addfavourite"
                                                     class="btn btn-lg"
-                                                    style="{{ $event->favorited() ? '' : 'display: none;' }}"
-                                            >
+                                                    style="{{ $event->favorited() ? '' : 'display: none;' }}">
                                                 <i class="fas fa-star"></i>
                                             </button>
 
@@ -116,8 +115,7 @@
                                                     onClick="addToFavourites({{$event->id}})"
                                                     name="deletefavourite"
                                                     class="btn btn-lg"
-                                                    style="{{ $event->favorited() ? 'display: none;' : '' }}"
-                                            >
+                                                    style="{{ $event->favorited() ? 'display: none;' : '' }}">
                                                 <i class="far fa-star" ></i>
                                             </button>
                                     </h3>
@@ -148,7 +146,6 @@
 
         </div>
         {{$events->links()}}
-
     </div>
 </section>
 <!--================ End Recent Event Area =================-->
@@ -180,57 +177,57 @@
 <!--================ End footer Area  =================-->
 
 @include('layouts.scripts')
-<script src="{{asset('js/favorite.js')}}"></script>
-{{--<script>--}}
-    {{--function addToFavourites(itemid) {--}}
-        {{--// var user_id = userid;--}}
-        {{--var item_id = itemid;--}}
 
-        {{--$.ajax({--}}
-            {{--type: 'post',--}}
-            {{--url: '/event/favorite',--}}
-            {{--data: {--}}
-                {{--// 'user_id': user_id,--}}
-                {{--'item_id': item_id,--}}
-                {{--_token: '{{csrf_token()}}'--}}
-            {{--},--}}
-            {{--success: function () {--}}
-                {{--// hide add button--}}
-                {{--$('#addfavourites' + item_id).hide();--}}
-                {{--// show delete button--}}
-                {{--$('#deletefavourite' + item_id).show();--}}
-            {{--},--}}
-            {{--error: function (XMLHttpRequest) {--}}
-                {{--// handle error--}}
-            {{--}--}}
-        {{--});--}}
-    {{--}--}}
+<script>
+    function addToFavourites(itemid) {
+        // var user_id = userid;
+        var item_id = itemid;
 
-    {{--function deleteFromFavourites(itemid) {--}}
-        {{--// var user_id = userid;--}}
-        {{--var item_id = itemid;--}}
+        $.ajax({
+            type: 'post',
+            url: '/event/favorite',
+            data: {
+                // 'user_id': user_id,
+                'item_id': item_id,
+                _token: '{{csrf_token()}}'
+            },
+            success: function () {
+                // hide add button
+                $('#addfavourites' + item_id).hide();
+                // show delete button
+                $('#deletefavourite' + item_id).show();
+            },
+            error: function (XMLHttpRequest) {
+                // handle error
+            }
+        });
+    }
 
-        {{--$.ajax({--}}
-            {{--type: 'post',--}}
-            {{--url: '/event/unfavorite',--}}
-            {{--data: {--}}
-                {{--// 'user_id': user_id,--}}
-                {{--'item_id': item_id,--}}
-                {{--_token: '{{csrf_token()}}'--}}
-            {{--},--}}
-            {{--success: function () {--}}
-                {{--// show add button--}}
-                {{--$('#addfavourites' + item_id).show();--}}
-                {{--// hide delete button--}}
-                {{--$('#deletefavourite' + item_id).hide();--}}
-            {{--},--}}
-            {{--error: function (XMLHttpRequest) {--}}
-                {{--// handle error--}}
-            {{--}--}}
-        {{--});--}}
-    {{--}--}}
+    function deleteFromFavourites(itemid) {
+        // var user_id = userid;
+        var item_id = itemid;
 
-{{--</script>--}}
+        $.ajax({
+            type: 'post',
+            url: '/event/unfavorite',
+            data: {
+                // 'user_id': user_id,
+                'item_id': item_id,
+                _token: '{{csrf_token()}}'
+            },
+            success: function () {
+                // show add button
+                $('#addfavourites' + item_id).show();
+                // hide delete button
+                $('#deletefavourite' + item_id).hide();
+            },
+            error: function (XMLHttpRequest) {
+                // handle error
+            }
+        });
+    }
+
+</script>
 </body>
 </html>
 

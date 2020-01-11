@@ -1,7 +1,10 @@
 <!doctype html>
 <html lang="en">
-@include('layouts.head')
-<body>
+<head>
+    <title>Stories</title>
+    @include('layouts.head')
+</head>
+<body onload="scrolll()">
 
 <!--================ Start Header Menu Area =================-->
 @include('layouts.header')
@@ -21,57 +24,13 @@
 </section>
 <!--================ End Home Banner Area =================-->
 
-<!--================Blog Categories Area =================-->
-{{--<section class="blog_categorie_area">--}}
-    {{--<div class="container">--}}
-        {{--<div class="row">--}}
-            {{--<div class="col-lg-4">--}}
-                {{--<div class="categories_post">--}}
-                    {{--<img src="img/blog/cat-post/cat-post-3.jpg" alt="post">--}}
-                    {{--<div class="categories_details">--}}
-                        {{--<div class="categories_text">--}}
-                            {{--<a href="single-blog.html"><h5>Social Life</h5></a>--}}
-                            {{--<div class="border_line"></div>--}}
-                            {{--<p>Enjoy your social life together</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="col-lg-4">--}}
-                {{--<div class="categories_post">--}}
-                    {{--<img src="img/blog/cat-post/cat-post-2.jpg" alt="post">--}}
-                    {{--<div class="categories_details">--}}
-                        {{--<div class="categories_text">--}}
-                            {{--<a href="single-blog.html"><h5>Politics</h5></a>--}}
-                            {{--<div class="border_line"></div>--}}
-                            {{--<p>Be a part of politics</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="col-lg-4">--}}
-                {{--<div class="categories_post">--}}
-                    {{--<img src="img/blog/cat-post/cat-post-1.jpg" alt="post">--}}
-                    {{--<div class="categories_details">--}}
-                        {{--<div class="categories_text">--}}
-                            {{--<a href="single-blog.html"><h5>Food</h5></a>--}}
-                            {{--<div class="border_line"></div>--}}
-                            {{--<p>Let the food be finished</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</section>--}}
-<!--================Blog Categories Area =================-->
-
 <!--================Blog Area =================-->
 <section style="padding-top: 50px" class="blog_area">
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
                 <div class="blog_left_sidebar">
+                    @include('layouts.message')
                     <article class="row blog_item">
                         <div class="col-md-3">
                             <div class="blog_info text-right">
@@ -85,7 +44,7 @@
                                     <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
                                     <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
                                     <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                    <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                                    <li><a href="#">00 Comments<i class="lnr lnr-bubble"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -95,53 +54,21 @@
                                 <div class="blog_details">
                                     <a href="single-blog.html"><h2>Astronomy Binoculars A Great Alternative</h2></a>
                                     <p>MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.</p>
-                                    <a href="single-blog.html" class="blog_btn">View More</a>
+                                    <a href="#" class="blog_btn">View More</a>
                                 </div>
                             </div>
                         </div>
                     </article>
+
+                    @foreach($stories as $story)
                     <article class="row blog_item">
                         <div class="col-md-3">
                             <div class="blog_info text-right">
-                                <div class="post_tag">
-                                    <a href="#">Food,</a>
-                                    <a class="active" href="#">Technology,</a>
-                                    <a href="#">Politics,</a>
-                                    <a href="#">Lifestyle</a>
-                                </div>
                                 <ul class="blog_meta list">
-                                    <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                    <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                    <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                    <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="blog_post">
-                                <img src="img/blog/main-blog/m-blog-2.jpg" alt="">
-                                <div class="blog_details">
-                                    <a href="single-blog.html"><h2>The Basics Of Buying A Telescope</h2></a>
-                                    <p>MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.</p>
-                                    <a href="single-blog.html" class="blog_btn">View More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="row blog_item">
-                        <div class="col-md-3">
-                            <div class="blog_info text-right">
-                                <div class="post_tag">
-                                    <a href="#">Food,</a>
-                                    <a class="active" href="#">Technology,</a>
-                                    <a href="#">Politics,</a>
-                                    <a href="#">Lifestyle</a>
-                                </div>
-                                <ul class="blog_meta list">
-                                    <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                    <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                    <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                    <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                                    <li><a href="{{route('stories.show',$story)}}">{{$story->owner->name}}<i class="lnr lnr-user"></i></a></li>
+                                    <li><a href="{{route('stories.show',$story)}}">{{$story->created_at->format('d-m-Y')}}<i class="lnr lnr-calendar-full"></i></a></li>
+                                    <li><a href="{{route('stories.show',$story)}}">{{$story->views_count}} Views<i class="lnr lnr-eye"></i></a></li>
+                                    <li><a href="{{route('stories.show',$story)}}">{{$story->comments_count}} Comments<i class="lnr lnr-bubble"></i></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -149,92 +76,19 @@
                             <div class="blog_post">
                                 <img src="img/blog/main-blog/m-blog-3.jpg" alt="">
                                 <div class="blog_details">
-                                    <a href="single-blog.html"><h2>The Glossary Of Telescopes</h2></a>
-                                    <p>MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.</p>
-                                    <a href="single-blog.html" class="blog_btn">View More</a>
+                                    <a href="single-blog.html"><h2>{{$story->title}}</h2></a>
+                                    <p>{{$story->text_short}}</p>
+                                    <a href="{{route('stories.show',$story)}}" class="blog_btn">View More</a>
                                 </div>
                             </div>
                         </div>
                     </article>
-                    <article class="row blog_item">
-                        <div class="col-md-3">
-                            <div class="blog_info text-right">
-                                <div class="post_tag">
-                                    <a href="#">Food,</a>
-                                    <a class="active" href="#">Technology,</a>
-                                    <a href="#">Politics,</a>
-                                    <a href="#">Lifestyle</a>
-                                </div>
-                                <ul class="blog_meta list">
-                                    <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                    <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                    <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                    <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="blog_post">
-                                <img src="img/blog/main-blog/m-blog-4.jpg" alt="">
-                                <div class="blog_details">
-                                    <a href="single-blog.html"><h2>The Night Sky</h2></a>
-                                    <p>MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.</p>
-                                    <a href="single-blog.html" class="blog_btn">View More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <article class="row blog_item">
-                        <div class="col-md-3">
-                            <div class="blog_info text-right">
-                                <div class="post_tag">
-                                    <a href="#">Food,</a>
-                                    <a class="active" href="#">Technology,</a>
-                                    <a href="#">Politics,</a>
-                                    <a href="#">Lifestyle</a>
-                                </div>
-                                <ul class="blog_meta list">
-                                    <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                    <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                    <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                    <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="blog_post">
-                                <img src="img/blog/main-blog/m-blog-5.jpg" alt="">
-                                <div class="blog_details">
-                                    <a href="single-blog.html"><h2>Telescopes 101</h2></a>
-                                    <p>MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.</p>
-                                    <a href="single-blog.html" class="blog_btn">View More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <nav class="blog-pagination justify-content-center d-flex">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a href="#" class="page-link" aria-label="Previous">
-		                                    <span aria-hidden="true">
-		                                        <span class="lnr lnr-chevron-left"></span>
-		                                    </span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a href="#" class="page-link">01</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">02</a></li>
-                            <li class="page-item"><a href="#" class="page-link">03</a></li>
-                            <li class="page-item"><a href="#" class="page-link">04</a></li>
-                            <li class="page-item"><a href="#" class="page-link">09</a></li>
-                            <li class="page-item">
-                                <a href="#" class="page-link" aria-label="Next">
-		                                    <span aria-hidden="true">
-		                                        <span class="lnr lnr-chevron-right"></span>
-		                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
+
+                    @endforeach
+                    {{$stories->links()}}
+
+
+
                 </div>
             </div>
             <div class="col-lg-4">
@@ -391,11 +245,6 @@
 @include('layouts.footer')
 <!--================ End footer Area  =================-->
 
-
-
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 @include('layouts.scripts')
 </body>
 </html>

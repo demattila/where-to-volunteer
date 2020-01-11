@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Story;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
-class StoriesController extends Controller
+class StoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,13 @@ class StoriesController extends Controller
      */
     public function index()
     {
-        return view('stories.index');
+        $stories = Story::withCount('comments')->withCount('views')->paginate(5);
+
+
+        return view('stories.index',[
+            'stories' => $stories,
+//            'views'=> $views
+        ]);
     }
 
     /**
@@ -24,7 +31,8 @@ class StoriesController extends Controller
      */
     public function create()
     {
-        //
+        return view('stories.create');
+
     }
 
     /**
@@ -35,7 +43,28 @@ class StoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(auth()->guard('web')->check()){
+            $user = auth()->guard('web')->user();
+            $type = 'App\Volunteer';
+        }
+        if(auth()->guard('web_organization')->check()){
+            $user = auth()->guard('web_organization')->user();
+            $type = 'App\Organization';
+        }
+
+        $parameters = Validator::make($request->all(), [
+            'title' => 'required|string|min:3|max:255',
+            'text_short' => 'required|string|max:255',
+            'text' => 'required|min:200',
+        ])->validate();
+
+        $id = $user->id;
+        $parameters['owner_id'] = $id;
+        $parameters['owner_type'] = $type;
+        Story::create($parameters);
+
+        $request->session()->flash('message', 'New story posted successfully!');
+        return redirect()->route('stories.index');
     }
 
     /**
@@ -46,7 +75,10 @@ class StoriesController extends Controller
      */
     public function show(Story $story)
     {
-        //
+
+        views($story)->record();
+//        dd($story->comments()->count());
+        return view('stories.details', ['story' => $story->load('comments')]);
     }
 
     /**

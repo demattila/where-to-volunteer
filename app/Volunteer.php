@@ -159,4 +159,13 @@ class Volunteer extends Authenticatable implements HasMedia
             ->width(50)
             ->height(50);
     }
+
+    public function stories()
+    {
+        return $this->morphMany(Story::class, 'owner');
+    }
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'owner');
+    }
 }

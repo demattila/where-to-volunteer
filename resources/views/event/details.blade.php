@@ -66,34 +66,64 @@
 
                     <a href="{{route('events.index')}}" class="genric-btn primary">Back!</a>
 
-                    @if(Auth::guard('web')->check())
-                        @if(auth()->user()->isApplied($event))
-                            <a href="{{ route('apply.cancel', $event) }}" class="genric-btn danger" onclick="event.preventDefault();
-                                                                   document.getElementById('cancel-form').submit();">
-                                Cancel the apply
-                            </a>
-                            <div class="alert alert-success">
-                                You applied!
-                            </div>
-                        @else
-                            <a href="{{ route('apply', $event) }}" class="genric-btn success" onclick="event.preventDefault();
-                                                                   document.getElementById('apply-form').submit();">
-                                Apply to event
-                            </a>
-                        @endif
-                        <form id="apply-form" method="POST" action="{{ route('apply', $event) }}" style="display: none;">
-                            @csrf
-                        </form>
-                        <form id="cancel-form" method="POST" action="{{ route('apply.cancel', $event) }}" style="display: none;">
-                            @csrf
-                            @method('delete')
-                        </form>
-                    @endif
+                    {{--@if(Auth::guard('web')->check())--}}
+                        {{--@if(auth()->user()->isApplied($event))--}}
+                            {{--<a href="{{ route('apply.cancel', $event) }}" class="genric-btn danger" onclick="event.preventDefault();--}}
+                                                                   {{--document.getElementById('cancel-form').submit();">--}}
+                                {{--Cancel the apply--}}
+                            {{--</a>--}}
+                            {{--<div class="alert alert-success">--}}
+                                {{--You applied!--}}
+                            {{--</div>--}}
+                        {{--@else--}}
+                            {{--<a href="{{ route('apply', $event) }}" class="genric-btn success" onclick="event.preventDefault();--}}
+                                                                   {{--document.getElementById('apply-form').submit();">--}}
+                                {{--Apply to event--}}
+                            {{--</a>--}}
+                        {{--@endif--}}
+                        {{--<form id="apply-form" method="POST" action="{{ route('apply', $event) }}" style="display: none;">--}}
+                            {{--@csrf--}}
+                        {{--</form>--}}
+                        {{--<form id="cancel-form" method="POST" action="{{ route('apply.cancel', $event) }}" style="display: none;">--}}
+                            {{--@csrf--}}
+                            {{--@method('delete')--}}
+                        {{--</form>--}}
+                    {{--@endif--}}
 
 
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <h4 style="margin-bottom: 2rem">Options</h4>
+        @if(Auth::guard('web')->check())
+            @if(auth()->user()->isApplied($event))
+                <p>
+                    You applied to this event at !
+                </p>
+                <a href="{{ route('apply.cancel', $event) }}" class="genric-btn danger" onclick="event.preventDefault();
+                                                                   document.getElementById('cancel-form').submit();">
+                    Cancel the apply
+                </a>
+
+            @else
+                <a href="{{ route('apply', $event) }}" class="genric-btn success" onclick="event.preventDefault();
+                                                                   document.getElementById('apply-form').submit();">
+                    Apply to event
+                </a>
+            @endif
+                <form id="apply-form" method="POST" action="{{ route('apply', $event) }}" style="display: none;">
+                    @csrf
+                </form>
+                <form id="cancel-form" method="POST" action="{{ route('apply.cancel', $event) }}" style="display: none;">
+                    @csrf
+                    @method('delete')
+                </form>
+        @endif
     </div>
 </section>
 <!--================ End Recent Event Area =================-->

@@ -48,8 +48,8 @@ class EventController extends Controller
         }
 
         $events = $event->orderBy('id','desc')->paginate($perPage);
-        $regions = Region::all()->pluck('name');
-        $categories = Category::all()->pluck('name');
+//        $regions = Region::all()->pluck('name');
+//        $categories = Category::all()->pluck('name');
 
         return view('event.index',[
             'events' => $events,
@@ -109,24 +109,6 @@ class EventController extends Controller
         return null;
     }
 
-    public function favorite(Event $event){
-        $volunteer_id = Auth::guard('web')->user()->id;
-        $event_id = $event->id;
-//        dump($event->id);
-        Favorite::create([
-            'volunteer_id' => $volunteer_id,
-            'event_id' => $event_id
-        ]);
-        return redirect()->route('events.index');
-    }
-
-    public function unfavorite(Event $event){
-        $user_id = Auth::guard('web')->user()->id;
-        $favorite = Favorite::where('volunteer_id',$user_id)->where('event_id',$event->id)->first();
-//        dump($favorite);
-        $favorite->delete();
-        return redirect()->route('events.index');
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -142,7 +124,6 @@ class EventController extends Controller
         }
         $categories = Category::all();
         return view('event.create',[
-            'user' => $user,
             'categories' => $categories
         ]);
     }

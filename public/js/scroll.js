@@ -93,12 +93,11 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-// function scrolll() {
-//     window.scrollTo(0,450);
-// }
-$(document).ready(function () {
+window.scrolll = function () {
   window.scrollTo(0, 450);
-});
+}; // $(document).loaded(function(){
+//     window.scrollTo(0,450);
+// });
 
 /***/ }),
 

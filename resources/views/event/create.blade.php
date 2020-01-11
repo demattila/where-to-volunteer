@@ -3,7 +3,7 @@
     <title>Login</title>
     @include('layouts.head')
 </head>
-<body onload="scroll()">
+<body>
 @include('layouts.header')
 
 <section class="banner_area">

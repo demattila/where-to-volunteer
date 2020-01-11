@@ -28,7 +28,9 @@ Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/lang/{locale}','LocalizationController@index');
 
 //Stories
-Route::get('/stories','StoriesController@index')->name('stories.index');
+//Route::get('/stories','StoryController@index')->name('stories.index');
+Route::resource('stories', 'StoryController');
+Route::post('/{story}/comment', 'CommentController@store')->name('comments.store');
 
 //Volunteer
 Auth::routes();

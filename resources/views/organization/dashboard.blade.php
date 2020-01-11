@@ -115,7 +115,12 @@
                 <div class="panel panel-default">
                     <div class="row m-2" align="left"><h5>Options</h5></div><hr>
                     <div class="panel-body">
-                        <a href="{{route('events.create')}}" class="genric-btn warning text-black-50"><i class="fas fa-plus"></i> Create new event</a>
+                        <div class="row">
+                            <a href="{{route('events.create')}}" class="genric-btn warning text-black-50 mb-2" style="width:12rem"><i class="fas fa-plus"></i> Create new event</a>
+                        </div>
+                       <div class="row">
+                           <a href="{{route('stories.create')}}" class="genric-btn warning text-black-50" style="width:12rem"><i class="fas fa-plus"></i> Write a story</a>
+                       </div>
                     </div>
                 </div>
             </div>
@@ -169,11 +174,6 @@
 
 @include('layouts.footer')
 
-<script>
-    function scroll() {
-        window.scrollTo(0,450);
-    }
-</script>
 @include('layouts.scripts')
 </body>
 </html>

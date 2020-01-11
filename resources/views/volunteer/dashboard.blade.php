@@ -4,8 +4,8 @@
     <title>Dashboard</title>
     @include('layouts.head')
 </head>
-<body>
-@include('layouts.header', ['user' =>$user])
+<body onload="scrolll()">
+@include('layouts.header')
 
 <!--================ Home Banner Area =================-->
 <section class="banner_area">
@@ -86,7 +86,7 @@
                                 <div class="col-md-4" align="middle" >
                                     <p>
                                         @if($user->sex === 'M')
-                                            <i class="fas fa-mars"></i>
+                                            <i class="fas fa-mars fa-2x"></i>
                                         @elseif($user->sex === 'F')
                                             <i class="fas fa-venus fa-2x"></i>
                                         @endif
@@ -125,37 +125,39 @@
                 </div>
                 <div class="col-md" style="padding: 10px">
                     <div class="panel panel-default">
-                        <div class="row m-2" align="left"><h5>Notifications</h5></div><hr>
+                        <div class="row m-2" align="left"><h5>Options</h5></div><hr>
 
 
-                        <div class="collapse navbar-collapse">
-                            <ul class="nav navbar-nav">
-                                <li class="dropdown dropdown-notifications">
-                                    <a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i data-count="0" class="fal fa-bell notification-icon"></i>
-                                    </a>
+                        {{--<div class="collapse navbar-collapse">--}}
+                            {{--<ul class="nav navbar-nav">--}}
+                                {{--<li class="dropdown dropdown-notifications">--}}
+                                    {{--<a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">--}}
+                                        {{--<i data-count="0" class="fal fa-bell notification-icon"></i>--}}
+                                    {{--</a>--}}
 
-                                    <div class="dropdown-container">
-                                        <div class="dropdown-toolbar">
-                                            <div class="dropdown-toolbar-actions">
-                                                <a href="#">Mark all as read</a>
-                                            </div>
-                                            <h3 class="dropdown-toolbar-title">Notifications (<span class="notif-count">0</span>)</h3>
-                                        </div>
-                                        <ul class="dropdown-menu">
-                                        </ul>
-                                        <div class="dropdown-footer text-center">
-                                            <a href="#">View All</a>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li><a href="#">Timeline</a></li>
-                                <li><a href="#">Friends</a></li>
-                            </ul>
-                        </div>
+                                    {{--<div class="dropdown-container">--}}
+                                        {{--<div class="dropdown-toolbar">--}}
+                                            {{--<div class="dropdown-toolbar-actions">--}}
+                                                {{--<a href="#">Mark all as read</a>--}}
+                                            {{--</div>--}}
+                                            {{--<h3 class="dropdown-toolbar-title">Options (<span class="notif-count">0</span>)</h3>--}}
+                                        {{--</div>--}}
+                                        {{--<ul class="dropdown-menu">--}}
+                                        {{--</ul>--}}
+                                        {{--<div class="dropdown-footer text-center">--}}
+                                            {{--<a href="#">View All</a>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--<li><a href="#">Timeline</a></li>--}}
+                                {{--<li><a href="#">Friends</a></li>--}}
+                            {{--</ul>--}}
+                        {{--</div>--}}
 
                         <div class="panel-body">
-
+                            <div class="row">
+                                <a href="{{route('stories.create')}}" class="genric-btn warning text-black-50" style="width:12rem"><i class="fas fa-plus"></i> Write a story</a>
+                            </div>
                         </div>
                     </div>
 

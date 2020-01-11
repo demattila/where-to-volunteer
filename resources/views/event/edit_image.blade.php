@@ -64,7 +64,7 @@
     </div>
 </section>
 
-@include('layouts.footer_bottom')
+@include('layouts.footer')
 
 @include('layouts.scripts')
 </body>
