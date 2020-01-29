@@ -29,62 +29,62 @@
 <!--================ End Home Banner Area =================-->
 
 <!--================ Start CTA Area =================-->
-<div class="cta-area section_gap overlay">
-    <div class="container">
-        <div class="row justify-content-center">
-            @if (Auth::guard('web')->check() )
+{{--<div class="cta-area section_gap overlay">--}}
+    {{--<div class="container">--}}
+        {{--<div class="row justify-content-center">--}}
+            {{--@if (Auth::guard('web')->check() )--}}
 
-                <div class="col-lg-6">
-                    <h1>You are logged in!</h1>
-                    <h4>User name: {{Auth::guard('web')->user()->name}}</h4>
-                    <h4>User type: volunteer</h4>
+                {{--<div class="col-lg-6">--}}
+                    {{--<h1>You are logged in!</h1>--}}
+                    {{--<h4>User name: {{Auth::guard('web')->user()->name}}</h4>--}}
+                    {{--<h4>User type: volunteer</h4>--}}
 
-                    <a href="#" class="genric-btn danger circle arrow" onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();">{{ __('Logout') }}<span class="lnr lnr-arrow-right"></span></a>
+                    {{--<a href="#" class="genric-btn danger circle arrow" onclick="event.preventDefault();--}}
+                       {{--document.getElementById('logout-form').submit();">{{ __('Logout') }}<span class="lnr lnr-arrow-right"></span></a>--}}
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
+                    {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                        {{--@csrf--}}
+                    {{--</form>--}}
+                {{--</div>--}}
 
-            @elseif( Auth::guard('web_organization')->check() )
+            {{--@elseif( Auth::guard('web_organization')->check() )--}}
 
-                <div class="col-lg-6">
-                    <h1>You are logged in!</h1>
-                    <h4>User name: {{Auth::guard('web_organization')->user()->name}}</h4>
-                    <h4>User type: organization</h4>
-                    <a href="#" class="genric-btn danger circle arrow" onclick="event.preventDefault();
-                       document.getElementById('logout-form').submit();">{{ __('Logout') }}<span class="lnr lnr-arrow-right"></span></a>
+                {{--<div class="col-lg-6">--}}
+                    {{--<h1>You are logged in!</h1>--}}
+                    {{--<h4>User name: {{Auth::guard('web_organization')->user()->name}}</h4>--}}
+                    {{--<h4>User type: organization</h4>--}}
+                    {{--<a href="#" class="genric-btn danger circle arrow" onclick="event.preventDefault();--}}
+                       {{--document.getElementById('logout-form').submit();">{{ __('Logout') }}<span class="lnr lnr-arrow-right"></span></a>--}}
 
-                    <form id="logout-form" action="{{ route('organization.logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </div>
+                    {{--<form id="logout-form" action="{{ route('organization.logout') }}" method="POST" style="display: none;">--}}
+                        {{--@csrf--}}
+                    {{--</form>--}}
+                {{--</div>--}}
 
-            @else
+            {{--@else--}}
 
-                <div class="col-lg-6">
-                    <h1>Become a volunteer</h1>
-                    <p>
-                        Start searching for the greatest activities, apply easily and give a hand.
-                    </p>
-                    <a href="{{ route('register') }}" class="primary_btn yellow_btn rounded">Register</a>
-                    <a href="{{ route('login') }}" class="primary_btn yellow_btn rounded">Login<span class="lnr lnr-arrow-right"></span></a>
-                </div>
+                {{--<div class="col-lg-6">--}}
+                    {{--<h1>Become a volunteer</h1>--}}
+                    {{--<p>--}}
+                        {{--Start searching for the greatest activities, apply easily and give a hand.--}}
+                    {{--</p>--}}
+                    {{--<a href="{{ route('register') }}" class="primary_btn yellow_btn rounded">Register</a>--}}
+                    {{--<a href="{{ route('login') }}" class="primary_btn yellow_btn rounded">Login<span class="lnr lnr-arrow-right"></span></a>--}}
+                {{--</div>--}}
 
-                <div class="col-lg-6">
-                    <h1>Advertise your events</h1>
-                    <p>
-                        After registering your organization you can start advertising your events.
-                    </p>
-                    <a href="{{ route('organization.register') }}" class="primary_btn yellow_btn rounded">Register</a>
-                    <a href="{{ route('organization.login') }}" class="primary_btn yellow_btn rounded">Login<span class="lnr lnr-arrow-right"></span></a>
-                </div>
+                {{--<div class="col-lg-6">--}}
+                    {{--<h1>Advertise your events</h1>--}}
+                    {{--<p>--}}
+                        {{--After registering your organization you can start advertising your events.--}}
+                    {{--</p>--}}
+                    {{--<a href="{{ route('organization.register') }}" class="primary_btn yellow_btn rounded">Register</a>--}}
+                    {{--<a href="{{ route('organization.login') }}" class="primary_btn yellow_btn rounded">Login<span class="lnr lnr-arrow-right"></span></a>--}}
+                {{--</div>--}}
 
-            @endif
-        </div>
-    </div>
-</div>
+            {{--@endif--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</div>--}}
 <!--================ End CTA Area =================-->
 
 <!--================ Start Story Area =================-->
@@ -93,94 +93,41 @@
         <div class="row justify-content-center">
             <div class="col-lg-7">
                 <div class="main_title">
-                    <h2>Our latest Story</h2>
+                    <h2>@lang('Our latest Story')</h2>
                     <p>
-                        Open lesser winged midst wherein may morning
+                        @lang('Open lesser winged midst wherein may morning')
                     </p>
                 </div>
             </div>
         </div>
         <div class="row">
             <!-- single-story -->
-            <div class="col-lg-4 col-md-6">
-                <div class="single-story">
-                    <div class="story-thumb">
-                        <img class="img-fluid" src="img/story/s1.jpg" alt="">
-                    </div>
-                    <div class="story-details">
-                        <div class="story-meta">
-                            <a href="#">
-                                <span class="lnr lnr-calendar-full"></span>
-                                20th Sep, 2018
-                            </a>
-                            <a href="#">
-                                <span class="lnr lnr-book"></span>
-                                Company
-                            </a>
+            @foreach($latestStories as $story)
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-story">
+                        <div class="story-thumb">
+                            <img class="img-fluid" src="{{$story->image_url}}" style="height: 220px">
                         </div>
-                        <h5>
-                            <a href="#">
-                                Lime recalls electric scooters over
-                                battery fire.
-                            </a>
-                        </h5>
+                        <div class="story-details">
+                            <div class="story-meta">
+                                <a href="#">
+                                    <span class="lnr lnr-calendar-full"></span>
+                                    {{$story->created_at}}
+                                </a>
+                                <a href="#">
+                                    <span class="lnr lnr-book"></span>
+                                    {{$story->owner->name}}
+                                </a>
+                            </div>
+                            <h5>
+                                <a href="{{route('stories.show',$story)}}">
+                                    {{$story->title}}
+                                </a>
+                            </h5>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- single-story -->
-            <div class="col-lg-4 col-md-6">
-                <div class="single-story">
-                    <div class="story-thumb">
-                        <img class="img-fluid" src="img/story/s2.jpg" alt="">
-                    </div>
-                    <div class="story-details">
-                        <div class="story-meta">
-                            <a href="#">
-                                <span class="lnr lnr-calendar-full"></span>
-                                20th Sep, 2018
-                            </a>
-                            <a href="#">
-                                <span class="lnr lnr-book"></span>
-                                Company
-                            </a>
-                        </div>
-                        <h5>
-                            <a href="#">
-                                Apple resorts to promo deals
-                                trade to boost
-                            </a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <!-- single-story -->
-            <div class="col-lg-4 col-md-6">
-                <div class="single-story">
-                    <div class="story-thumb">
-                        <img class="img-fluid" src="img/story/s3.jpg" alt="">
-                    </div>
-                    <div class="story-details">
-                        <div class="story-meta">
-                            <a href="#">
-                                <span class="lnr lnr-calendar-full"></span>
-                                20th Sep, 2018
-                            </a>
-                            <a href="#">
-                                <span class="lnr lnr-book"></span>
-                                Company
-                            </a>
-                        </div>
-                        <h5>
-                            <a href="#">
-                                Lime recalls electric scooters over
-                                battery fire.
-                            </a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

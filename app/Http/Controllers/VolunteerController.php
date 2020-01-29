@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Story;
 use App\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,12 @@ class VolunteerController extends Controller
 //        else{
 //            return view('index');
 //        }
-        return view('volunteer.index');
+
+        $latestStories = Story::orderBy('created_at','desc')->limit(3)->get();
+//        dd($latestEvents);
+        return view('volunteer.index',[
+            'latestStories' => $latestStories
+        ]);
 
     }
 

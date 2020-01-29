@@ -41,6 +41,14 @@ class Event extends Model implements HasMedia
             $applies = $this->applies()->wherePivot('status', '=',0)->get();
             return $applies;
     }
+    public function acceptedApplies(){
+        $applies = $this->applies()->wherePivot('status', '=',1)->get();
+        return $applies;
+    }
+    public function rejectedApplies(){
+        $applies = $this->applies()->wherePivot('status', '=',2)->get();
+        return $applies;
+    }
 
     public function favoritedBy()
     {
@@ -60,7 +68,8 @@ class Event extends Model implements HasMedia
         return $this->hasOne(Media::class,'id','image_id');
     }
 
-    public function getImageUrlAttribute(){$image = $this->image;
+    public function getImageUrlAttribute(){
+        $image = $this->image;
 
         if($image == Null){
             return(url('/storage/default/event.jpg'));

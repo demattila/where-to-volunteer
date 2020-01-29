@@ -3,6 +3,7 @@
 <head>
     <title>Dashboard</title>
     @include('layouts.head')
+
 </head>
 <body onload="scrolll()">
 @include('layouts.header')
@@ -20,6 +21,27 @@
     </div>
 </section>
 <!--================ End Home Banner Area =================-->
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <section class="section-content">
     <div class="section-top-border">
         <div class="container">
@@ -126,42 +148,13 @@
                 <div class="col-md" style="padding: 10px">
                     <div class="panel panel-default">
                         <div class="row m-2" align="left"><h5>Options</h5></div><hr>
-
-
-                        {{--<div class="collapse navbar-collapse">--}}
-                            {{--<ul class="nav navbar-nav">--}}
-                                {{--<li class="dropdown dropdown-notifications">--}}
-                                    {{--<a href="#notifications-panel" class="dropdown-toggle" data-toggle="dropdown">--}}
-                                        {{--<i data-count="0" class="fal fa-bell notification-icon"></i>--}}
-                                    {{--</a>--}}
-
-                                    {{--<div class="dropdown-container">--}}
-                                        {{--<div class="dropdown-toolbar">--}}
-                                            {{--<div class="dropdown-toolbar-actions">--}}
-                                                {{--<a href="#">Mark all as read</a>--}}
-                                            {{--</div>--}}
-                                            {{--<h3 class="dropdown-toolbar-title">Options (<span class="notif-count">0</span>)</h3>--}}
-                                        {{--</div>--}}
-                                        {{--<ul class="dropdown-menu">--}}
-                                        {{--</ul>--}}
-                                        {{--<div class="dropdown-footer text-center">--}}
-                                            {{--<a href="#">View All</a>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</li>--}}
-                                {{--<li><a href="#">Timeline</a></li>--}}
-                                {{--<li><a href="#">Friends</a></li>--}}
-                            {{--</ul>--}}
-                        {{--</div>--}}
-
                         <div class="panel-body">
                             <div class="row">
                                 <a href="{{route('stories.create')}}" class="genric-btn warning text-black-50" style="width:12rem"><i class="fas fa-plus"></i> Write a story</a>
                             </div>
+                            {{--<ul id="messages" class="list-group">--}}
                         </div>
                     </div>
-
-
 
                 </div>
             </div>
@@ -240,77 +233,93 @@
                 {{--@include('event.show_component',['events' => Auth::user()->rejectedApplies(),'type' => 'rejected'])--}}
             {{--</div>--}}
             <div class="tab-pane fade" id="favorites" role="tabpanel" aria-labelledby="favorites-tab">
-                @include('event.show_component',['events' => Auth::user()->favorites()->get(),'type' => 'favorite'])
+                @include('volunteer.saved_events')
             </div>
 
         </div>
     </div>
 </section>
 
+@include('layouts.footer')
 
-<!--================ Start footer Area  =================-->
-{{--@include('layouts.footer')--}}
-@include('layouts.footer_bottom')
-<!--================ End footer Area  =================-->
-{{--<script>--}}
-    {{--function scroll() {--}}
-        {{--window.scrollTo(0,450);--}}
-    {{--}--}}
-{{--</script>--}}
-<script type="text/javascript">
-
-    var notificationsWrapper   = $('.dropdown-notifications');
-    var notificationsToggle    = notificationsWrapper.find('a[data-toggle]');
-    var notificationsCountElem = notificationsToggle.find('i[data-count]');
-    var notificationsCount     = parseInt(notificationsCountElem.data('count'));
-    var notifications          = notificationsWrapper.find('ul.dropdown-menu');
-
-    // if (notificationsCount <= 0) {
-    //     notificationsWrapper.hide();
-    // }
+@include('layouts.scripts')
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{{--<style>--}}
+    {{--/*.fixed-dialog {position: fixed;}*/--}}
+{{--</style>--}}
+<script>
 
     // Enable pusher logging - don't include this in production
-    // Pusher.logToConsole = true;
+    Pusher.logToConsole = true;
 
     var pusher = new Pusher('8fa3cad6dcc20526ad09', {
-        encrypted: true
+        cluster: 'eu',
+        forceTLS: true
     });
 
-    // Subscribe to the channel we specified in our Laravel Event
-    var channel = pusher.subscribe('apply-accepted');
+    var channel = pusher.subscribe('my-channel');
 
-    // Bind a function to a Event (the full Laravel class)
-    channel.bind('App\\Events\\ApplyAccepted', function(data) {
-        var existingNotifications = notifications.html();
-        // var avatar = Math.floor(Math.random() * (71 - 20 + 1)) + 20;
-        var newNotificationHtml ='<div>data.message</div>';
-        // var newNotificationHtml = `
-        //   <li class="notification active">
-        //       <div class="media">
-        //         <div class="media-left">
-        //           <div class="media-object">
-        //             <img src="https://api.adorable.io/avatars/71/`+avatar+`.png" class="img-circle" alt="50x50" style="width: 50px; height: 50px;">
-        //           </div>
-        //         </div>
-        //         <div class="media-body">
-        //           <strong class="notification-title">`+data.message+`</strong>
-        //           <!--p class="notification-desc">Extra description can go here</p-->
-        //           <div class="notification-meta">
-        //             <small class="timestamp">about a minute ago</small>
-        //           </div>
-        //         </div>
-        //       </div>
-        //   </li>
-        // `;
+    // channel.bind('apply_response', function(data) {
+    //     // alert(JSON.stringify(data));
+    //     // alert(JSON.stringify(data));
+    //     $("#myModal").modal();
+    // });
+    channel.bind('apply_response',notify);
 
-        notifications.html(newNotificationHtml + existingNotifications);
+    var heightCounter = 10;
+    function notify(data) {
+        var yourPosition = {
+            my: "left bottom",
+            at: "left+10 bottom-"+heightCounter
+        };
+        var elem = $('<div></div>');
+        // elem.html();
+        $('<a href="/dashboard" style="font-size: 16px"></a>', {
+            class : 'inner'
+        }).html(data.message).appendTo( elem );
+        elem.dialog({
+            create: function(event) {
+                $(event.target).parent().css('position', 'fixed');
+            },
+            dialogClass: "no-close noTitleStuff fixed-dialog",
+            autoOpen: true,
+            title: data.event,
+            // modal: true,
+            position:yourPosition,
+            minWidth: 300,
+            draggable:false,
+            resizable: false,
+            show : { effect: "fade", duration: 1000},
+            hide: { effect: "fade", duration: 1000 },
+            close: function() { heightCounter-=20; }
 
-        notificationsCount += 1;
-        notificationsCountElem.attr('data-count', notificationsCount);
-        notificationsWrapper.find('.notif-count').text(notificationsCount);
-        notificationsWrapper.show();
-    });
+        });
+    // .prev(".ui-dialog-titlebar").css("background","#7FFF00")
+        heightCounter+=20;
+    }
 </script>
-@include('layouts.scripts')
+<script>
+    function deleteFromFavourites(itemid) {
+        // var user_id = userid;
+        var item_id = itemid;
+
+        $.ajax({
+            type: 'post',
+            url: '/event/unfavorite',
+            data: {
+                // 'user_id': user_id,
+                'item_id': item_id,
+                _token: '{{csrf_token()}}'
+            },
+            success: function () {
+                $('#event-' + item_id).hide();
+            },
+            error: function (XMLHttpRequest) {
+                // handle error
+            }
+        });
+    }
+</script>
 </body>
 </html>

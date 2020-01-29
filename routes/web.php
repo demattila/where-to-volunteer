@@ -15,14 +15,26 @@
 use App\Events\MyEvent;
 use Illuminate\Support\Facades\App;
 
-
+//Testing
 Route::get('test', function () {
-    event(new \App\Events\ApplyAccepted('Levente'));
-    return "Event has been sent!";
+//    event(new \App\Events\ApplyResponse('Levente'));
+//    event(new MyEvent('hello world'));
+    return view('testPusher');
 });
+
+Route::get('/sender', function () {
+    return view('sender');
+});
+Route::post('/sender', function () {
+//this is 4 post
+    $text = request()->get('text');
+    event(new MyEvent($text));
+});
+
 
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
+
 
 //Localization
 Route::get('/lang/{locale}','LocalizationController@index');
@@ -30,7 +42,8 @@ Route::get('/lang/{locale}','LocalizationController@index');
 //Stories
 //Route::get('/stories','StoryController@index')->name('stories.index');
 Route::resource('stories', 'StoryController');
-Route::post('/{story}/comment', 'CommentController@store')->name('comments.store');
+Route::post('/{story}/comment', 'CommentController@store')->name('comments.store')->middleware('auth.any');
+Route::delete('/comment/{comment}', 'CommentController@destroy')->name('comments.delete')->middleware('auth.any');
 
 //Volunteer
 Auth::routes();
@@ -43,15 +56,18 @@ Route::patch('/volunteer/update','VolunteerController@update')->name('profile.up
 //Route::get('/image','ImageController@index')->name('image.index');
 //Route::get('/image/create','ImageController@create')->name('image.create');
 //Route::get('image/{image}','ImageController@show')->name('image.show');
-Route::post('/image/volunteer','ImageController@store')->name('image.store');
-Route::post('/image/event/{event}','ImageController@event_store')->name('event.image.store');
+Route::post('/image/user','ImageController@store')->name('image.store');
+Route::post('/image/event/{event}','ImageController@store_event')->name('event.image.store');
+Route::post('/image/story/{story}','ImageController@store_story')->name('story.image.store');
+Route::post('/image/additional/{story}','ImageController@store_story_additional')->name('story.additionalImages.store');
 Route::get('/image/edit','ImageController@edit')->name('image.edit');
 Route::get('/event/{event}/image/edit','ImageController@event_edit')->name('event.image.edit');
+Route::get('/story/{story}/image/edit','ImageController@story_edit')->name('story.image.edit');
 //Route::patch('image/{image}','ImageController@update')->name('image.update');
 Route::delete('/image/volunteer/{image}','ImageController@destroy')->name('image.destroy');
-Route::delete('/image/event/{image}','ImageController@event_destroy')->name('event.image.destroy');
-
-
+Route::delete('/image/event/{image}','ImageController@destroy')->name('event.image.destroy');
+Route::delete('/image/story/{image}','ImageController@destroy')->name('story.image.destroy');
+Route::delete('/image/additional/{story}','ImageController@destroy_story')->name('story.additionalImages.destroy');
 
 
 //Event

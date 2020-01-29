@@ -17,9 +17,11 @@ class CreateStoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('text_short');
+            $table->string('quote');
             $table->text('text');
             $table->unsignedBigInteger('owner_id');
             $table->string('owner_type');
+            $table->unsignedBigInteger('image_id')->nullable();
             $table->timestamps();
 
 //            $table->foreign('owner_id')->references('id')->on('')->onDelete('cascade');

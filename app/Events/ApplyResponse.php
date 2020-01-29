@@ -10,22 +10,27 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ApplyAccepted implements ShouldBroadcast
+class ApplyResponse implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $eventname;
-
     public $message;
+    public $event;
+
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param $eventname
      */
-    public function __construct($eventname)
+    public function __construct($eventname,$isAccepted)
     {
-        $this->eventname = $eventname;
-        $this->message  = "Your apply had been accepted on {$eventname}";
+        $this->event = $eventname;
+        if($isAccepted === true){
+            $this->message  = "Your apply had been accepted!";
+        }
+        if($isAccepted === false){
+            $this->message  = "Your apply had been rejected!";
+        }
     }
 
     /**
@@ -36,6 +41,11 @@ class ApplyAccepted implements ShouldBroadcast
     public function broadcastOn()
     {
 //        return new PrivateChannel('channel-name');
-        return ['apply-accepted'];
+        return ['my-channel'];
+    }
+
+    public function broadcastAs()
+    {
+        return 'apply_response';
     }
 }

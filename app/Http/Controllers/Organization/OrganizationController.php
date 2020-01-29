@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Organization;
 
 use App\Organization;
 use App\Http\Controllers\Controller;
+use App\Story;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -23,7 +24,8 @@ class OrganizationController extends Controller
 //        else{
 //            return view('organization.index');
 //        }
-        return view('organization.index');
+        $latestStories = Story::orderBy('created_at','desc')->limit(3)->get();
+        return view('organization.index')->with('latestStories',$latestStories);
     }
 
     public function dashboard()

@@ -15,4 +15,8 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/ajaxsearch.js', 'public/js')
     .js('resources/js/scroll.js', 'public/js')
     .js('resources/js/favorite.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css');
+    .js('resources/js/comment.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/popular-thumb.scss', 'public/css')
+    .sass('resources/sass/limit-chars.scss', 'public/css')
+    .sass('resources/sass/counter.scss', 'public/css');

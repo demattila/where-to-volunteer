@@ -64,9 +64,35 @@
 
 <section>
     <div class="container">
-        <h4 style="margin-bottom: 2rem">Manage subscribed volunteers:</h4>
 
-        <table style="width:100%">
+        <h4 class="mb-4">Manage subscribed volunteers:</h4>
+        <div class="row mb-4">
+            <div class="col-md-2">
+                <div class="card  text-center">
+                    <div class="card-body">
+                        <h6 class="card-title">Accepted</h6>
+                        <p >{{$accepted_count}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card  text-center" >
+                    <div class="card-body">
+                        <h6 class="card-title">Rejected</h6>
+                        <p >{{$rejected_count}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="card  text-center" >
+                    <div class="card-body">
+                        <h6 class="card-title">Waiting</h6>
+                        <p >{{$ongoing_count}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover" style="width:100%">
             <tr>
                 <th>Name</th>
                 <th>Email</th>

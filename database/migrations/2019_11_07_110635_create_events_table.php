@@ -21,7 +21,7 @@ class CreateEventsTable extends Migration
             $table->dateTime('starts_at');
             $table->dateTime('ends_at');
             $table->string('reward');
-            $table->string('image_id')->nullable();
+            $table->unsignedBigInteger('image_id')->nullable();
             $table->string('city')->nullable();
             $table->string('region')->nullable();
             $table->string('address')->nullable();

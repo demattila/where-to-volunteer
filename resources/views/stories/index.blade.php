@@ -3,6 +3,9 @@
 <head>
     <title>Stories</title>
     @include('layouts.head')
+    <link rel="stylesheet" href="{{asset('css/popular-thumb.css')}}">
+    <link rel="stylesheet" href="{{asset('css/limit-chars.css')}}">
+
 </head>
 <body onload="scrolll()">
 
@@ -31,36 +34,9 @@
             <div class="col-lg-8">
                 <div class="blog_left_sidebar">
                     @include('layouts.message')
-                    <article class="row blog_item">
-                        <div class="col-md-3">
-                            <div class="blog_info text-right">
-                                <div class="post_tag">
-                                    <a href="#">Food,</a>
-                                    <a class="active" href="#">Technology,</a>
-                                    <a href="#">Politics,</a>
-                                    <a href="#">Lifestyle</a>
-                                </div>
-                                <ul class="blog_meta list">
-                                    <li><a href="#">Mark wiens<i class="lnr lnr-user"></i></a></li>
-                                    <li><a href="#">12 Dec, 2017<i class="lnr lnr-calendar-full"></i></a></li>
-                                    <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                    <li><a href="#">00 Comments<i class="lnr lnr-bubble"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="blog_post">
-                                <img src="img/blog/main-blog/m-blog-1.jpg" alt="">
-                                <div class="blog_details">
-                                    <a href="single-blog.html"><h2>Astronomy Binoculars A Great Alternative</h2></a>
-                                    <p>MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.</p>
-                                    <a href="#" class="blog_btn">View More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
+                    @if($stories)
                     @foreach($stories as $story)
+
                     <article class="row blog_item">
                         <div class="col-md-3">
                             <div class="blog_info text-right">
@@ -70,11 +46,29 @@
                                     <li><a href="{{route('stories.show',$story)}}">{{$story->views_count}} Views<i class="lnr lnr-eye"></i></a></li>
                                     <li><a href="{{route('stories.show',$story)}}">{{$story->comments_count}} Comments<i class="lnr lnr-bubble"></i></a></li>
                                 </ul>
+                                {{--{{dump($user)}}--}}
+                                {{--{{dump($story->owner)}}--}}
+                                {{--{{dump($user == $story->owner)}}--}}
+                                @if($volunteerSignedIn or $organizationSignedIn)
+                                    @if($user->id == $story->owner_id and $user_type == $story->owner_type )
+                                    <ul>
+                                        <div class="dropdown">
+                                            <button class="genric-btn primary small dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Edit post
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="{{route('story.image.edit',$story)}}">Image</a>
+                                                <a class="dropdown-item" href="{{route('stories.edit',$story)}}">Content</a>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                    @endif
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-9">
                             <div class="blog_post">
-                                <img src="img/blog/main-blog/m-blog-3.jpg" alt="">
+                                <img src="{{$story->image_url}}" alt="">
                                 <div class="blog_details">
                                     <a href="single-blog.html"><h2>{{$story->title}}</h2></a>
                                     <p>{{$story->text_short}}</p>
@@ -86,22 +80,26 @@
 
                     @endforeach
                     {{$stories->links()}}
-
+                    @endif
 
 
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="blog_right_sidebar">
+                    <form method="get" action="{{ route('stories.index') }}" >
                     <aside class="single_sidebar_widget search_widget">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search Posts">
+                            @csrf
+                            <div class="input-group">
+                            <input name="q" type="text" class="form-control" placeholder="Search Posts">
                             <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button"><i class="lnr lnr-magnifier"></i></button>
+                                        <button class="btn btn-default" type="submit"><i class="lnr lnr-magnifier"></i></button>
                                     </span>
-                        </div><!-- /input-group -->
-                        <div class="br"></div>
+                            </div>
                     </aside>
+                    </form>
+
+                        <div class="br"></div>
                     {{--<aside class="single_sidebar_widget author_widget">--}}
                         {{--<img class="author_img rounded-circle" src="img/blog/author.png" alt="">--}}
                         {{--<h4>Charlie Barber</h4>--}}
@@ -117,88 +115,22 @@
                     {{--</aside>--}}
                     <aside class="single_sidebar_widget popular_post_widget">
                         <h3 class="widget_title">Popular Posts</h3>
-                        <div class="media post_item">
-                            <img src="img/blog/popular-post/post1.jpg" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html"><h3>Space The Final Frontier</h3></a>
-                                <p>02 Hours ago</p>
+                        @foreach($popularStories as $story)
+                            <div class="media post_item">
+                                <img src="{{$story->image_url}}" class="popular-thumb" alt="post">
+                                <div class="media-body">
+                                    <a href="{{route('stories.show',$story)}}" ><h3 class="twenty-chars">{{$story->title}}</h3></a>
+                                    <p>{{$story->created_at}}</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="media post_item">
-                            <img src="img/blog/popular-post/post2.jpg" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html"><h3>The Amazing Hubble</h3></a>
-                                <p>02 Hours ago</p>
-                            </div>
-                        </div>
-                        <div class="media post_item">
-                            <img src="img/blog/popular-post/post3.jpg" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html"><h3>Astronomy Or Astrology</h3></a>
-                                <p>03 Hours ago</p>
-                            </div>
-                        </div>
-                        <div class="media post_item">
-                            <img src="img/blog/popular-post/post4.jpg" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html"><h3>Asteroids telescope</h3></a>
-                                <p>01 Hours ago</p>
-                            </div>
-                        </div>
+                        @endforeach
                         <div class="br"></div>
                     </aside>
                     <aside class="single_sidebar_widget ads_widget">
                         <a href="#"><img class="img-fluid" src="img/blog/add.jpg" alt=""></a>
                         <div class="br"></div>
                     </aside>
-                    <aside class="single_sidebar_widget post_category_widget">
-                        <h4 class="widget_title">Post Catgories</h4>
-                        <ul class="list cat-list">
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Technology</p>
-                                    <p>37</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Lifestyle</p>
-                                    <p>24</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Fashion</p>
-                                    <p>59</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Art</p>
-                                    <p>29</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Food</p>
-                                    <p>15</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Architecture</p>
-                                    <p>09</p>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="d-flex justify-content-between">
-                                    <p>Adventure</p>
-                                    <p>44</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="br"></div>
-                    </aside>
+
                     <aside class="single-sidebar-widget newsletter_widget">
                         <h4 class="widget_title">Newsletter</h4>
                         <p>
@@ -216,23 +148,6 @@
                         </div>
                         <p class="text-bottom">You can unsubscribe at any time</p>
                         <div class="br"></div>
-                    </aside>
-                    <aside class="single-sidebar-widget tag_cloud_widget">
-                        <h4 class="widget_title">Tag Clouds</h4>
-                        <ul class="list">
-                            <li><a href="#">Technology</a></li>
-                            <li><a href="#">Fashion</a></li>
-                            <li><a href="#">Architecture</a></li>
-                            <li><a href="#">Fashion</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Technology</a></li>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Art</a></li>
-                            <li><a href="#">Adventure</a></li>
-                            <li><a href="#">Food</a></li>
-                            <li><a href="#">Lifestyle</a></li>
-                            <li><a href="#">Adventure</a></li>
-                        </ul>
                     </aside>
                 </div>
             </div>

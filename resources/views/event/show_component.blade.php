@@ -3,7 +3,7 @@
         <div class="container">
             @switch($type)
                 @case('ongoing')
-                <h6>You have not applied for any events!</h6>
+                <h6>You have not applied for any events! <a href="{{route('events.index')}}">Find an event!</a></h6>
                 @break
                 @case('accepted')
                 <h6>You don't have any accepted events!</h6>

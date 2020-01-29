@@ -3,6 +3,9 @@
 <head>
     <title>Story</title>
     @include('layouts.head')
+    <link rel="stylesheet" href="{{asset('css/popular-thumb.css')}}">
+    <link rel="stylesheet" href="{{asset('css/limit-chars.css')}}">
+
 </head>
 <body>
 
@@ -30,11 +33,11 @@
         <div class="row">
             <div class="col-lg-8 posts-list">
                 <div class="single-post row">
-                    <div class="col-lg-12">
-                        <div class="feature-img">
-                            <img class="img-fluid" src="img/blog/feature-img1.jpg" alt="">
-                        </div>
-                    </div>
+                    {{--<div class="col-lg-12">--}}
+                        {{--<div class="feature-img">--}}
+                            {{--<img class="img-fluid" src="img/blog/feature-img1.jpg" alt="">--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
                     <div class="col-lg-3  col-md-3">
                         <div class="blog_info text-right">
                             <ul class="blog_meta list">
@@ -54,34 +57,37 @@
                     <div class="col-lg-9 col-md-9 blog_details">
                         <h2>{{$story->title}}</h2>
                         <p class="excert">
-                            MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction.
+                            {{$story->text}}
                         </p>
-                        <p>
-                            Boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually sit through a self-imposed
-                        </p>
-                        <p>
-                            Boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually sit through a self-imposed
-                        </p>
+                        {{--<p>--}}
+                            {{--Boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually sit through a self-imposed--}}
+                        {{--</p>--}}
+                        {{--<p>--}}
+                            {{--Boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually sit through a self-imposed--}}
+                        {{--</p>--}}
                     </div>
                     <div class="col-lg-12">
                         <div class="quotes">
-                            MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training.
+                            {{$story->quote}}
                         </div>
                         <div class="row">
-                            <div class="col-6">
-                                <img class="img-fluid" src="img/blog/post-img1.jpg" alt="">
-                            </div>
+                            @foreach($story->getMedia('story_additional_images') as $image)
+                                <div class="col-6">
+                                    <img class="img-fluid" src="{{$image->getUrl()}}" alt="">
+                                </div>
+                            @endforeach
+
                             <div class="col-6">
                                 <img class="img-fluid" src="img/blog/post-img2.jpg" alt="">
                             </div>
-                            <div class="col-lg-12 mt-25">
-                                <p>
-                                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
-                                </p>
-                                <p>
-                                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.
-                                </p>
-                            </div>
+                            {{--<div class="col-lg-12 mt-25">--}}
+                                {{--<p>--}}
+                                    {{--MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.--}}
+                                {{--</p>--}}
+                                {{--<p>--}}
+                                    {{--MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.--}}
+                                {{--</p>--}}
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
@@ -141,29 +147,33 @@
 
                     @foreach($story->comments as $comment)
                     <div class="comment-list">
-                        <div class="single-comment justify-content-between d-flex">
-                            <div class="user justify-content-between d-flex">
-                                <div class="thumb">
-                                    <img src="{{$comment->owner->avatar_url}}" alt="">
+                        <div id="comment-{{$comment->id}}">
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb">
+                                        <img src="{{$comment->owner->avatar_url}}" alt="">
+                                    </div>
+                                    <div class="desc">
+                                        <h5><a href="#">{{$comment->owner->name}}</a></h5>
+                                        <p  class="date">{{$comment->created_at}} </p>
+                                        <p class="comment">
+                                            {{$comment->text}}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="desc">
-                                    <h5><a href="#">{{$comment->owner->name}}</a></h5>
-                                    <p class="date">{{$comment->created_at}} </p>
-                                    <p class="comment">
-                                        {{$comment->text}}
-                                    </p>
+                                @if($user == $comment->owner)
+                                <div class="reply-btn">
+                                    <a class="btn-reply text-uppercase" onclick="deleteComment({{$comment->id}})"><i class="fas fa-backspace"></i></a>
                                 </div>
+                                @endif
                             </div>
-                            {{--<div class="reply-btn">--}}
-                                {{--<a href="" class="btn-reply text-uppercase">reply</a>--}}
-                            {{--</div>--}}
                         </div>
                     </div>
                     @endforeach
                 </div>
                 <div class="comment-form">
                     <h4>Leave a Reply</h4>
-                    <form method="POST" action="{{ route('comments.store',['story' => $story]) }}">
+                    <form method="POST" action="{{ route('comments.store',['story' => $story])}}">
                         @csrf
                         <div class="form-group">
                             <textarea class="form-control mb-10" rows="5" name="text" placeholder="Message" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Message'" required="true"></textarea>
@@ -187,34 +197,15 @@
 
                     <aside class="single_sidebar_widget popular_post_widget">
                         <h3 class="widget_title">Popular Posts</h3>
+                        @foreach($popularStories as $story)
                         <div class="media post_item">
-                            <img src="img/blog/popular-post/post1.jpg" alt="post">
+                            <img src="{{$story->image_url}}" class="popular-thumb" alt="post">
                             <div class="media-body">
-                                <a href="single-blog.html"><h3>Space The Final Frontier</h3></a>
-                                <p>02 Hours ago</p>
+                                <a href="{{route('stories.show',$story)}}" ><h3 class="twenty-chars">{{$story->title}}</h3></a>
+                                <p>{{$story->created_at}}</p>
                             </div>
                         </div>
-                        <div class="media post_item">
-                            <img src="img/blog/popular-post/post2.jpg" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html"><h3>The Amazing Hubble</h3></a>
-                                <p>02 Hours ago</p>
-                            </div>
-                        </div>
-                        <div class="media post_item">
-                            <img src="img/blog/popular-post/post3.jpg" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html"><h3>Astronomy Or Astrology</h3></a>
-                                <p>03 Hours ago</p>
-                            </div>
-                        </div>
-                        <div class="media post_item">
-                            <img src="img/blog/popular-post/post4.jpg" alt="post">
-                            <div class="media-body">
-                                <a href="single-blog.html"><h3>Asteroids telescope</h3></a>
-                                <p>01 Hours ago</p>
-                            </div>
-                        </div>
+                       @endforeach
                         <div class="br"></div>
                     </aside>
                     <aside class="single_sidebar_widget ads_widget">
@@ -250,7 +241,23 @@
 
 
 @include('layouts.footer')
-
+{{--<script src="{{asset('js/comment.js')}}"></script>--}}
 @include('layouts.scripts')
+
+<script>
+    function deleteComment(commentid) {
+        var comment_id = commentid;
+        $.ajax({
+            type: 'DELETE',
+            url: '/comment/' + comment_id,
+            data: {
+                _token: '{{csrf_token()}}'
+            },
+            success: function () {
+                $('#comment-'+comment_id).hide();
+            }
+        });
+    }
+</script>
 </body>
 </html>

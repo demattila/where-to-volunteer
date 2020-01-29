@@ -100,85 +100,32 @@
         </div>
         <div class="row">
             <!-- single-story -->
+            @foreach($latestStories as $story)
             <div class="col-lg-4 col-md-6">
                 <div class="single-story">
                     <div class="story-thumb">
-                        <img class="img-fluid" src="img/story/s1.jpg" alt="">
+                        <img class="img-fluid" src="{{$story->image_url}}" style="height: 220px">
                     </div>
                     <div class="story-details">
                         <div class="story-meta">
                             <a href="#">
                                 <span class="lnr lnr-calendar-full"></span>
-                                20th Sep, 2018
+                                {{$story->created_at}}
                             </a>
                             <a href="#">
                                 <span class="lnr lnr-book"></span>
-                                Company
+                                {{$story->owner->name}}
                             </a>
                         </div>
                         <h5>
-                            <a href="#">
-                                Lime recalls electric scooters over
-                                battery fire.
+                            <a href="{{route('stories.show',$story)}}">
+                                {{$story->title}}
                             </a>
                         </h5>
                     </div>
                 </div>
             </div>
-
-            <!-- single-story -->
-            <div class="col-lg-4 col-md-6">
-                <div class="single-story">
-                    <div class="story-thumb">
-                        <img class="img-fluid" src="img/story/s2.jpg" alt="">
-                    </div>
-                    <div class="story-details">
-                        <div class="story-meta">
-                            <a href="#">
-                                <span class="lnr lnr-calendar-full"></span>
-                                20th Sep, 2018
-                            </a>
-                            <a href="#">
-                                <span class="lnr lnr-book"></span>
-                                Company
-                            </a>
-                        </div>
-                        <h5>
-                            <a href="#">
-                                Apple resorts to promo deals
-                                trade to boost
-                            </a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
-
-            <!-- single-story -->
-            <div class="col-lg-4 col-md-6">
-                <div class="single-story">
-                    <div class="story-thumb">
-                        <img class="img-fluid" src="img/story/s3.jpg" alt="">
-                    </div>
-                    <div class="story-details">
-                        <div class="story-meta">
-                            <a href="#">
-                                <span class="lnr lnr-calendar-full"></span>
-                                20th Sep, 2018
-                            </a>
-                            <a href="#">
-                                <span class="lnr lnr-book"></span>
-                                Company
-                            </a>
-                        </div>
-                        <h5>
-                            <a href="#">
-                                Lime recalls electric scooters over
-                                battery fire.
-                            </a>
-                        </h5>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -206,7 +153,6 @@
     </div>
 </div>
 <!--================ End Subscribe Area =================-->
-
 <!--================ Start footer Area  =================-->
 @include('layouts.footer')
 <!--================ End footer Area  =================-->

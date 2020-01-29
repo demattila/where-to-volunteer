@@ -58,7 +58,13 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="quote" class="col-md-4 col-form-label text-md-right">{{ __('Quote above images') }}</label>
 
+                                <div class="col-md-6">
+                                    <input id="quote" type="text" class="form-control @error('quote') is-invalid @enderror" name="quote" value="{{ old('quote') }}" autocomplete="quote">
+                                </div>
+                            </div>
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

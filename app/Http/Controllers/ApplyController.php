@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Events\ApplyResponse;
 use App\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -62,7 +63,8 @@ class ApplyController extends Controller
             'status' => 1,
         ]);
 //        dd($apply);
-        Alert::success('SuccessAlert','Volunteer successfully accepted.');
+//        Alert::success('SuccessAlert','Volunteer successfully accepted.');
+        event(new ApplyResponse($event->title,true));
         return redirect()->back();
     }
 
@@ -77,7 +79,8 @@ class ApplyController extends Controller
         $apply->update([
             'status' => 2,
         ]);
-        alert()->success('SuccessAlert','Volunteer successfully rejected.');
+//        alert()->success('SuccessAlert','Volunteer successfully rejected.');
+        event(new ApplyResponse($event->title,false));
         return redirect()->back();
     }
 }

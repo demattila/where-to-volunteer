@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Story;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class StoryController extends Controller
@@ -11,16 +12,26 @@ class StoryController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $popularStories= Story::withCount('views')->orderBy('views_count','desc')->limit(3)->get();
+
+        if ($request->has('q')) {
+            $q = request()->get ( 'q' );
+            $stories = Story::where ( 'title', 'LIKE', '%' . $q . '%' )->withCount('comments')->withCount('views')->paginate(1);
+            if (count ( $stories ) > 0)
+                return view ('stories.index')->withStories($stories)->withPopularStories($popularStories);
+            else
+                return view ( 'stories.index' )->withMessage ( 'No Details found. Try to search again !' );
+        }
+
         $stories = Story::withCount('comments')->withCount('views')->paginate(5);
-
-
         return view('stories.index',[
             'stories' => $stories,
-//            'views'=> $views
+            'popularStories' => $popularStories
         ]);
     }
 
@@ -55,6 +66,7 @@ class StoryController extends Controller
         $parameters = Validator::make($request->all(), [
             'title' => 'required|string|min:3|max:255',
             'text_short' => 'required|string|max:255',
+            'quote' => 'required|string|max:255',
             'text' => 'required|min:200',
         ])->validate();
 
@@ -77,8 +89,13 @@ class StoryController extends Controller
     {
 
         views($story)->record();
+        $popularStories= Story::withCount('views')->orderBy('views_count','desc')->limit(3)->get();
+
 //        dd($story->comments()->count());
-        return view('stories.details', ['story' => $story->load('comments')]);
+        return view('stories.details', [
+            'story' => $story->load('comments'),
+            'popularStories' =>$popularStories
+        ]);
     }
 
     /**

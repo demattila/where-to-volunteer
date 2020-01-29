@@ -43,7 +43,28 @@
                             <li class="nav-item {{Request::path() ==='events' ? 'active' : ''}}"><a class="nav-link" href={{route('events.index')}}>{{__('Events')}}</a></li>
                             <li class="nav-item {{Request::path() ==='stories' ? 'active' : ''}}"><a class="nav-link" href={{route('stories.index')}}>{{__('Stories')}}</a></li>
                             <li class="nav-item {{Request::path() ==='about' ? 'active' : ''}}"><a class="nav-link" href={{route('about')}}>{{__('About')}}</a></li>
+                            <li class="nav-item submenu dropdown">
+                                @if ( Config::get('app.locale') == 'en')
+                                <a href="{{url('/lang/en')}}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">EN</a>
+                                @elseif ( Config::get('app.locale') == 'ro' )
+                                <a href="{{url('/lang/ro')}}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">RO</a>
+                                @elseif ( Config::get('app.locale') == 'hu' )
+                                <a href="{{url('/lang/hu')}}" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">HU</a>
+                                @endif
+                                    <ul class="dropdown-menu">
+                                    @if ( Config::get('app.locale') == 'en')
+                                        <li class="nav-item"><a class="nav-link" href="{{url('/lang/hu')}}">HU</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{url('/lang/ro')}}">RO</a></li>
+                                    @elseif ( Config::get('app.locale') == 'ro' )
+                                        <li class="nav-item"><a class="nav-link" href="{{url('/lang/en')}}">EN</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{url('/lang/hu')}}">HU</a></li>
+                                    @elseif ( Config::get('app.locale') == 'hu' )
+                                        <li class="nav-item"><a class="nav-link" href="{{url('/lang/en')}}">EN</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="{{url('/lang/ro')}}">RO</a></li>
+                                    @endif
 
+                                </ul>
+                            </li>
                             {{--@if (App::isLocale('en'))--}}
                             {{--<li class="nav-item"><a class="nav-link">English</a></li>--}}
                             {{--@endif--}}
@@ -51,50 +72,81 @@
 {{--                            @if(!empty($user))--}}
 {{--                            {{dd($user)}}--}}
                             @auth('web')
-                                <li class="nav-item dropdown">
-                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{--<li class="nav-item dropdown">--}}
+                                    {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">--}}
+                                        {{--<i class="fas fa-bell fa-2x"></i>--}}
+                                    {{--</a>--}}
+                                    {{--<div class="dropdown-menu">--}}
+
+                                    {{--</div>--}}
+                                {{--</li>--}}
+                                {{--<li class="nav-item dropdown">--}}
+                                    {{--<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">--}}
                                         {{--@if($user->avatar_url)--}}
                                         {{--{{dump($user->avatar_url)}}--}}
-                                            <img src="{{$user->avatar_url}}" alt="avatar" class="rounded-circle">
+                                            {{--<img src="{{$user->avatar_url}}" alt="avatar" class="rounded-circle">--}}
                                         {{--@endif--}}
-                                    </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{route('dashboard')}}"><h6>{{$user->name }}</h6></a>
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                                                 onclick="event.preventDefault();
-                                                                          document.getElementById('logout-form-1').submit();">
-                                            {{ __('Logout') }}</a>
+                                    {{--</a>--}}
+                                    {{--<div class="dropdown-menu">--}}
+                                        {{--<a class="dropdown-item" href="{{route('dashboard')}}"><h6>{{$user->name }}</h6></a>--}}
+                                        {{--<a class="dropdown-item" href="{{ route('logout') }}"--}}
+                                                                 {{--onclick="event.preventDefault();--}}
+                                                                          {{--document.getElementById('logout-form-1').submit();">--}}
+                                            {{--{{ __('Logout') }}</a>--}}
 
-                                        <form id="logout-form-1" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        {{--<form id="logout-form-1" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                                            {{--@csrf--}}
+                                        {{--</form>--}}
+                                    {{--</div>--}}
+                                {{--</li>--}}
+
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <img src="{{$user->avatar_url}}" alt="avatar" class="rounded-circle">
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('dashboard')}}">{{$user->name }}</a>
+                                        </li>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('logout') }}"
+                                                               onclick="event.preventDefault();
+                                                               document.getElementById('logout-form-1').submit();">
+                                            {{ __('Logout') }}</a>
+                                            <form id="logout-form-1" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             @csrf
-                                        </form>
-                                    </div>
+                                            </form>
+                                        </li>
+                                    </ul>
                                 </li>
                             @endauth
                             @auth('web_organization')
-                                <li class="nav-item dropdown">
+                                <li class="nav-item submenu dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                                        @if($user->avatar_url)
                                             <img src="{{$user->avatar_url}}" alt="avatar" class="rounded-circle">
-                                        @endif
                                     </a>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{route('organization.dashboard')}}"><h6>{{ $user->name }}</h6></a>
-                                        <a class="dropdown-item" href="{{ route('organization.logout') }}"
-                                                                 onclick="event.preventDefault();
-                                                                          document.getElementById('logout-form-2').submit();">
-                                            {{ __('Logout') }}</a>
-                                        <form id="logout-form-2" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{route('organization.dashboard')}}">{{ $user->name }}</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ route('organization.logout') }}"
+                                                                onclick="event.preventDefault();
+                                                                document.getElementById('logout-form-2').submit();">
+                                                {{ __('Logout') }}</a>
+                                            <form id="logout-form-2" action="{{ route('organization.logout') }}" method="POST" style="display: none;">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
                                 </li>
                             @endauth
-
                             {{--@endif--}}
                         </ul>
                     </div>
                 </div>
+
             </nav>
         </div>
     </div>

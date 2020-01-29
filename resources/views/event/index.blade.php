@@ -4,6 +4,8 @@
     <title>Events</title>
     @include('layouts.head')
     <link rel="stylesheet" href="{{asset('css/fav.css')}}">
+    <link rel="stylesheet" href="{{asset('css/limit-chars.css')}}">
+
 </head>
 
 <body onload="scrolll()">
@@ -26,7 +28,8 @@
 </section>
 <!--================ End Home Banner Area =================-->
 
-
+{{--{{dump($volunteerSignedIn)}}--}}
+{{--{{dump($organizationSignedIn)}}--}}
 
 <!--================ Start Recent Event Area =================-->
 <section class="event_area section_gap_top">
@@ -102,22 +105,22 @@
                                                 {{--</form>--}}
                                             {{--@endif--}}
                                         {{--@endif--}}
-                                            <button id="deletefavourite{{$event->id}}"
+                                            <p id="deletefavourite{{$event->id}}"
                                                     onClick="deleteFromFavourites({{$event->id}})"
                                                     name="addfavourite"
                                                     class="btn btn-lg"
                                                     style="{{ $event->favorited() ? '' : 'display: none;' }}">
                                                 <i class="fas fa-star"></i>
-                                            </button>
+                                            </p>
 
                                             <!-- hide if favourited -->
-                                            <button id="addfavourites{{$event->id}}"
+                                            <p id="addfavourites{{$event->id}}"
                                                     onClick="addToFavourites({{$event->id}})"
                                                     name="deletefavourite"
                                                     class="btn btn-lg"
                                                     style="{{ $event->favorited() ? 'display: none;' : '' }}">
                                                 <i class="far fa-star" ></i>
-                                            </button>
+                                            </p>
                                     </h3>
                                     {{--<h2>--}}
                                         {{--<span>--}}
@@ -132,10 +135,10 @@
 
                                 <!-- set color and hide if not favourited -->
 
-                                    <p>
+                                    <div class="four-line-box">
                                         {{$event->description}}
-                                    </p>
-                                    <a href="{{route('events.show',$event)}}" class="primary_btn">Learn More</a>
+                                    </div>
+                                    <a href="{{route('events.show',$event)}}" class="primary_btn mt-2">Learn More</a>
                                 </div>
                             </div>
                         </div>
@@ -172,12 +175,127 @@
 {{--</div>--}}
 <!--================ End Subscribe Area =================-->
 
+<div id="dialog">
+    <h6><a href="/dashboard" id="mess"></a></h6>
+</div>
+
 <!--================ Start footer Area  =================-->
 @include('layouts.footer')
 <!--================ End footer Area  =================-->
 
 @include('layouts.scripts')
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+{{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
 
+<style>
+    .no-close .ui-dialog-titlebar-close {
+        display: none;
+    }
+    .noTitleStuff .ui-dialog-titlebar {display:none}
+    .fixed-dialog {position: fixed;}
+
+     .ui-dialog .ui-dialog-content {
+         padding: 20px;
+         font-size:14px;
+         color:#CAAD75;
+         background-color: #FDF8E4;
+         overflow: auto;
+     }
+</style>
+<script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('8fa3cad6dcc20526ad09', {
+        cluster: 'eu',
+        forceTLS: true
+    });
+
+    var channel = pusher.subscribe('my-channel');
+
+    // channel.bind('apply_response', function(data) {
+    //     // alert(JSON.stringify(data));
+    //     // alert(JSON.stringify(data));
+    // });
+    channel.bind('apply_response',notify);
+    var heightCounter = 0;
+    function notify(data) {
+        // var listItem = $("<li class='list-group-item'></li>");
+        // listItem.html(data.message);
+        // $('#messages').prepend(listItem);
+        // var isOpen = $( ".dialog" ).dialog( "isOpen" );
+        // if(isOpen){
+        //     $( "#dialog" ).dialog( "close" );
+        // }
+
+
+        var yourPosition = {
+            my: "left bottom",
+            at: "left+5 bottom-"+heightCounter
+        };
+        var elem = $('<div></div>');
+        // elem.html();
+        $('<a href="/dashboard" style="font-size: 16px;font-family: Poppins"></a>', {
+            class : 'inner'
+        }).html(data.message).appendTo( elem );
+        // $('<a href="/dasbhoard"></a>').html(data.message)
+        elem.dialog({
+            dialogClass: "no-close noTitleStuff fixed-dialog",
+            autoOpen: true,
+            // title: "Notification",
+            // modal: true,
+            // position: {
+            //     my: "left+5 bottom-5",
+            //     at: "left bottom",
+            //     of: window
+            // },
+            position:yourPosition,
+            minWidth: 350,
+            draggable:false,
+            resizable: false,
+            show : { effect: "fade", duration: 1000},
+            hide: { effect: "fade", duration: 1000 },
+            buttons: [
+                {
+                    text: "Close",
+                    click: function() {
+                        $( this ).dialog( "close" );
+                        heightCounter-=20;
+                    }
+                }
+            ]
+        });
+        heightCounter+=20;
+        // $("#mess").text(data.message);
+        // $("#dialog").dialog({
+        //     dialogClass: "no-close noTitleStuff fixed-dialog padding",
+        //     autoOpen: true,
+        //     // title: "Notification",
+        //     // modal: true,
+        //     position: {
+        //         my: "left+5 bottom+5",
+        //         at: "left bottom",
+        //         of: window
+        //     },
+        //     minWidth: 400,
+        //     draggable:false,
+        //     resizable: false,
+        //     show : { effect: "fade", duration: 1000},
+        //     hide: { effect: "fade", duration: 1000 },
+        //     buttons: [
+        //         {
+        //             text: "OK",
+        //             click: function() {
+        //                 $( this ).dialog( "close" );
+        //             }
+        //         }
+        //     ]
+        // });
+
+
+    }
+</script>
 <script>
     function addToFavourites(itemid) {
         // var user_id = userid;

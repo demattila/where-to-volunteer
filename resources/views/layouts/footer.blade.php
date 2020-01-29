@@ -1,7 +1,6 @@
 <footer style="margin-top: 15rem">
     <div class="footer-area">
         <div class="container">
-            <div>szia</div>
             <div class="row section_gap">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="single-footer-widget tp_widgets">

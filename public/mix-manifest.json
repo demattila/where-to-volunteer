@@ -2,6 +2,10 @@
     "/js/ajaxsearch.js": "/js/ajaxsearch.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/css/popular-thumb.css": "/css/popular-thumb.css",
+    "/css/limit-chars.css": "/css/limit-chars.css",
+    "/css/counter.css": "/css/counter.css",
+    "/js/comment.js": "/js/comment.js",
     "/js/favorite.js": "/js/favorite.js",
     "/js/scroll.js": "/js/scroll.js"
 }

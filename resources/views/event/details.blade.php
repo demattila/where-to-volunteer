@@ -42,29 +42,21 @@
                     <h2 class="mb-20">
                         {{$event->title}}
                     </h2>
-                    <div>
-                    <favorite
-                            :event=1
-                            :favorited=true
-                    ></favorite>
-                    </div>
                     <p>
                         If you are looking at blank cassettes on the web, you may be very confused at the difference in price You may
                         see some for as low as each. If you are looking at blank cassettes on the web, you may be very confused at the
-                        difference in price You may see.
-                    </p>
-                    <p>
-                        If you are looking at blank cassettes on the web, you may be very confused at the difference in price You may
+                        difference in price You may see.If you are looking at blank cassettes on the web, you may be very confused at the difference in price You may
                         see some for as low as each. If you are looking at blank cassettes on the web, you may be very confused at the
                         difference in price You may see.
+                        {{$event->description}}
                     </p>
                     <ul>
-                        <li>{{$event->starts_at}}</li>
-                        <li>{{$event->address}}</li>
-                        <li>{{$event->city}}, {{$event->region}}.</li>
+                        <li style="font-size: 20px"><b>{{$event->starts_at->format('H:i d-m-Y')}} - {{$event->ends_at->format('H:i d-m-Y')}}</b></li>
+                        <li><strong>{{$event->address}}</strong></li>
+                        <li><strong>{{$event->city}}, {{$event->region}}</strong></li>
                     </ul>
 
-                    <a href="{{route('events.index')}}" class="genric-btn primary">Back!</a>
+                    {{--<a href="{{route('events.index')}}" class="genric-btn primary">Back!</a>--}}
 
                     {{--@if(Auth::guard('web')->check())--}}
                         {{--@if(auth()->user()->isApplied($event))--}}
@@ -94,16 +86,25 @@
                 </div>
             </div>
         </div>
+        <h5>What should volunteers do?</h5>
+        <p>{{$event->mission}}</p>
+        <h5>Reward</h5>
+        <p>{{$event->reward}}</p>
+        <h5>More info</h5>
+        <p>{{$event->info}}</p>
     </div>
 </section>
 
 <section>
     <div class="container">
-        <h4 style="margin-bottom: 2rem">Options</h4>
         @if(Auth::guard('web')->check())
-            @if(auth()->user()->isApplied($event))
+            <h3 class="mb-4">Options</h3>
+            @if($event->starts_at <= now() )
+                <p><strong><i class="far fa-frown"></i>  Sorry, You can no longer apply!</strong></p>
+                <p>Find other events <a href="{{route('events.index')}}" >here</a>! </p>
+            @elseif($user->isApplied($event))
                 <p>
-                    You applied to this event at !
+                    <strong><i class="far fa-smile-wink"></i>  You applied to this event!</strong>
                 </p>
                 <a href="{{ route('apply.cancel', $event) }}" class="genric-btn danger" onclick="event.preventDefault();
                                                                    document.getElementById('cancel-form').submit();">

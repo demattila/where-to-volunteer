@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Story;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\MediaLibrary\Models\Media;
@@ -53,7 +54,7 @@ class ImageController extends Controller
         return redirect()->back();
     }
 
-    public function event_store(Request $request,Event $event)
+    public function store_event(Request $request,Event $event)
     {
         $new_image = $event->addMedia($request->image)->toMediaCollection('event_profile_images');
         $event->update(['image_id' => $new_image->id]);
@@ -65,6 +66,25 @@ class ImageController extends Controller
             return redirect()->route('organization.dashboard');
         }
 
+        $request->session()->flash('message', 'Successfully uploaded the image!');
+        return redirect()->back();
+    }
+    public function store_story(Request $request,Story $story)
+    {
+        $new_image = $story->addMedia($request->image)->toMediaCollection('story_image');
+        $story->update(['image_id' => $new_image->id]);
+
+
+        $request->session()->flash('message', 'Successfully uploaded the image!');
+        return redirect()->back();
+    }
+    public function store_story_additional(Request $request,Story $story){
+        $images = $story->getMedia('story_additional_images');
+        if($images->count() >= 2){
+            $request->session()->flash('error', 'Only 2 additional images are allowed!');
+            return redirect()->back();
+        }
+        $story->addMedia($request->image)->toMediaCollection('story_additional_images');
         $request->session()->flash('message', 'Successfully uploaded the image!');
         return redirect()->back();
     }
@@ -108,6 +128,11 @@ class ImageController extends Controller
             'event' => $event
         ]);
     }
+    public function story_edit(Story $story){
+        return view('stories.edit_image',[
+            'story' => $story
+        ]);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -130,10 +155,9 @@ class ImageController extends Controller
         return redirect()->back();
     }
 
-    public function event_destroy(Request $request,$id){
-        $media = Media::find($id);
-        $media->delete();
-        $request->session()->flash('message', 'Successfully deleted the image!');
+    public function destroy_story(Request $request,Story $story){
+        $story->clearMediaCollection('story_additional_images');
+        $request->session()->flash('message', 'Additional images successfully deleted!');
         return redirect()->back();
     }
 }

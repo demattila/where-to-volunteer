@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en">
 @include('layouts.head')
-<body>
+<link rel="stylesheet" href="{{asset('css/counter.css')}}">
+<body onload="scrolll()">
 
 <!--================ Start Header Menu Area =================-->
 @include('layouts.header')
@@ -28,7 +29,7 @@
             <div class="single_about row">
                 <div class="col-lg-6 col-md-12 text-center about_left">
                     <div class="about_thumb">
-                        <img src="img/about-img.jpg" class="img-fluid" alt="">
+                        <img src="{{url('/storage/about/about.png')}}" class="img-fluid" alt="">
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 about_right">
@@ -48,7 +49,6 @@
                             very fill agenc to. Dry creepeth subdue them kind night behold
                             rule stars him grass waters our without
                         </p>
-                        <a href="#" class="primary_btn">Learn more</a>
                     </div>
                 </div>
             </div>
@@ -56,119 +56,48 @@
     </div>
 </section>
 <!--================ End About Us Area =================-->
-
-<!--================Team Area =================-->
-<section class="team_area section_gap">
+<section >
     <div class="container">
-        <div class="main_title">
-            <h2>Meet our voluteer</h2>
-            <p>Creepeth called face upon face yielding midst is after moveth </p>
-        </div>
-        <div class="row team_inner">
-            <div class="col-lg-3 col-md-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="img/voluteer/v1.jpg" alt="">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card  text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">Volunteers</h4>
+                        <p class="counter">{{$volunteers_count}}</p>
                     </div>
-                    <div class="team_name">
-                        <h4>Alea Mirslava</h4>
-                        <p>Party Manager</p>
-                        <p class="mt-20">
-                            So seed seed green that winged cattle in kath  moved us land years living.
-                        </p>
-                        <div class="social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="active"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-envelope-o"></i></a>
-                        </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  text-center" >
+                    <div class="card-body">
+                        <h4 class="card-title">Organizations</h4>
+                        <p class="counter">{{$organizations_count}}</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">Events</h4>
+                        <p class="counter">{{$events_count}}</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">Applies</h4>
+                        <p class="counter">{{$applies_count}}</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="img/voluteer/v2.jpg" alt="">
-                    </div>
-                    <div class="team_name">
-                        <h4>Adam Virland</h4>
-                        <p>Party Manager</p>
-                        <p class="mt-20">
-                            So seed seed green that winged cattle in kath  moved us land years living.
-                        </p>
-                        <div class="social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="active"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-envelope-o"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="img/voluteer/v3.jpg" alt="">
-                    </div>
-                    <div class="team_name">
-                        <h4>Adam Virland</h4>
-                        <p>Party Manager</p>
-                        <p class="mt-20">
-                            So seed seed green that winged cattle in kath  moved us land years living.
-                        </p>
-                        <div class="social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="active"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-envelope-o"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6">
-                <div class="team_item">
-                    <div class="team_img">
-                        <img class="img-fluid" src="img/voluteer/v4.jpg" alt="">
-                    </div>
-                    <div class="team_name">
-                        <h4>Adam Virland</h4>
-                        <p>Party Manager</p>
-                        <p class="mt-20">
-                            So seed seed green that winged cattle in kath  moved us land years living.
-                        </p>
-                        <div class="social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#" class="active"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-envelope-o"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </section>
-<!--================End Team Area =================-->
 
-<!--================ Start CTA Area =================-->
-<div class="cta-area section_gap overlay">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-                <h1>Become a volunteer</h1>
-                <p>
-                    So seed seed green that winged cattle in. Gathering thing made fly you're
-                    divided deep leave on the medicene moved us land years living.
-                </p>
-                <a href="#" class="primary_btn yellow_btn rounded">join with us</a>
-            </div>
-        </div>
-    </div>
-</div>
-<!--================ End CTA Area =================-->
 
 <!--================ Start footer Area  =================-->
 @include('layouts.footer')

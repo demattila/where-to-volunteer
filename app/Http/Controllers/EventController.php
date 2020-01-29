@@ -178,8 +178,14 @@ class EventController extends Controller
     }
 
     public function orgOngoingDetails(Event $event){
+        $ongoing_count = $event->ongoingApplies()->count();
+        $accepted_count = $event->acceptedApplies()->count();
+        $rejected_count = $event->rejectedApplies()->count();
         return view('organization.ongoing_details',[
-            'event' => $event->load('applies')
+            'event' => $event->load('applies'),
+            'ongoing_count' => $ongoing_count,
+            'accepted_count' => $accepted_count,
+            'rejected_count' => $rejected_count
         ]);
     }
     /**
