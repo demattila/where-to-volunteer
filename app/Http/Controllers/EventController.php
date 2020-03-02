@@ -122,10 +122,7 @@ class EventController extends Controller
         if(auth()->guard('web_organization')->check()){
             $user = auth()->guard('web_organization')->user();
         }
-        $categories = Category::all();
-        return view('event.create',[
-            'categories' => $categories
-        ]);
+        return view('event.create');
     }
 
     /**
@@ -196,7 +193,7 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        return view('event.edit')->withEvent($event);
     }
 
     /**
@@ -208,7 +205,35 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        $parameters =$request->validate([
+            'title' => 'required|string|min:3|max:255',
+            'description' => 'required|min:10',
+            'address' => 'nullable|string|max:255',
+            'city' => 'required|string|max:255',
+            'region' => 'required|string|max:255',
+            'starts_at' => 'required|date|date_format:Y-m-d',
+            'ends_at' => 'required|date|date_format:Y-m-d',
+            'mission' => 'nullable|string|max:255',
+            'reward' => 'nullable|string|max:255',
+            'info' => 'nullable|string|max:255',
+        ]);
+
+        $categories =$request->validate(['categoriesArray' => 'required']);
+        $categories = $categories['categoriesArray'];
+
+//        $id = $event->id;
+//        foreach ($categories as $category){
+//            EventCategory::create([
+//                'event_id' => $id ,
+//                'category_id' => $category
+//            ]);
+//        }
+        $event->categories()->syncWithoutDetaching($categories);
+
+        $event->update($parameters);
+
+        $request->session()->flash('message', 'Successfully updated the event!');
+        return redirect()->route('events.show',['event' => $event]);
     }
 
     /**

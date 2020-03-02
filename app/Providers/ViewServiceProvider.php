@@ -34,6 +34,9 @@ class ViewServiceProvider extends ServiceProvider
         View::composer(
             'shared.about', 'App\Http\ViewComposers\AboutComposer'
         );
+        View::composer(
+            ['event.create', 'event.edit'], 'App\Http\ViewComposers\EventCategoryComposer'
+        );
 
         // Using Closure based composers...
         View::composer('dashboard', function ($view) {

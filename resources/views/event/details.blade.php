@@ -52,8 +52,8 @@
                     </p>
                     <ul>
                         <li style="font-size: 20px"><b>{{$event->starts_at->format('H:i d-m-Y')}} - {{$event->ends_at->format('H:i d-m-Y')}}</b></li>
-                        <li><strong>{{$event->address}}</strong></li>
-                        <li><strong>{{$event->city}}, {{$event->region}}</strong></li>
+                        <li><b>{{$event->address}}</b></li>
+                        <li><b>{{$event->city}}, {{$event->region}}</b></li>
                     </ul>
 
                     {{--<a href="{{route('events.index')}}" class="genric-btn primary">Back!</a>--}}

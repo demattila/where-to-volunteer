@@ -47,7 +47,7 @@
 
                     <div class="row">
                         <a href="{{route('event.image.edit',$event)}}" class="genric-btn info medium m-2">Change image</a>
-                        <a href="{{route('event.image.edit',$event)}}" class="genric-btn info medium m-2">Edit</a>
+                        <a href="{{route('events.edit',$event)}}" class="genric-btn info medium m-2">Edit</a>
                         <form action="{{route('events.destroy',$event)}}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('DELETE')

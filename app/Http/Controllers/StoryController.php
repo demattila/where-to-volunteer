@@ -106,7 +106,7 @@ class StoryController extends Controller
      */
     public function edit(Story $story)
     {
-        //
+        return view('stories.edit')->withStory($story);
     }
 
     /**
@@ -118,7 +118,17 @@ class StoryController extends Controller
      */
     public function update(Request $request, Story $story)
     {
-        //
+        $parameters =$request->validate([
+            'title' => 'required|string|min:3|max:255',
+            'text_short' => 'required|string|max:255',
+            'text' => 'required|min:200',
+            'quote' => 'required|string|max:255'
+        ]);
+
+        $story->update($parameters);
+
+        $request->session()->flash('message', 'Successfully updated the story!');
+        return redirect()->route('stories.show',['story' => $story]);
     }
 
     /**

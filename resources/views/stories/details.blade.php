@@ -55,6 +55,7 @@
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9 blog_details">
+                        <img class="img-fluid mb-3" src="{{$story->image_url}}">
                         <h2>{{$story->title}}</h2>
                         <p class="excert">
                             {{$story->text}}

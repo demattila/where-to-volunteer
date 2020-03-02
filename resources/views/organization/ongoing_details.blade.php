@@ -3,6 +3,8 @@
 <head>
     <title>Event details</title>
     @include('layouts.head')
+    <link rel="stylesheet" href="{{asset('css/limit-chars.css')}}">
+
 </head>
 <body>
 
@@ -50,9 +52,9 @@
                        {{$event->description}}
                     </p>
                     <ul>
-                        <li><h6>{{$event->starts_at->format('d.m.Y')}} - {{$event->ends_at->format('d.m.Y')}}</h6></li>
-                        <li><h6>{{$event->address}}</h6></li>
-                        <li><h6>{{$event->city}}, {{$event->region}}</h6></li>
+                        <li><b>{{$event->starts_at->format('d.m.Y')}} - {{$event->ends_at->format('d.m.Y')}}</b></li>
+                        <li><b>{{$event->address}}</b></li>
+                        <li><b>{{$event->city}}, {{$event->region}}</b></li>
                     </ul>
 
                 </div>
@@ -94,14 +96,76 @@
         </div>
         <table class="table table-hover" style="width:100%">
             <tr>
-                <th>Name</th>
+                <th>
+                    Name
+                    <a data-container="body" data-toggle="popover" data-placement="right" data-content="Click on name to get more info about volunteers!">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                </th>
                 <th>Email</th>
                 <th>Status</th>
                 <th></th>
             </tr>
             @foreach($event->applies as $volunteer)
+                <div class="modal fade" id="modalProfile{{$volunteer->id}}" tabindex="-1" role="dialog" aria-labelledby="modalProfileCenter" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title" id="modalTitle">{{$volunteer->name}}</h6>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img class="img-fluid" style="max-width: 15rem" src="{{$volunteer->image_url}}">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6>Data</h6>
+                                        @if($volunteer->sex == 'M')
+                                            <p><i class="fas fa-mars"></i> <b>Male</b></p>
+                                        @else
+                                            <p><i class="fas fa-venus"></i> <b>Female</b></p>
+                                        @endif
+                                            <p><i class="fas fa-calendar-day"></i> <b>{{$volunteer->birth}}</b></p>
+                                            <p><i class="fas fa-address-card"></i> <b>{{$volunteer->city}}, {{$volunteer->region}}</b></p>
+                                        @if($volunteer->driving_licence)
+                                        <p><i class="fas fa-car-side"></i> <b>Driving licence</b></p>
+                                        @endif
+                                        <p><i class="fas fa-briefcase"></i> <b>{{$volunteer->works_at}}</b></p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h6>Contact</h6>
+
+                                        <p><b>{{$volunteer->mobile}}</b></p>
+                                        <p><b>{{$volunteer->email}}</b></p>
+                                    </div>
+                                </div>
+                                <p class="mt-2"><strong>Motto</strong></p>
+                                <blockquote>{{$volunteer->posy}}</blockquote>
+                                <div>
+                                    <p class="mt-2"><strong>Events attended</strong></p>
+                                    <div class="four-line-box">
+                                    @foreach($volunteer->historyEvents() as $event)
+                                        <a class="mr-2" href="{{route('events.show',$event)}}"> {{$event->title}}</a>
+                                    @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            {{--<div class="modal-footer">--}}
+                                {{--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>--}}
+                                {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
+                            {{--</div>--}}
+                        </div>
+                    </div>
+                </div>
                 <tr>
-                    <td>{{$volunteer->name}}</td>
+                    <td>
+                        <a href="#"  data-toggle="modal" data-target="#modalProfile{{$volunteer->id}}">
+                            <h6>{{$volunteer->name}}</h6>
+                        </a>
+                    </td>
                     <td>{{$volunteer ->email}}</td>
                     <td>
                         @switch($volunteer->pivot->status)
@@ -117,11 +181,11 @@
                             <div class="row">
                                 <form action="{{ route('apply.accept',['event' => $event,'volunteer' => $volunteer]) }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <button class="genric-btn info small m-2 ml-4" type="submit" >Accept</button>
+                                    <button class="mr-2" style="color:green" type="submit" ><i class="fas fa-user-check"></i></button>
                                 </form>
                                 <form action="{{ route('apply.reject',['event' => $event,'volunteer' => $volunteer]) }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <button class="genric-btn danger small m-2" type="submit" >Reject</button>
+                                    <button  type="submit" ><i class="fas fa-user-times"></i></button>
                                 </form>
                             </div>
                             @break
@@ -129,7 +193,7 @@
                             <div class="row">
                                 <form action="{{ route('apply.reject',['event' => $event,'volunteer' => $volunteer]) }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <button class="genric-btn danger small m-2" type="submit" >Reject</button>
+                                    <button style="color: red" type="submit" ><i class="fas fa-user-times"></i></button>
                                 </form>
                             </div>
                             @break
@@ -137,7 +201,7 @@
                             <div class="row">
                                 <form action="{{ route('apply.accept',['event' => $event,'volunteer' => $volunteer]) }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <button class="genric-btn info small m-2 ml-4" type="submit" >Accept</button>
+                                    <button style="color:green" type="submit" ><i class="fas fa-user-check"></i></button>
                                 </form>
                             </div>
                             @break
@@ -148,9 +212,15 @@
         </table>
     </div>
 </section>
+
 @include('layouts.footer')
 
 @include('layouts.scripts')
 @include('sweetalert::alert')
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
 </body>
 </html>

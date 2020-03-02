@@ -80,10 +80,10 @@
                             <div class="form-group row">
                                 <label for="duration" class="col-md-4 col-form-label text-md-right">{{ __('Duration') }}*</label>
                                 <div class="col-md-3">
-                                    From <input id="duration" type="date" class="form-control @error('starts_at') is-invalid @enderror" name="starts_at" value="{{ old('starts_at') }}" autocomplete="starts_at">
+                                    From <input id="duration" type="date" class="form-control @error('starts_at') is-invalid @enderror" name="starts_at" value="{{ old('starts_at',date('Y.m.d')) }}" autocomplete="starts_at">
                                 </div>
                                 <div class="col-md-3">
-                                    To <input id="duration" type="date" class="form-control @error('ends_at') is-invalid @enderror" name="ends_at" value="{{ old('ends_at') }}" autocomplete="ends_at">
+                                    To <input id="duration" type="date" class="form-control @error('ends_at') is-invalid @enderror" name="ends_at" value="{{ old('ends_at', date('Y.m.d')) }}" autocomplete="ends_at">
                                 </div>
                             </div>
 

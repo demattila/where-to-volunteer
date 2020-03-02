@@ -58,7 +58,7 @@
                 </a>
             </div>
         </div>
-        <h3 class="mb-5">Additional images</h3>
+        <h3 class="mb-5 mt-5">Additional images</h3>
         <div class="row">
 
             <div class="col-md-4">
