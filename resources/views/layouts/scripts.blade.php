@@ -24,4 +24,5 @@
 <script src="{{asset('js/scroll.js')}}"></script>
 <script src="{{asset('js/ajaxsearch.js')}}"></script>
 <script src="{{asset('js/favorite.js')}}"></script>
+<script src="{{asset('js/popover_custom.js')}}"></script>
 

@@ -26,6 +26,7 @@ class Organization extends Authenticatable implements HasMedia
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'terms_accepted_at' => 'datetime'
     ];
 
     public function events()
@@ -103,5 +104,21 @@ class Organization extends Authenticatable implements HasMedia
     public function comments()
     {
         return $this->morphMany(Comment::class, 'owner');
+    }
+
+    public function hasAcceptedLatestTerms(){
+        $term = Terms::recentFirst()->first();
+        return $this->terms_accepted_at >= $term->published_at;
+    }
+
+    public function currentlyAcceptedTerm(){
+        if($this->terms_accepted_at){
+            $term = Terms::published()->where('published_at','<=',$this->terms_accepted_at)->recentFirst()->first();
+        }
+        else{
+            return null;
+        }
+
+        return $term;
     }
 }

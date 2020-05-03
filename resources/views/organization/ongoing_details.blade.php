@@ -147,8 +147,8 @@
                                 <div>
                                     <p class="mt-2"><strong>Events attended</strong></p>
                                     <div class="four-line-box">
-                                    @foreach($volunteer->historyEvents() as $event)
-                                        <a class="mr-2" href="{{route('events.show',$event)}}"> {{$event->title}}</a>
+                                    @foreach($volunteer->historyEvents() as $eventsAttended)
+                                        <a class="mr-2" href="{{route('events.show',$eventsAttended)}}"> {{$eventsAttended->title}}</a>
                                     @endforeach
                                     </div>
                                 </div>
@@ -166,7 +166,7 @@
                             <h6>{{$volunteer->name}}</h6>
                         </a>
                     </td>
-                    <td>{{$volunteer ->email}}</td>
+                    <td>{{$volunteer->email}} </td>
                     <td>
                         @switch($volunteer->pivot->status)
                             @case(0) Waiting @break
@@ -214,13 +214,7 @@
 </section>
 
 @include('layouts.footer')
-
 @include('layouts.scripts')
 @include('sweetalert::alert')
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="popover"]').popover();
-    });
-</script>
 </body>
 </html>

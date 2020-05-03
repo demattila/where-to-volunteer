@@ -6,7 +6,7 @@
     @include('layouts.head')
 </head>
 
-<body>
+<body onload="scrolll()">
 @include('layouts.header')
 
 <!--================ Home Banner Area =================-->

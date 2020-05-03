@@ -50,6 +50,11 @@ return [
         'web_organization' => [
             'driver' => 'session',
             'provider' => 'organizations',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
         ]
     ],
 

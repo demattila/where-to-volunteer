@@ -23,9 +23,11 @@ class Volunteer extends Authenticatable implements HasMedia
      *
      * @var array
      */
-    protected $fillable = [
-        'name','email','password','posy','mobile','city','region','works_at','birth','image_id','sex','driving_licence',
-    ];
+//    protected $fillable = [
+//        'name','email','password','posy','mobile','city','region','works_at','birth','image_id','sex','driving_licence','terms_accepted_at'
+//    ];
+
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -43,6 +45,7 @@ class Volunteer extends Authenticatable implements HasMedia
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'terms_accepted_at' => 'datetime'
     ];
     protected $dates = [
         'birth'
@@ -168,5 +171,21 @@ class Volunteer extends Authenticatable implements HasMedia
     public function comments()
     {
         return $this->morphMany(Comment::class, 'owner');
+    }
+
+    public function hasAcceptedLatestTerms(){
+        $term = Terms::recentFirst()->first();
+        return $this->terms_accepted_at >= $term->published_at;
+    }
+
+    public function currentlyAcceptedTerm(){
+        if($this->terms_accepted_at){
+            $term = Terms::published()->where('published_at','<=',$this->terms_accepted_at)->recentFirst()->first();
+        }
+        else{
+            return null;
+        }
+
+        return $term;
     }
 }

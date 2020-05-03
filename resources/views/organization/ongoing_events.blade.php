@@ -38,7 +38,7 @@
                                 <p>{{$event->address}}</p>
                                 <p>{{$event->city}}</p>
 
-                                    <a href="{{route('events.ongoing_show',$event)}}" class="genric-btn primary medium ">More</a>
+                                    <a href="{{route('events.ongoing_show',$event)}}" class="genric-btn primary medium ">Manage</a>
                                     {{--<a href="{{route('event.image.edit',$event)}}" class="primary_btn">Edit</a>--}}
                             </div>
                         </div>

@@ -1,5 +1,6 @@
 <header class="header_area">
     <div class="main_menu">
+        @include('shared.header_message')
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <div class="container">
@@ -42,6 +43,7 @@
                             {{--<li class="nav-item {{Request::path() ==='/' ? 'active' : ''}}"><a class="nav-link" href={{route('volunteer.index')}}>Home</a></li>--}}
                             <li class="nav-item {{Request::path() ==='events' ? 'active' : ''}}"><a class="nav-link" href={{route('events.index')}}>{{__('Events')}}</a></li>
                             <li class="nav-item {{Request::path() ==='stories' ? 'active' : ''}}"><a class="nav-link" href={{route('stories.index')}}>{{__('Stories')}}</a></li>
+                            <li class="nav-item {{Request::path() ==='terms' ? 'active' : ''}}"><a class="nav-link" href="{{ route('terms.index') }}">{{ __('Terms') }}</a></li>
                             <li class="nav-item {{Request::path() ==='about' ? 'active' : ''}}"><a class="nav-link" href={{route('about')}}>{{__('About')}}</a></li>
                             <li class="nav-item submenu dropdown">
                                 @if ( Config::get('app.locale') == 'en')

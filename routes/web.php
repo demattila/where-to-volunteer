@@ -114,3 +114,15 @@ Route::prefix('/organization')->name('organization.')->namespace('Organization')
         Route::post('register', 'RegisterController@register')->name('register');
     });
 });
+
+//Terms of Service
+Route::get('/register/terms', 'TermController@terms')->name('terms.latest');
+
+//Route::get('/terms', 'TermController@index')->name('terms.index')->middleware('auth')->middleware('verified');
+//Route::get('/terms/{term}/edit', 'TermController@edit')->name('terms.edit')->middleware('auth')->middleware('verified');
+//Route::get('/terms/create', 'TermController@create')->name('terms.create')->middleware('auth')->middleware('verified');
+//Route::post('/terms', 'TermController@store')->name('terms.store')->middleware('auth')->middleware('verified');
+//Route::delete('/terms/{term}', 'TermController@destroy')->name('terms.delete')->middleware('auth')->middleware('verified');
+Route::resource('terms','TermController');
+Route::post('terms/{term}/publish', 'TermController@publish')->name('terms.publish');
+Route::post('terms/accept', 'TermController@accept')->name('terms.accept');

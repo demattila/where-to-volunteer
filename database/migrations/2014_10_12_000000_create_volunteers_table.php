@@ -19,6 +19,7 @@ class CreateVolunteersTable extends Migration
             $table->string('email')->unique();
             $table->string('posy')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('terms_accepted_at')->nullable();
             $table->string('password');
             $table->string('mobile')->nullable();
             $table->string('city')->nullable();

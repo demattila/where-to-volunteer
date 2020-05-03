@@ -60,7 +60,8 @@ class RegisterController extends Controller
             'region' => ['required','string','min:3', 'max:255'],
             'mobile' => ['required','string','min:6', 'max:20'],
             'site' => ['nullable','string', 'max:255'],
-            'type' => ['required']
+            'type' => ['required'],
+            'terms' =>['accepted']
         ]);
     }
 
@@ -84,7 +85,8 @@ class RegisterController extends Controller
             'region' => $data['region'],
             'mobile' => $data['site'],
             'site' => $data['site'],
-            'type_id' => $data['type']
+            'type_id' => $data['type'],
+            'terms_accepted_at' => now()
         ]);
     }
 

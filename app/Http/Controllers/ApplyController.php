@@ -62,8 +62,9 @@ class ApplyController extends Controller
         $apply->update([
             'status' => 1,
         ]);
-//        dd($apply);
-//        Alert::success('SuccessAlert','Volunteer successfully accepted.');
+
+        $alertMessage = $volunteer->name.' has been accepted';
+        Alert::success('Accepted!',$alertMessage);
         event(new ApplyResponse($event->title,true));
         return redirect()->back();
     }
@@ -79,8 +80,11 @@ class ApplyController extends Controller
         $apply->update([
             'status' => 2,
         ]);
-//        alert()->success('SuccessAlert','Volunteer successfully rejected.');
+
+        $alertMessage = $volunteer->name.' has been rejected';
+        alert()->error('Rejected!',$alertMessage);
         event(new ApplyResponse($event->title,false));
+
         return redirect()->back();
     }
 }

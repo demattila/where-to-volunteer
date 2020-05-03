@@ -10,6 +10,7 @@ class UserComposer
     protected $user;
     protected $volunteerSignedIn = false;
     protected $organizationSignedIn = false;
+    protected $adminSignedIn = false;
     protected $user_type;
 
     public function __construct()
@@ -23,8 +24,12 @@ class UserComposer
             $this->organizationSignedIn = true;
             $this->user = auth()->guard('web_organization')->user();
             $this->user_type = "App\Organization";
-
         }
+//        if(auth()->guard('web_admin')->check()){
+//            $this->adminSignedIn = true;
+//            $this->user = auth()->guard('web_admin')->user();
+//            $this->user_type = "App\Admin";
+//        }
     }
 
     /**
@@ -38,6 +43,7 @@ class UserComposer
         $view->with('user', $this->user);
         $view->with('volunteerSignedIn', $this->volunteerSignedIn);
         $view->with('organizationSignedIn', $this->organizationSignedIn);
+//        $view->with('adminSignedIn', $this->adminSignedIn);
         $view->with('user_type', $this->user_type);
     }
 }

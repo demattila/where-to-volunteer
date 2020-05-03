@@ -64,6 +64,7 @@ class RegisterController extends Controller
 //            'image' => ['image','mimes:jpeg,png,jpg,gif','max:2048'],
             'sex' => ['required'],
             'driving_licence' => ['required'],
+            'terms' =>['accepted']
         ]);
     }
 
@@ -100,6 +101,7 @@ class RegisterController extends Controller
 //            'image' => $filePath
             'sex' => $data['sex'],
             'driving_licence' => ($data['driving_licence'] == 'true') ? 1 : 0,
+            'terms_accepted_at' => now()
         ]);
     }
 }

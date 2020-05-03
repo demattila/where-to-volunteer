@@ -7,5 +7,6 @@
     "/css/counter.css": "/css/counter.css",
     "/js/comment.js": "/js/comment.js",
     "/js/favorite.js": "/js/favorite.js",
+    "/js/popover_custom.js": "/js/popover_custom.js",
     "/js/scroll.js": "/js/scroll.js"
 }

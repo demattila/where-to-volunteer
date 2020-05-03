@@ -147,6 +147,7 @@
                                 </div>
 
                             </div>
+
                             <div class="form-group row">
                                 <label for="driving_licence" class="col-md-4 col-form-label text-md-right">{{ __('Driving Licence') }}</label>
                                 <div class="col-md-6">
@@ -164,6 +165,20 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-6">
+                                    <input id="terms" type="checkbox" name="terms">
+                                    <label for="terms">Accept our <a href="{{route('terms.latest')}}">Terms of Service</a></label>
+
+                                    @error('terms')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                             </div>
 
                             <div class="form-group row mb-0">
