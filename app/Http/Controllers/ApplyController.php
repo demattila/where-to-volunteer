@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\Events\ApplyRequest;
 use App\Events\ApplyResponse;
 use App\Volunteer;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class ApplyController extends Controller
         $apply->status = 0;
         $apply->save();
 
+        event(new ApplyRequest($event, auth()->user()->name,true));
         $request->session()->flash('message', 'Successfully applied to this event!!');
         return redirect()->back();
     }
@@ -46,6 +48,8 @@ class ApplyController extends Controller
     {
         $apply = Apply::where('volunteer_id',auth()->user()->id)->where('event_id', $event->id)->first();
         $apply->delete();
+
+        event(new ApplyRequest($event, auth()->user()->name,false));
         $request->session()->flash('message', 'Successfully canceled!');
 
         return redirect()->back();
@@ -58,6 +62,7 @@ class ApplyController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function accept(Request $request, Event $event, Volunteer $volunteer){
+
         $apply = Apply::where('volunteer_id',$volunteer->id)->where('event_id',$event->id)->first();
         $apply->update([
             'status' => 1,
@@ -65,7 +70,8 @@ class ApplyController extends Controller
 
         $alertMessage = $volunteer->name.' has been accepted';
         Alert::success('Accepted!',$alertMessage);
-        event(new ApplyResponse($event->title,true));
+        event(new ApplyResponse($event->title,true,$volunteer->id));
+
         return redirect()->back();
     }
 
@@ -83,7 +89,7 @@ class ApplyController extends Controller
 
         $alertMessage = $volunteer->name.' has been rejected';
         alert()->error('Rejected!',$alertMessage);
-        event(new ApplyResponse($event->title,false));
+        event(new ApplyResponse($event->title,false,$volunteer->id));
 
         return redirect()->back();
     }

@@ -243,62 +243,62 @@
 @include('layouts.footer')
 
 @include('layouts.scripts')
-<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{{--<script src="https://js.pusher.com/5.0/pusher.min.js"></script>--}}
+{{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
 {{--<style>--}}
     {{--/*.fixed-dialog {position: fixed;}*/--}}
 {{--</style>--}}
-<script>
+{{--<script>--}}
 
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
+    {{--// Enable pusher logging - don't include this in production--}}
+    {{--Pusher.logToConsole = true;--}}
 
-    var pusher = new Pusher('8fa3cad6dcc20526ad09', {
-        cluster: 'eu',
-        forceTLS: true
-    });
+    {{--var pusher = new Pusher('8fa3cad6dcc20526ad09', {--}}
+        {{--cluster: 'eu',--}}
+        {{--forceTLS: true--}}
+    {{--});--}}
 
-    var channel = pusher.subscribe('my-channel');
+    {{--var channel = pusher.subscribe('my-channel');--}}
 
-    // channel.bind('apply_response', function(data) {
-    //     // alert(JSON.stringify(data));
-    //     // alert(JSON.stringify(data));
-    //     $("#myModal").modal();
-    // });
-    channel.bind('apply_response',notify);
+    {{--// channel.bind('apply_response', function(data) {--}}
+    {{--//     // alert(JSON.stringify(data));--}}
+    {{--//     // alert(JSON.stringify(data));--}}
+    {{--//     $("#myModal").modal();--}}
+    {{--// });--}}
+    {{--channel.bind('apply_response',notify);--}}
 
-    var heightCounter = 10;
-    function notify(data) {
-        var yourPosition = {
-            my: "left bottom",
-            at: "left+10 bottom-"+heightCounter
-        };
-        var elem = $('<div></div>');
-        // elem.html();
-        $('<a href="/dashboard" style="font-size: 16px"></a>', {
-            class : 'inner'
-        }).html(data.message).appendTo( elem );
-        elem.dialog({
-            create: function(event) {
-                $(event.target).parent().css('position', 'fixed');
-            },
-            dialogClass: "no-close noTitleStuff fixed-dialog",
-            autoOpen: true,
-            title: data.event,
-            // modal: true,
-            position:yourPosition,
-            minWidth: 300,
-            draggable:false,
-            resizable: false,
-            show : { effect: "fade", duration: 1000},
-            hide: { effect: "fade", duration: 1000 },
-            close: function() { heightCounter-=20; }
+    {{--var heightCounter = 10;--}}
+    {{--function notify(data) {--}}
+        {{--var yourPosition = {--}}
+            {{--my: "left bottom",--}}
+            {{--at: "left+10 bottom-"+heightCounter--}}
+        {{--};--}}
+        {{--var elem = $('<div></div>');--}}
+        {{--// elem.html();--}}
+        {{--$('<a href="/dashboard" style="font-size: 16px"></a>', {--}}
+            {{--class : 'inner'--}}
+        {{--}).html(data.message).appendTo( elem );--}}
+        {{--elem.dialog({--}}
+            {{--create: function(event) {--}}
+                {{--$(event.target).parent().css('position', 'fixed');--}}
+            {{--},--}}
+            {{--dialogClass: "no-close noTitleStuff fixed-dialog",--}}
+            {{--autoOpen: true,--}}
+            {{--title: data.event,--}}
+            {{--// modal: true,--}}
+            {{--position:yourPosition,--}}
+            {{--minWidth: 300,--}}
+            {{--draggable:false,--}}
+            {{--resizable: false,--}}
+            {{--show : { effect: "fade", duration: 1000},--}}
+            {{--hide: { effect: "fade", duration: 1000 },--}}
+            {{--close: function() { heightCounter-=20; }--}}
 
-        });
-    // .prev(".ui-dialog-titlebar").css("background","#7FFF00")
-        heightCounter+=20;
-    }
-</script>
+        {{--});--}}
+    {{--// .prev(".ui-dialog-titlebar").css("background","#7FFF00")--}}
+        {{--heightCounter+=20;--}}
+    {{--}--}}
+{{--</script>--}}
 <script>
     function deleteFromFavourites(itemid) {
         // var user_id = userid;

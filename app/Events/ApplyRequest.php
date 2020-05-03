@@ -10,32 +10,32 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class ApplyResponse implements ShouldBroadcast
+class ApplyRequest implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
     public $event;
-    public $volunteerId;
-
+    public $eventName;
+    public $ownerId;
     /**
      * Create a new event instance.
      *
-     * @param $eventname
+     * @return void
      */
-    public function __construct($eventname,$isAccepted,$volunteerId)
+    public function __construct($event,$volunteername,$isApplied)
     {
-//        if(auth()->guard('web')->check()){
-//            $user = auth()->guard('web')->user();
-//        }
-        $this->volunteerId = $volunteerId;
-        $this->event = $eventname;
-        if($isAccepted === true){
-            $this->message  = "Your apply had been accepted!";
+        $this->event = $event;
+        $this->eventName = $event->title;
+        $this->ownerId = $event->owner->id;
+
+        if($isApplied){
+            $this->message = $volunteername." has applied to your event!";
         }
-        if($isAccepted === false){
-            $this->message  = "Your apply had been rejected!";
+        else{
+            $this->message = $volunteername." has canceled the apply!";
         }
+
     }
 
     /**
@@ -45,12 +45,12 @@ class ApplyResponse implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-//        return new PrivateChannel('my-channel'.$this->volunteerId);
-        return ['my-channel'.$this->volunteerId];
+//        return new PrivateChannel('channel-name');
+        return ['my-channel'.$this->ownerId];
     }
 
     public function broadcastAs()
     {
-        return 'apply_response';
+        return 'apply_request';
     }
 }

@@ -34,7 +34,15 @@ Route::post('/sender', function () {
 
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/about', 'HomeController@about')->name('about');
-
+Route::get('/GetCurrentUserId', function () {
+    if (auth()->guard('web')->check() ){
+        return auth()->guard('web')->user()->id;
+    }
+    if (auth()->guard('web_organization')->check() ){
+        return auth()->guard('web_organization')->user()->id;
+    }
+    return null;
+});
 
 //Localization
 Route::get('/lang/{locale}','LocalizationController@index');

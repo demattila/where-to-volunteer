@@ -184,118 +184,127 @@
 <!--================ End footer Area  =================-->
 
 @include('layouts.scripts')
-<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+{{--<script src="https://js.pusher.com/5.0/pusher.min.js"></script>--}}
 {{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
 
-<style>
-    .no-close .ui-dialog-titlebar-close {
-        display: none;
-    }
-    .noTitleStuff .ui-dialog-titlebar {display:none}
-    .fixed-dialog {position: fixed;}
+{{--<style>--}}
+    {{--.no-close .ui-dialog-titlebar-close {--}}
+        {{--display: none;--}}
+    {{--}--}}
+    {{--.noTitleStuff .ui-dialog-titlebar {display:none}--}}
+    {{--.fixed-dialog {position: fixed;}--}}
 
-     .ui-dialog .ui-dialog-content {
-         padding: 20px;
-         font-size:14px;
-         color:#CAAD75;
-         background-color: #FDF8E4;
-         overflow: auto;
-     }
-</style>
-<script>
+     {{--.ui-dialog .ui-dialog-content {--}}
+         {{--padding: 20px;--}}
+         {{--font-size:14px;--}}
+         {{--color:#CAAD75;--}}
+         {{--background-color: #FDF8E4;--}}
+         {{--overflow: auto;--}}
+     {{--}--}}
+{{--</style>--}}
+{{--<script>--}}
 
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
+    {{--// Enable pusher logging - don't include this in production--}}
+    {{--Pusher.logToConsole = true;--}}
 
-    var pusher = new Pusher('8fa3cad6dcc20526ad09', {
-        cluster: 'eu',
-        forceTLS: true
-    });
+    {{--var pusher = new Pusher('8fa3cad6dcc20526ad09', {--}}
+        {{--cluster: 'eu',--}}
+        {{--forceTLS: true--}}
+    {{--});--}}
 
-    var channel = pusher.subscribe('my-channel');
+    {{--var channel = pusher.subscribe('my-channel');--}}
 
-    // channel.bind('apply_response', function(data) {
-    //     // alert(JSON.stringify(data));
-    //     // alert(JSON.stringify(data));
-    // });
-    channel.bind('apply_response',notify);
-    var heightCounter = 0;
-    function notify(data) {
-        // var listItem = $("<li class='list-group-item'></li>");
-        // listItem.html(data.message);
-        // $('#messages').prepend(listItem);
-        // var isOpen = $( ".dialog" ).dialog( "isOpen" );
-        // if(isOpen){
-        //     $( "#dialog" ).dialog( "close" );
-        // }
-
-
-        var yourPosition = {
-            my: "left bottom",
-            at: "left+5 bottom-"+heightCounter
-        };
-        var elem = $('<div></div>');
-        // elem.html();
-        $('<a href="/dashboard" style="font-size: 16px;font-family: Poppins"></a>', {
-            class : 'inner'
-        }).html(data.message).appendTo( elem );
-        // $('<a href="/dasbhoard"></a>').html(data.message)
-        elem.dialog({
-            dialogClass: "no-close noTitleStuff fixed-dialog",
-            autoOpen: true,
-            // title: "Notification",
-            // modal: true,
-            // position: {
-            //     my: "left+5 bottom-5",
-            //     at: "left bottom",
-            //     of: window
-            // },
-            position:yourPosition,
-            minWidth: 350,
-            draggable:false,
-            resizable: false,
-            show : { effect: "fade", duration: 1000},
-            hide: { effect: "fade", duration: 1000 },
-            buttons: [
-                {
-                    text: "Close",
-                    click: function() {
-                        $( this ).dialog( "close" );
-                        heightCounter-=20;
-                    }
-                }
-            ]
-        });
-        heightCounter+=20;
-        // $("#mess").text(data.message);
-        // $("#dialog").dialog({
-        //     dialogClass: "no-close noTitleStuff fixed-dialog padding",
-        //     autoOpen: true,
-        //     // title: "Notification",
-        //     // modal: true,
-        //     position: {
-        //         my: "left+5 bottom+5",
-        //         at: "left bottom",
-        //         of: window
-        //     },
-        //     minWidth: 400,
-        //     draggable:false,
-        //     resizable: false,
-        //     show : { effect: "fade", duration: 1000},
-        //     hide: { effect: "fade", duration: 1000 },
-        //     buttons: [
-        //         {
-        //             text: "OK",
-        //             click: function() {
-        //                 $( this ).dialog( "close" );
-        //             }
-        //         }
-        //     ]
-        // });
+    {{--// channel.bind('apply_response', function(data) {--}}
+    {{--//     // alert(JSON.stringify(data));--}}
+    {{--//     // alert(JSON.stringify(data));--}}
+    {{--// });--}}
+    {{--channel.bind('apply_response',notify);--}}
+    {{--var heightCounter = 0;--}}
+    {{--function notify(data) {--}}
+        {{--// var listItem = $("<li class='list-group-item'></li>");--}}
+        {{--// listItem.html(data.message);--}}
+        {{--// $('#messages').prepend(listItem);--}}
+        {{--// var isOpen = $( ".dialog" ).dialog( "isOpen" );--}}
+        {{--// if(isOpen){--}}
+        {{--//     $( "#dialog" ).dialog( "close" );--}}
+        {{--// }--}}
 
 
-    }
-</script>
+        {{--var yourPosition = {--}}
+            {{--my: "left bottom",--}}
+            {{--at: "left+5 bottom-"+heightCounter--}}
+        {{--};--}}
+        {{--var elem = $('<div></div>');--}}
+        {{--// elem.html();--}}
+        {{--$('<a href="/dashboard" style="font-size: 16px;font-family: Poppins"></a>', {--}}
+            {{--class : 'inner'--}}
+        {{--}).html(data.message).appendTo( elem );--}}
+        {{--// $('<a href="/dasbhoard"></a>').html(data.message)--}}
+        {{--elem.dialog({--}}
+            {{--dialogClass: "no-close noTitleStuff fixed-dialog",--}}
+            {{--autoOpen: true,--}}
+            {{--// title: "Notification",--}}
+            {{--// modal: true,--}}
+            {{--// position: {--}}
+            {{--//     my: "left+5 bottom-5",--}}
+            {{--//     at: "left bottom",--}}
+            {{--//     of: window--}}
+            {{--// },--}}
+            {{--position:yourPosition,--}}
+            {{--minWidth: 350,--}}
+            {{--draggable:false,--}}
+            {{--resizable: false,--}}
+            {{--show : { effect: "fade", duration: 1000},--}}
+            {{--hide: { effect: "fade", duration: 1000 },--}}
+            {{--buttons: [--}}
+                {{--{--}}
+                    {{--text: "Close",--}}
+                    {{--click: function() {--}}
+                        {{--$( this ).dialog( "close" );--}}
+                        {{--heightCounter-=20;--}}
+                    {{--}--}}
+                {{--}--}}
+            {{--]--}}
+        {{--});--}}
+        {{--heightCounter+=20;--}}
+        {{--// $("#mess").text(data.message);--}}
+        {{--// $("#dialog").dialog({--}}
+        {{--//     dialogClass: "no-close noTitleStuff fixed-dialog padding",--}}
+        {{--//     autoOpen: true,--}}
+        {{--//     // title: "Notification",--}}
+        {{--//     // modal: true,--}}
+        {{--//     position: {--}}
+        {{--//         my: "left+5 bottom+5",--}}
+        {{--//         at: "left bottom",--}}
+        {{--//         of: window--}}
+        {{--//     },--}}
+        {{--//     minWidth: 400,--}}
+        {{--//     draggable:false,--}}
+        {{--//     resizable: false,--}}
+        {{--//     show : { effect: "fade", duration: 1000},--}}
+        {{--//     hide: { effect: "fade", duration: 1000 },--}}
+        {{--//     buttons: [--}}
+        {{--//         {--}}
+        {{--//             text: "OK",--}}
+        {{--//             click: function() {--}}
+        {{--//                 $( this ).dialog( "close" );--}}
+        {{--//             }--}}
+        {{--//         }--}}
+        {{--//     ]--}}
+        {{--// });--}}
+
+
+    {{--}--}}
+{{--</script>--}}
+
+{{--<script src="https://js.pusher.com/5.0/pusher.min.js"></script>--}}
+{{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
+{{--@if($volunteerSignedIn)--}}
+    {{--<script type="text/javascript" src="{{ asset('js/pusherNotifyVolunteer.js') }}"></script>--}}
+{{--@elseif($organizationSignedIn)--}}
+    {{--<script type="text/javascript" src="{{ asset('js/pusherNotifyOrganization.js') }}"></script>--}}
+{{--@endif--}}
+
 <script>
     function addToFavourites(itemid) {
         // var user_id = userid;

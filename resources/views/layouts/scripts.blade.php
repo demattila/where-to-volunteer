@@ -26,3 +26,12 @@
 <script src="{{asset('js/favorite.js')}}"></script>
 <script src="{{asset('js/popover_custom.js')}}"></script>
 
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+@if($volunteerSignedIn)
+    <script type="text/javascript" src="{{ asset('js/pusherNotifyVolunteer.js') }}"></script>
+@elseif($organizationSignedIn)
+    <script type="text/javascript" src="{{ asset('js/pusherNotifyOrganization.js') }}"></script>
+@endif
+
