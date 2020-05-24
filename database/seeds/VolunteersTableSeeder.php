@@ -14,6 +14,7 @@ class VolunteersTableSeeder extends Seeder
         DB::table('volunteers')->insert([
             'id' => 1,
             'name' => 'Demeter Attila',
+            'is_admin' =>true,
             'email' => 'hello@laravel.com',
             'posy' => '“No one has ever become poor by giving.”',
             'password' => bcrypt('1234asdf'),
@@ -27,6 +28,7 @@ class VolunteersTableSeeder extends Seeder
         ]);
         DB::table('volunteers')->insert([
             'id' => 2,
+            'is_admin' =>false,
             'name' => 'Peter Levente',
             'email' => 'new@new.com',
             'posy' => '“Fancy quote here.”',

@@ -18,12 +18,17 @@
                     <div class="single-footer-widget tp_widgets">
                         <h4 class="footer_title">Quick Links</h4>
                         <ul class="list">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Causes</a></li>
-                            <li><a href="#">Event</a></li>
-                            <li><a href="#">News</a></li>
-                            <li><a href="#">Contact</a></li>
+                            @if($volunteerSignedIn)
+                            <li><a href={{route('dashboard')}}>Home</a></li>
+                            @elseif($organizationSignedIn)
+                            <li><a href={{route('organization.dashboard')}}>Home</a></li>
+                            @else
+                            <li><a href={{route('index')}}>Home</a></li>
+                            @endif
+                            <li><a href={{route('events.index')}}>Events</a></li>
+                            <li><a href={{route('stories.index')}}>Stories</a></li>
+                            <li><a href={{ route('terms.latest') }}>Terms of Service</a></li>
+                            <li><a href={{route('about')}}>About</a></li>
                         </ul>
                     </div>
                 </div>

@@ -15,6 +15,7 @@ class CreateVolunteersTable extends Migration
     {
         Schema::create('volunteers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->boolean('is_admin')->nullable();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('posy')->nullable();

@@ -29,6 +29,10 @@ class Organization extends Authenticatable implements HasMedia
         'terms_accepted_at' => 'datetime'
     ];
 
+    public function isAdmin(){
+        return false;
+    }
+
     public function events()
     {
         return $this->hasMany(Event::class, 'owner_id');

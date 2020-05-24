@@ -86,17 +86,21 @@
                 </div>
             </div>
         </div>
-        <h5>What should volunteers do?</h5>
-        <p>{{$event->mission}}</p>
-        <h5>Reward</h5>
-        <p>{{$event->reward}}</p>
-        <h5>More info</h5>
-        <p>{{$event->info}}</p>
+
+        <div style="background-color: whitesmoke;padding: 2rem 1rem 2rem 1rem ">
+            <h5>What should volunteers do?</h5>
+            <p>{{$event->mission}}</p>
+            <h5>Reward</h5>
+            <p>{{$event->reward}}</p>
+            <h5>More info</h5>
+            <p>{{$event->info}}</p>
+        </div>
+
     </div>
 </section>
 
 <section>
-    <div class="container">
+    <div class="container" style="background-color: whitesmoke;padding: 2rem 1rem 2rem 1rem "">
         @if(Auth::guard('web')->check())
             <h3 class="mb-4">Options</h3>
             @if($event->starts_at <= now() )

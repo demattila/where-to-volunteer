@@ -59,6 +59,7 @@ Route::get('/', 'VolunteerController@index')->name('index')->middleware('guest:w
 Route::get('/dashboard', 'VolunteerController@dashboard')->name('dashboard')->middleware('auth:web');
 Route::get('/volunteer/edit','VolunteerController@edit')->name('profile.edit')->middleware('auth:web');
 Route::patch('/volunteer/update','VolunteerController@update')->name('profile.update')->middleware('auth:web');
+Route::post('/delete','VolunteerController@destroy')->name('profile.delete')->middleware('auth:web');
 
 //Image
 //Route::get('/image','ImageController@index')->name('image.index');
@@ -104,6 +105,7 @@ Route::prefix('/organization')->name('organization.')->namespace('Organization')
     Route::get('/', 'OrganizationController@index')->name('index')->middleware('guest:web_organization')->middleware('guest:web');
     Route::get('/dashboard', 'OrganizationController@dashboard')->name('dashboard')->middleware('auth:web_organization');
     Route::get('/edit','OrganizationController@edit')->name('profile.edit')->middleware('auth:web_organization');
+    Route::post('/delete','OrganizationController@destroy')->name('profile.delete')->middleware('auth:web_organization');
 
     Route::namespace('Auth')->group(function(){
         //Login Routes

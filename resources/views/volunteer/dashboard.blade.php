@@ -58,6 +58,8 @@
                                     <a class="dropdown-item" href="{{route('profile.edit')}}">Edit profile data</a>
                                     <a class="dropdown-item" href="#">Change password</a>
                                     <a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>
+                                    <a class="dropdown-item" style="cursor: pointer" onclick="showDeleteModal();">Delete profile</a>
+
                                 </div>
                             </div>
                         </div>
@@ -240,6 +242,33 @@
     </div>
 </section>
 
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Are you sure ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Clicking on delete button will permanently delete your account.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                        onclick="event.preventDefault();
+                                document.getElementById('delete-profile-form').submit();">
+                    Delete
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    <form id="delete-profile-form" action="{{ route('profile.delete') }}" method="POST" style="display: none;">
+    @csrf
+    </form>
+</div>
+
 @include('layouts.footer')
 
 @include('layouts.scripts')
@@ -299,6 +328,8 @@
         {{--heightCounter+=20;--}}
     {{--}--}}
 {{--</script>--}}
+
+
 <script>
     function deleteFromFavourites(itemid) {
         // var user_id = userid;
@@ -319,6 +350,13 @@
                 // handle error
             }
         });
+    }
+
+    function showDeleteModal(){
+        $('#deleteModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        })
     }
 </script>
 </body>

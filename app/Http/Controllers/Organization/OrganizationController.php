@@ -86,6 +86,10 @@ class OrganizationController extends Controller
      */
     public function destroy(Organization $organization)
     {
-        //
+        $user = auth()->guard('web_organization')->user();
+        if($user){
+            $user->delete();
+        }
+        return redirect('/');
     }
 }

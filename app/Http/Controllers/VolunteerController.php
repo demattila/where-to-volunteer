@@ -119,6 +119,10 @@ class VolunteerController extends Controller
      */
     public function destroy(Volunteer $volunteer)
     {
-        //
+        $user = auth()->guard('web')->user();
+        if($user){
+            $user->delete();
+        }
+        return redirect('/');
     }
 }

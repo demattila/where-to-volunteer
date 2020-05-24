@@ -51,6 +51,10 @@ class Volunteer extends Authenticatable implements HasMedia
         'birth'
     ];
 
+    public function isAdmin(){
+        return $this->is_admin;
+    }
+
     public function applies()
     {
         return $this->belongsToMany(Event::class, 'applies')->withPivot('id','status')->withTimestamps();

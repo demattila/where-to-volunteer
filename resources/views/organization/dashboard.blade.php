@@ -4,7 +4,7 @@
     <title>Dashboard</title>
     @include('layouts.head')
 </head>
-<body>
+<body onload="scrolll()">
 @include('layouts.header')
 
 <section class="banner_area">
@@ -24,7 +24,7 @@
     <div class="container">
         @include('layouts.message')
         {{--<div class="jumbotron"></div>--}}
-        <div class="row border border-light rounded" style="background-color: #f5f5f5;box-shadow: 10px 10px 5px grey">
+        <div class="row border border-light rounded" style="background-color: #f5f5f5">
 
             <div class="col-md-3"  style="padding: 10px">
                 <div class="panel panel-default" >
@@ -39,6 +39,7 @@
                                     <a class="dropdown-item" href="{{route('organization.profile.edit')}}">Edit profile data</a>
                                     <a class="dropdown-item" href="#">Change password</a>
                                     <a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>
+                                    <a class="dropdown-item" style="cursor: pointer" onclick="showDeleteModal();">Delete profile</a>
                                 </div>
                             </div>
                         </div>
@@ -172,10 +173,44 @@
     </div>
 </section>
 
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Are you sure ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Clicking on delete button will permanently delete your account.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger"
+                        onclick="event.preventDefault();
+                                document.getElementById('delete-profile-form').submit();">
+                    Delete
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+    <form id="delete-profile-form" action="{{ route('organization.profile.delete') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+</div>
+
 @include('layouts.footer')
 
 @include('layouts.scripts')
-
+<script>
+    function showDeleteModal(){
+        $('#deleteModal').modal({
+            backdrop: 'static',
+            keyboard: false
+        })
+    }
+</script>
 {{--<script src="https://js.pusher.com/5.0/pusher.min.js"></script>--}}
 {{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
 {{--<style>--}}
