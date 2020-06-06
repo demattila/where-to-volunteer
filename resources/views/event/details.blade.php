@@ -87,7 +87,7 @@
             </div>
         </div>
 
-        <div style="background-color: whitesmoke;padding: 2rem 1rem 2rem 1rem ">
+        <div class="cellsmoke">
             <h5>What should volunteers do?</h5>
             <p>{{$event->mission}}</p>
             <h5>Reward</h5>
@@ -96,40 +96,42 @@
             <p>{{$event->info}}</p>
         </div>
 
+            @if(Auth::guard('web')->check())
+                <div class="container cellsmoke" style="margin-top: 20px">
+                    <h3 class="mb-4">Options</h3>
+                    @if($event->starts_at <= now() )
+                        <p><strong><i class="far fa-frown"></i>  Sorry, You can no longer apply!</strong></p>
+                        <p>Find other events <a href="{{route('events.index')}}" >here</a>! </p>
+                    @elseif($user->isApplied($event))
+                        <p>
+                            <strong><i class="far fa-smile-wink"></i>  You applied to this event!</strong>
+                        </p>
+                        <a href="{{ route('apply.cancel', $event) }}" class="genric-btn danger" onclick="event.preventDefault();
+                                                                   document.getElementById('cancel-form').submit();">
+                            Cancel the apply
+                        </a>
+
+                    @else
+                        <a href="{{ route('apply', $event) }}" class="genric-btn success" onclick="event.preventDefault();
+                                                                   document.getElementById('apply-form').submit();">
+                            Apply to event
+                        </a>
+                    @endif
+                    <form id="apply-form" method="POST" action="{{ route('apply', $event) }}" style="display: none;">
+                        @csrf
+                    </form>
+                    <form id="cancel-form" method="POST" action="{{ route('apply.cancel', $event) }}" style="display: none;">
+                        @csrf
+                        @method('delete')
+                    </form>
+                </div>
+            @endif
     </div>
 </section>
 
 <section>
-    <div class="container" style="background-color: whitesmoke;padding: 2rem 1rem 2rem 1rem "">
-        @if(Auth::guard('web')->check())
-            <h3 class="mb-4">Options</h3>
-            @if($event->starts_at <= now() )
-                <p><strong><i class="far fa-frown"></i>  Sorry, You can no longer apply!</strong></p>
-                <p>Find other events <a href="{{route('events.index')}}" >here</a>! </p>
-            @elseif($user->isApplied($event))
-                <p>
-                    <strong><i class="far fa-smile-wink"></i>  You applied to this event!</strong>
-                </p>
-                <a href="{{ route('apply.cancel', $event) }}" class="genric-btn danger" onclick="event.preventDefault();
-                                                                   document.getElementById('cancel-form').submit();">
-                    Cancel the apply
-                </a>
 
-            @else
-                <a href="{{ route('apply', $event) }}" class="genric-btn success" onclick="event.preventDefault();
-                                                                   document.getElementById('apply-form').submit();">
-                    Apply to event
-                </a>
-            @endif
-                <form id="apply-form" method="POST" action="{{ route('apply', $event) }}" style="display: none;">
-                    @csrf
-                </form>
-                <form id="cancel-form" method="POST" action="{{ route('apply.cancel', $event) }}" style="display: none;">
-                    @csrf
-                    @method('delete')
-                </form>
-        @endif
-    </div>
+
 </section>
 <!--================ End Recent Event Area =================-->
 

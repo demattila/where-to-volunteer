@@ -24,7 +24,7 @@
     <div class="container">
         @include('layouts.message')
         {{--<div class="jumbotron"></div>--}}
-        <div class="row border border-light rounded" style="background-color: #f5f5f5">
+        <div class="row border border-light rounded cellsmoke-dark">
 
             <div class="col-md-3"  style="padding: 10px">
                 <div class="panel panel-default" >
@@ -52,7 +52,7 @@
                             <h6 class=" mt-3">{{$user->name}} </h6>
                             <p>{{$user->email}}</p>
                             <p class="card-text"><i>{{$user->founded_at}}</i></p>
-                            {{--<a href="#" class="genric-btn info medium">Edit</a>--}}
+                            {{--<a href="#" class="genric-btn info medium">Editf</a>--}}
                             {{--<div class="row justify-content-center">--}}
                                 {{--<div class="dropdown">--}}
                                     {{--<a class=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
@@ -80,7 +80,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-4" align="middle" >
-                                <p><i class="fas fa-address-card fa-2x"></i></p>
+                                <p><i class="fas fa-map-marker fa-2x"></i></p>
                             </div>
 
                             <div class="col-md-6">
@@ -90,7 +90,7 @@
 
                         <div class="row">
                             <div class="col-md-4" align="middle" >
-                                <p><i class="fas fa-address-card fa-2x"></i></p>
+                                <p><i class="fas fa-share-square fa-2x"></i></p>
                             </div>
 
                             <div class="col-md-6">
@@ -116,12 +116,15 @@
                 <div class="panel panel-default">
                     <div class="row m-2" align="left"><h5>Options</h5></div><hr>
                     <div class="panel-body">
-                        <div class="row">
-                            <a href="{{route('events.create')}}" class="genric-btn warning text-black-50 mb-2" style="width:12rem"><i class="fas fa-plus"></i> Create new event</a>
+                        <div>
+                            <a href="{{route('events.create')}}" class="genric-btn circle warning text-black-50 mb-2" style="width:12rem"><i class="fas fa-plus"></i> New event</a>
                         </div>
-                       <div class="row">
-                           <a href="{{route('stories.create')}}" class="genric-btn warning text-black-50" style="width:12rem"><i class="fas fa-plus"></i> Write a story</a>
+                       <div>
+                           <a href="{{route('stories.create')}}" class="genric-btn circle warning text-black-50 mb-2" style="width:12rem"><i class="fas fa-plus"></i> Write a story</a>
                        </div>
+                        <div>
+                            <a id="sendMessageButton" href="#" class="genric-btn circle warning text-black-50" style="width:12rem"><i class="fas fa-plus"></i> Send message</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -129,6 +132,9 @@
     </div>
 </div>
 
+<section id="messageSendBox" style="display: none">
+    @include('organization.message_send')
+</section>
 
 
 <section class="section">
@@ -141,7 +147,9 @@
             </li>
 
             <li class="nav-item">
-                <a class="genric-btn primary medium mr-1 nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">All Events</a>
+                <a class="genric-btn primary medium mr-1 nav-link" id="all-tab" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="false">
+                    <i class="fas fa-align-justify fa-2x mr-2"></i>All Events
+                </a>
             </li>
 
             <li class="nav-item">
@@ -160,7 +168,7 @@
 
             <div class="tab-pane fade" id="all" role="tabpanel" aria-labelledby="all-tab">
                 <div class="container">
-                    @include('organization.my_events',['events' => $user->events()->get(),'type' => 'all'])
+                    @include('organization.my_events_all',['events' => $user->events()->get(),'type' => 'all'])
                 </div>
             </div>
 
@@ -210,7 +218,29 @@
             keyboard: false
         })
     }
+    function showMessageBox(){
+        $('#messageSendBox').show();
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#messageSendBox").offset().top-60
+        }, 1000);
+    }
+    $( "#sendMessageButton" ).click(function() {
+        showMessageBox();
+    });
+
+    $(document).on("click","#myTab .nav-item",function(){
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#myTab").offset().top-100
+        }, 1000);
+    });
+
 </script>
+
+@if ($errors->count() > 0)
+<script>
+    showMessageBox();
+</script>
+@endif
 {{--<script src="https://js.pusher.com/5.0/pusher.min.js"></script>--}}
 {{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
 {{--<style>--}}

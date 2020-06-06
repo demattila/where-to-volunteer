@@ -45,7 +45,7 @@
 <section class="section-content">
     <div class="section-top-border">
         <div class="container">
-            <div class="row border border-light rounded" style="background-color: #f5f5f5">
+            <div class="row border border-light rounded cellsmoke-dark">
                 <div class="col-md-3 mr-2" style="padding: 10px">
                     <div class="panel panel-default" >
                         <div class="row m-2">
@@ -65,7 +65,9 @@
                         </div>
                         <hr>
                         <div class="panel-body" align="middle">
+                            <a href="{{route('image.edit')}}" >
                             <img class="rounded" style="width: 10rem;" src="{{$user->image_url}}" alt="user image">
+                            </a>
                             <div class="col-lg-12">
                                 <h6 class=" mt-3">{{$user->name}}</h6>
                                 <p>{{$user->email}}</p>
@@ -151,19 +153,71 @@
                     <div class="panel panel-default">
                         <div class="row m-2" align="left"><h5>Options</h5></div><hr>
                         <div class="panel-body">
-                            <div class="row">
-                                <a href="{{route('stories.create')}}" class="genric-btn warning text-black-50" style="width:12rem"><i class="fas fa-plus"></i> Write a story</a>
+                            <div>
+                                <a href="#" class="genric-btn primary circle text-black-50 mb-2" style="width:12rem" data-toggle="modal" data-target="#messagesModal"><i class="far fa-envelope"></i> View messages</a>
+                            </div>
+                            <div>
+                                <a href="{{route('stories.create')}}" class="genric-btn warning circle text-black-50 mb-2" style="width:12rem"><i class="fas fa-plus"></i> Write a story</a>
                             </div>
                             {{--<ul id="messages" class="list-group">--}}
                         </div>
                     </div>
 
                 </div>
+
             </div>
         </div>
     </div>
 </section>
 
+<!-- messagesModal -->
+<div class="modal fade" id="messagesModal" tabindex="-1" role="dialog" aria-labelledby="messagesModalTitle" aria-hidden="false">
+    <div class="modal-dialog modal-lg" role="document" style="padding-top: 80px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="messagesModalTitle">Messages</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @foreach($user->acceptedApplies() as $event)
+                <p>
+                    <a class="genric-btn btn-outline-light" style="width: 100%;background-color: whitesmoke" type="button" data-toggle="collapse" data-target="#collapseExample{{$event->id}}" aria-expanded="false" aria-controls="collapseExample">
+                        {{$event->title}}
+                    </a>
+                </p>
+                <div class="collapse" id="collapseExample{{$event->id}}">
+                    <div class="card card-body">
+                        <table class="table table-hover" style="table-layout: fixed; border: none">
+                            @foreach($event->messages() as $message)
+                            <tbody>
+                                <tr id="row-{{$message->id}}">
+                                    <td style="width: 95%">{{$message->description}}</td>
+                                    <td><a style="cursor: pointer" class="deleteMessageBtn" data-value="{{$message->id}}">
+                                            <i class="fas fa-times"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                            <form id="delete-message-form{{$message->id}}" action="{{ route('message.delete',$message) }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                {{--<button type="button" class="btn btn-primary">Save changes</button>--}}
+            </div>
+        </div>
+    </div>
+</div>
+<!---->
 <section class="section">
     <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -243,7 +297,7 @@
 </section>
 
 <div id="deleteModal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Are you sure ?</h5>
@@ -358,6 +412,32 @@
             keyboard: false
         })
     }
+
+    // $(document).on("click",".deleteMessageBtn",function(){
+    //     var message_id =$(this).data("value");
+    //     $("#row-" + message_id).fadeOut( "slow" );
+    // });
+    $(document).on("click",".deleteMessageBtn",function(){
+        var message_id =$(this).data("value");
+        $.ajax({
+            method: "POST",
+            url: 'message/' + message_id,
+            data: { _token: '{{csrf_token()}}' },
+            success: function () {
+                $("#row-" + message_id).fadeOut( "slow" );
+            },
+            error: function (data) {
+                console.log('Error:', data);
+            }
+        })
+    });
+
+    $(document).on("click","#myTab .nav-item",function(){
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#myTab").offset().top-100
+        }, 1000);
+    });
+
 </script>
 </body>
 </html>

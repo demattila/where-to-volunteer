@@ -40,12 +40,18 @@
                                     @endif
                                 </a>
                             </li>
+                            @if($user && $user->isAdmin())
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{__('Admin')}}</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item "><a class="nav-link" href="{{ route('terms.index') }}">{{ __('Manage terms') }}</a></li>
+                                        {{--<li class="nav-item"><a class="nav-link" href="{{ route('user.management.index') }}">{{ __('Manage users') }}</a></li>--}}
+                                    </ul>
+                                </li>
+                            @endif
                             {{--<li class="nav-item {{Request::path() ==='/' ? 'active' : ''}}"><a class="nav-link" href={{route('volunteer.index')}}>Home</a></li>--}}
                             <li class="nav-item {{Request::path() ==='events' ? 'active' : ''}}"><a class="nav-link" href="{{route('events.index')}}">{{__('Events')}}</a></li>
                             <li class="nav-item {{Request::path() ==='stories' ? 'active' : ''}}"><a class="nav-link" href="{{route('stories.index')}}">{{__('Stories')}}</a></li>
-                            @if($user && $user->isAdmin())
-                            <li class="nav-item {{Request::path() ==='terms' ? 'active' : ''}}"><a class="nav-link" href="{{ route('terms.index') }}">{{ __('Terms') }}</a></li>
-                            @endif
                             <li class="nav-item {{Request::path() ==='about' ? 'active' : ''}}"><a class="nav-link" href={{route('about')}}>{{__('About')}}</a></li>
                             <li class="nav-item submenu dropdown">
                                 @if ( Config::get('app.locale') == 'en')

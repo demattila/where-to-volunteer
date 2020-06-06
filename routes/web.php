@@ -81,7 +81,9 @@ Route::delete('/image/additional/{story}','ImageController@destroy_story')->name
 
 //Event
 Route::post('/events/fetch', 'EventController@fetch')->name('events.fetch');
+Route::post('/events/getSearchEvents', 'EventController@getSearchEvents')->name('events.getSearchEvents');
 Route::resource('events', 'EventController');
+Route::post('/events/{event}/postDelete','EventController@destroy')->name('events.postDelete');
 //Route::get('events', 'EventController@index')->name('events.index');
 //Route::get('/events/create', 'EventController@create')->name('events.create');
 //Route::get('/events/{event}', 'EventController@show')->name('events.show');
@@ -105,8 +107,8 @@ Route::prefix('/organization')->name('organization.')->namespace('Organization')
     Route::get('/', 'OrganizationController@index')->name('index')->middleware('guest:web_organization')->middleware('guest:web');
     Route::get('/dashboard', 'OrganizationController@dashboard')->name('dashboard')->middleware('auth:web_organization');
     Route::get('/edit','OrganizationController@edit')->name('profile.edit')->middleware('auth:web_organization');
+    Route::patch('/update','OrganizationController@update')->name('profile.update')->middleware('auth:web_organization');
     Route::post('/delete','OrganizationController@destroy')->name('profile.delete')->middleware('auth:web_organization');
-
     Route::namespace('Auth')->group(function(){
         //Login Routes
         Route::get('/login','LoginController@showLoginForm')->name('login');
@@ -124,15 +126,21 @@ Route::prefix('/organization')->name('organization.')->namespace('Organization')
         Route::post('register', 'RegisterController@register')->name('register');
     });
 });
+Route::post('/organization/message','MessageController@store')->name('organization.message')->middleware('auth:web_organization');
+Route::post('/message/{message}','MessageController@destroy')->name('message.delete')->middleware('auth:web');
 
 //Terms of Service
 Route::get('/register/terms', 'TermController@terms')->name('terms.latest');
 
-//Route::get('/terms', 'TermController@index')->name('terms.index')->middleware('auth')->middleware('verified');
-//Route::get('/terms/{term}/edit', 'TermController@edit')->name('terms.edit')->middleware('auth')->middleware('verified');
-//Route::get('/terms/create', 'TermController@create')->name('terms.create')->middleware('auth')->middleware('verified');
-//Route::post('/terms', 'TermController@store')->name('terms.store')->middleware('auth')->middleware('verified');
-//Route::delete('/terms/{term}', 'TermController@destroy')->name('terms.delete')->middleware('auth')->middleware('verified');
-Route::resource('terms','TermController');
-Route::post('terms/{term}/publish', 'TermController@publish')->name('terms.publish');
+//Route::get('/admin/terms', 'TermController@index')->name('terms.index')->middleware('auth')->middleware('verified');
+//Route::get('/admin/terms/{term}/edit', 'TermController@edit')->name('terms.update')->middleware('auth')->middleware('verified');
+//Route::get('/admin/terms/create', 'TermController@create')->name('terms.create')->middleware('auth')->middleware('verified');
+//Route::post('/admin/terms', 'TermController@store')->name('terms.store')->middleware('auth')->middleware('verified');
+//Route::delete('/admin/terms/{term}', 'TermController@destroy')->name('terms.destroy')->middleware('auth')->middleware('verified');
+Route::prefix('/admin')->group(function() {
+    Route::resource('terms', 'TermController');
+//    Route::resource('user.management', 'UserManagementController');
+});
+Route::post('/admin/terms/{term}/publish', 'TermController@publish')->name('terms.publish');
 Route::post('terms/accept', 'TermController@accept')->name('terms.accept');
+Route::post('/admin/terms/delete-old', 'TermController@deleteOldTerms')->name('terms.delete.old');

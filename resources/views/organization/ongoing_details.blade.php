@@ -209,7 +209,11 @@
                     </td>
                 </tr>
             @endforeach
+
         </table>
+        @if($event->applies->isEmpty())
+            <p>Nobody applied to this event yet.</p>
+        @endif
     </div>
 </section>
 

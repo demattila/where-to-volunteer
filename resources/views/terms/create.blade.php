@@ -1,8 +1,27 @@
-@extends('layouts.app')
+<!doctype html>
+<html lang="en">
+<head>
+    <title>New Term</title>
+    @include('layouts.head')
+</head>
 
-@section('title','Create Terms')
+<body onload="scrolll()">
+@include('layouts.header')
 
-@section('content')
+<!--================ Home Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="overlay bg-parallax" data-stellar-ratio="0.9" data-stellar-vertical-offset="0" data-background=""></div>
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>New Term</h2>
+                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section-top-border">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -55,4 +74,14 @@
             </div>
         @endif
     </div>
-@endsection
+</section>
+
+<!--================ Start footer Area  =================-->
+@include('layouts.footer')
+<!--================ End footer Area  =================-->
+
+@include('layouts.scripts')
+
+</body>
+</html>
+

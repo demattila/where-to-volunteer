@@ -12,7 +12,7 @@ class EventsTableSeeder extends Seeder
     public function run()
     {
         DB::table('events')->insert([
-            'id' => 1,
+            'id' => 3,
             'owner_id' => 1,
             'title' => 'WizzAir Marathon',
             'description' => 'run Forest run Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
@@ -26,7 +26,7 @@ class EventsTableSeeder extends Seeder
             'updated_at'=> now(),
         ]);
         DB::table('events')->insert([
-            'id' => 2,
+            'id' => 7,
             'owner_id' => 2,
             'title' => 'Yuppi Camp 2019',
             'description' => 'Yuppi este prima tabără din România care utilizează metoda revoluţionară numită terapie prin experienţă, recunoscută și aplicată în întreaga lume.',
@@ -40,7 +40,7 @@ class EventsTableSeeder extends Seeder
             'updated_at'=> now(),
         ]);
         DB::table('events')->insert([
-            'id' => 3,
+            'id' => 12,
             'owner_id' => 1,
             'title' => 'EVENT 3',
             'description' => 'Yuppi este prima tabără din România care utilizează metoda revoluţionară numită terapie prin experienţă, recunoscută și aplicată în întreaga lume.',
@@ -54,7 +54,7 @@ class EventsTableSeeder extends Seeder
             'updated_at'=> now(),
         ]);
         DB::table('events')->insert([
-            'id' => 4,
+            'id' => 13,
             'owner_id' => 1,
             'title' => 'EVENT 4',
             'description' => 'Yuppi este prima tabără din România care utilizează metoda revoluţionară numită terapie prin experienţă, recunoscută și aplicată în întreaga lume.',
@@ -68,7 +68,7 @@ class EventsTableSeeder extends Seeder
             'updated_at'=> now(),
         ]);
         DB::table('events')->insert([
-            'id' => 5,
+            'id' => 18,
             'owner_id' => 1,
             'title' => 'EVENT 5',
             'description' => 'Yuppi este prima tabără din România care utilizează metoda revoluţionară numită terapie prin experienţă, recunoscută și aplicată în întreaga lume.',
@@ -83,7 +83,7 @@ class EventsTableSeeder extends Seeder
         ]);
 
         DB::table('events')->insert([
-            'id' => 6,
+            'id' => 29,
             'owner_id' => 1,
             'title' => 'EVENT 6',
             'description' => 'Yuppi este prima tabără din România care utilizează metoda revoluţionară numită terapie prin experienţă, recunoscută și aplicată în întreaga lume.',

@@ -81,65 +81,46 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/ajaxsearch.js":
-/*!************************************!*\
-  !*** ./resources/js/ajaxsearch.js ***!
-  \************************************/
+/***/ "./resources/js/VolunteerDashboardHelper.js":
+/*!**************************************************!*\
+  !*** ./resources/js/VolunteerDashboardHelper.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-    function showSearchEvents(data){
-        var $list = $('#eventList');
-        $list.empty()
-        $list.show();
-        for (let val of data) {
-            $option = '<li class="option searched_event"><a href="/events/' + val.id + '"><h6><b>'+ val.title + '</b></h6></a></li>';
-            $list.append($option);
-        }
-    }
+function showDeleteModal() {
+  $('#deleteModal').modal({
+    backdrop: 'static',
+    keyboard: false
+  });
+}
 
-    $('#event_name').keyup(function(){
-        var query = $(this).val();
-        if(query !== '' && query.length > 2)
-        {
-          var _token = $('input[name="_token"]').val();
-          $.ajax({
-              url:"/events/getSearchEvents",
-              method:"POST",
-              data:{query:query, _token:_token},
-              success:function(data){
-                  showSearchEvents(data);
-              }
-          });
-        }
-        else{
-            $('#eventList').empty();
-            $('#eventList').hide();
-        }
-    });
+function showMessageBox() {
+  $('#messageSendBox').show();
+  $([document.documentElement, document.body]).animate({
+    scrollTop: $("#messageSendBox").offset().top - 60
+  }, 1000);
+}
 
-    $(document).click(function(){
-        $('#eventList').hide();
-    });
-
+$("#sendMessageButton").click(function () {
+  showMessageBox();
 });
 
 /***/ }),
 
-/***/ 1:
-/*!******************************************!*\
-  !*** multi ./resources/js/ajaxsearch.js ***!
-  \******************************************/
+/***/ 6:
+/*!********************************************************!*\
+  !*** multi ./resources/js/VolunteerDashboardHelper.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\WTVolunteer\resources\js\ajaxsearch.js */"./resources/js/ajaxsearch.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\WTVolunteer\resources\js\VolunteerDashboardHelper.js */"./resources/js/VolunteerDashboardHelper.js");
 
 
 /***/ })

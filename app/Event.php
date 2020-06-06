@@ -104,4 +104,10 @@ class Event extends Model implements HasMedia
                 ->width(50)
                 ->height(50);
     }
+
+    public function messages(){
+        $messages = Message::where('event_id', $this->id)->orderBy('created_at', 'desc')->limit(10)->get();
+
+        return $messages;
+    }
 }

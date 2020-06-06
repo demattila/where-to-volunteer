@@ -7,9 +7,11 @@ use App\Event;
 use App\EventCategory;
 use App\Favorite;
 use App\Region;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use function Sodium\add;
 
 class EventController extends Controller
 {
@@ -32,20 +34,23 @@ class EventController extends Controller
 //        $events = Event::all();
         $event = $event->newQuery();
         $perPage = 6;
+        $filters = new Collection([]);
 
         if ($request->has('region')) {
             $event->where('region', $request->input('region'));
+            $filters->push($request->input('region'));
         }
 
         if ($request->has('category')) {
             $event->whereHas('categories',function($q)use ($request) {
                 $q->where('name',$request->input('category'));
             });
+            $filters->push($request->input('category'));
         }
 
-        if($request->has('per_page')){
-            $perPage=$request->get('per_page');
-        }
+//        if($request->has('per_page')){
+//            $perPage=$request->get('per_page');
+//        }
 
         $events = $event->orderBy('id','desc')->paginate($perPage);
 //        $regions = Region::all()->pluck('name');
@@ -53,6 +58,7 @@ class EventController extends Controller
 
         return view('event.index',[
             'events' => $events,
+            'filters' =>$filters
 //            'regions' => $regions,
 //            'categories' => $categories,
 //            'user' => $user ?? null,
@@ -64,6 +70,7 @@ class EventController extends Controller
 //        dd($request->get('query'));
         if($request->get('query'))
         {
+
             $query = $request->get('query');
             $data = Event::where('title', 'LIKE', "%{$query}%")->get();
             $output = '<ul class="dropdown-menu list" style="display:block; position:relative">';
@@ -74,6 +81,16 @@ class EventController extends Controller
             }
             $output .= '</ul>';
             echo $output;
+        }
+    }
+
+    public function getSearchEvents(Request $request){
+        if($request->get('query'))
+        {
+
+            $query = $request->get('query');
+            $data = Event::where('title', 'LIKE', "%{$query}%")->get();
+            return $data;
         }
     }
 

@@ -35,17 +35,18 @@
 <section class="event_area section_gap_top">
     <div class="container">
         <div class="main_title">
-            <h2>Upcoming events</h2>
-            {{--<p>Creepeth called face upon face yielding midst is after moveth </p>--}}
+            <h2 >Upcoming events</h2>
+            <p class="mb-5">Creepeth called face upon face yielding midst is after moveth </p>
 
             <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
                     {{--<form class="form-inline justify-content-center" method="get" action="{{ route('events.index') }}" >--}}
-                        @csrf
                         <div class="form-group">
                             <input type="text" name="event_name" id="event_name" class="form-control single-input" data-url="{{route('events.fetch')}}" placeholder="Search" />
-                            <div id="eventList">
+                            <div style="position: absolute">
+                                <ul id="eventList" id class="dropdown-menu list">
+                                </ul>
                             </div>
                         </div>
                         {{--<button type="submit" class="genric-btn primary m-2">{{ __('Search') }}</button>--}}
@@ -58,7 +59,10 @@
               {{--'regions' => $regions,--}}
               {{--'categories' =>$categories,--}}
               {{--])--}}
-            @include('event.filter')
+            <div class="cellsmoke" style="position: relative;">
+                @include('event.filter',['filters' => $filters])
+
+            </div>
         </div>
         <div class="row">
             @foreach($events as $event)

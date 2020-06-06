@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Organization;
 use App\Terms;
+use App\Volunteer;
 use Illuminate\Http\Request;
 
 class TermController extends Controller
@@ -134,5 +136,40 @@ class TermController extends Controller
     public function terms(){
         $term = Terms::recentFirst()->first();
         return view('terms.show')->withTerm($term);
+    }
+
+    public function deleteOldTerms(Request $request)
+    {
+        //if nobody accepted recently published term yet, it shouldn't be deleted with the elder terms
+        //if there is more newly published terms, the older ones should be deleted, we should keep the latest only
+
+        $currents = [];
+        $latestTerm = Terms::recentFirst()->first();
+
+        foreach (Volunteer::all() as $user){
+            $term = $user->currentlyAcceptedTerm();
+            if($term)
+            {
+                array_push($currents, $term->id);
+            }
+        }
+        foreach (Organization::all() as $user){
+            $term = $user->currentlyAcceptedTerm();
+            if($term)
+            {
+                array_push($currents, $term->id);
+            }
+        }
+
+        $deleted = Terms::published()->whereNotIn('id', $currents)->where('id','!=',$latestTerm->id)->delete();
+
+        if($deleted){
+            $request->session()->flash('message', 'Old terms deleted successfully!');
+        }
+        else{
+            $request->session()->flash('message', 'Nothing to delete!');
+        }
+
+        return redirect()->back();
     }
 }
