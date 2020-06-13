@@ -67,9 +67,9 @@
         <div class="row">
             @foreach($events as $event)
                 <div class="col-lg-6" >
-                    <div class="single_event">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6 col-md-6">
+                    <div class="single_event cellsmoke_event">
+                        <div class="row">
+                            <div class="col-lg-5 col-md-6">
                                 <figure>
                                     <img class="img-fluid w-100" src="{{$event->image_url}}" alt="">
                                     <div class="img-overlay"></div>
@@ -77,74 +77,38 @@
                             </div>
                             <div class="col-lg-6 col-md-6">
                                 <div class="content_wrapper">
-
-                                        <h3 class="title mr-2">
-                                            <a href="{{route('events.show',$event)}}">{{$event->title}}</a>
-                                            {{--<div class="click_fav">--}}
-                                                {{--<span class="fa fa-star-o"></span>--}}
-                                                {{--<div class="ring"></div>--}}
-                                                {{--<div class="ring2"></div>--}}
-                                            {{--</div>--}}
-
-
-                                        {{--@if(auth()->guard('web')->check())--}}
-                                            {{--@if( auth()->user()->isFavorite($event) )--}}
-                                                {{--<button type="button" class="btn" onclick="event.preventDefault();--}}
-                                                    {{--document.getElementById('unfavorite-form-{{$event->id}}').submit();">--}}
-                                                    {{--<span class="fas fa-star"></span>--}}
-                                                {{--</button>--}}
-                                                {{--<form id="unfavorite-form-{{$event->id}}" action="{{route('events.unfavorite', $event)}}" method="POST" style="display: none;">--}}
-                                                    {{--@method('delete')--}}
-                                                    {{--@csrf--}}
-                                                {{--</form>--}}
-                                            {{--@else--}}
-                                                {{--<button type="button" class="btn" onclick="event.preventDefault();--}}
-                                                        {{--document.getElementById('favorite-form-{{$event->id}}').submit();">--}}
-                                                    {{--<span class="far fa-star"></span>--}}
-                                                {{--</button>--}}
-                                                {{--{{dump(route('events.favorite', $event))}}--}}
-                                                {{--{{dump(route('events.unfavorite', $event))}}--}}
-                                                {{--<form id="favorite-form-{{$event->id}}" action="{{route('events.favorite', $event)}}" method="POST" style="display: none;">--}}
-                                                    {{--@csrf--}}
-                                                {{--</form>--}}
-                                            {{--@endif--}}
-                                        {{--@endif--}}
-                                            <p id="deletefavourite{{$event->id}}"
-                                                    onClick="deleteFromFavourites({{$event->id}})"
-                                                    name="addfavourite"
-                                                    class="btn btn-lg"
-                                                    style="{{ $event->favorited() ? '' : 'display: none;' }}">
-                                                <i class="fas fa-star"></i>
-                                            </p>
-
-                                            <!-- hide if favourited -->
-                                            <p id="addfavourites{{$event->id}}"
-                                                    onClick="addToFavourites({{$event->id}})"
-                                                    name="deletefavourite"
-                                                    class="btn btn-lg"
-                                                    style="{{ $event->favorited() ? 'display: none;' : '' }}">
-                                                <i class="far fa-star" ></i>
-                                            </p>
-                                    </h3>
-                                    {{--<h2>--}}
-                                        {{--<span>--}}
-                                                {{--<a href="#">--}}
-                                                    {{--<i  class="far fa-star"></i>--}}
-                                                {{--</a>--}}
-                                                {{--<a href="#" >--}}
-                                                    {{--<i  class="fas fa-star"></i>--}}
-                                                {{--</a>--}}
-                                            {{--</span>--}}
-                                    {{--</h2>--}}
-
-                                <!-- set color and hide if not favourited -->
-
-                                    <div class="four-line-box">
-                                        {{$event->description}}
-                                    </div>
-                                    <a href="{{route('events.show',$event)}}" class="primary_btn mt-2">Learn More</a>
+                                    <h4 class="title">
+                                        <a href="{{route('events.show',$event)}}">{{$event->title}}</a>
+                                    </h4>
+                                    <p><b>{{$event->city}}, {{$event->region}}</b></p>
                                 </div>
                             </div>
+
+                            <div class="col-lg-1 col-md-6" style="padding: 0; display: block;margin-left: auto;margin-right: auto;width: 20px;">
+                                @if($volunteerSignedIn || $organizationSignedIn)
+                                <p id="deletefavourite{{$event->id}}"
+                                   onClick="deleteFromFavourites({{$event->id}})"
+                                   name="addfavourite"
+                                   class="btn btn-lg"
+                                   style="{{ $event->favorited() ? '' : 'display: none;' }} padding: 0;">
+                                    <i class="fas fa-star"></i>
+                                </p>
+
+                                <p id="addfavourites{{$event->id}}"
+                                   onClick="addToFavourites({{$event->id}})"
+                                   name="deletefavourite"
+                                   class="btn btn-lg"
+                                   style="{{ $event->favorited() ? 'display: none;' : '' }} padding: 0;">
+                                    <i class="far fa-star" ></i>
+                                </p>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="four-line-event-box">
+                            {{$event->description}}
+                        </div>
+                        <div>
+                            <a href="{{route('events.show',$event)}}" class="genric-btn primary medium mt-2">Learn More</a>
                         </div>
                     </div>
                 </div>

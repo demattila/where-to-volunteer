@@ -43,11 +43,6 @@
                         {{$event->title}}
                     </h2>
                     <p>
-                        If you are looking at blank cassettes on the web, you may be very confused at the difference in price You may
-                        see some for as low as each. If you are looking at blank cassettes on the web, you may be very confused at the
-                        difference in price You may see.If you are looking at blank cassettes on the web, you may be very confused at the difference in price You may
-                        see some for as low as each. If you are looking at blank cassettes on the web, you may be very confused at the
-                        difference in price You may see.
                         {{$event->description}}
                     </p>
                     <ul>
@@ -125,6 +120,39 @@
                         @method('delete')
                     </form>
                 </div>
+                @if($user->isApplied($event))
+                <div class="container cellsmoke" style="margin-top: 20px">
+                    <h3 class="mb-4">Event owner information</h3>
+                    <div style="margin-bottom: 20px">
+                        <h5>{{$event->owner->name}}</h5>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img class="img-fluid" style="max-width: 15rem" src="{{$event->owner->image_url}}">
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Data</h6>
+                                <p>Contact person: <b>{{$event->owner->contact_person}}</b></p>
+                                <p>Organization type: <b>{{$event->owner->type->name}}</b></p>
+                                <p>Site: <b>{{$event->owner->site}}</b></p>
+                                <p><i class="fas fa-calendar-day"></i> Founded at: <b>{{$event->owner->founded_at}}</b></p>
+                                <p><i class="fas fa-address-card"></i> Address: <b>{{$event->owner->city}}, {{$event->owner->region}}</b></p>
+                                {{--<p><i class="fas fa-briefcase"></i> <b>{{$volunteer->works_at}}</b></p>--}}
+                            </div>
+                            <div class="col-md-4">
+                                <h6>Contact</h6>
+                                <p><b>{{$event->owner->mobile}}</b></p>
+                                <p><b>{{$event->owner->email}}</b></p>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <h6>Description: </h6>
+                            <p>{{$event->owner->description}}</p>
+                        </div>
+                    </div>
+                </div>
+                @endif
             @endif
     </div>
 </section>

@@ -49344,29 +49344,60 @@ module.exports = function(module) {
 /***/ (function(module, exports) {
 
 $(document).ready(function () {
+  function showSearchEvents(data) {
+    $list = $('#eventList');
+    $list.empty();
+    $list.show();
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = data[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var val = _step.value;
+        $option = '<li class="option searched_event"><a href="/events/' + val.id + '"><h6><b>' + val.title + '</b></h6></a></li>';
+        $list.append($option);
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+          _iterator["return"]();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+  }
+
   $('#event_name').keyup(function () {
     var query = $(this).val();
 
-    if (query != '') {
+    if (query !== '' && query.length > 2) {
       var _token = $('input[name="_token"]').val();
 
       $.ajax({
-        url: "/events/fetch",
+        url: "/events/getSearchEvents",
         method: "POST",
         data: {
           query: query,
           _token: _token
         },
         success: function success(data) {
-          $('#eventList').fadeIn();
-          $('#eventList').html(data);
+          showSearchEvents(data);
         }
       });
+    } else {
+      $('#eventList').empty();
+      $('#eventList').hide();
     }
   });
-  $(document).on('click', 'li', function () {
-    $('#event_name').val($(this).text());
-    $('#eventList').fadeOut();
+  $(document).click(function () {
+    $('#eventList').hide();
   });
 });
 

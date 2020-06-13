@@ -10,5 +10,6 @@
   display: -webkit-box;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
+  padding-top: 10px;
 }
 
