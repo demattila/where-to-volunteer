@@ -223,12 +223,12 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
                 <a class="genric-btn primary medium mr-1 nav-link" id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">
-                    <i class="fas fa-history fa-2x"></i> Volunteering History
+                    <i class="fas fa-history fa-2x"></i> Expired Events
                 </a>
             </li>
             <li class="nav-item">
                 <a class="genric-btn primary medium mr-1 nav-link show active " id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing" aria-selected="false">
-                    <i class="far fa-calendar-alt fa-2x"></i> Ongoing Events
+                    <i class="far fa-calendar-alt fa-2x"></i> Upcoming Events
                 </a>
             </li>
             {{--<li class="nav-item">--}}
@@ -239,7 +239,7 @@
             {{--</li>--}}
             <li class="nav-item">
                 <a class="genric-btn primary medium mr-1 nav-link" id="favorites-tab" data-toggle="tab" href="#favorites" role="tab" aria-controls="favorites" aria-selected="false">
-                    <i class="far fa-star fa-2x"></i> Saved Events
+                    <i class="far fa-star fa-2x"></i> Favorite Events
                 </a>
             </li>
         </ul>

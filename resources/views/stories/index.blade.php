@@ -70,7 +70,7 @@
                             <div class="blog_post">
                                 <img src="{{$story->image_url}}" alt="">
                                 <div class="blog_details">
-                                    <a href="single-blog.html"><h2>{{$story->title}}</h2></a>
+                                    <a href="{{route('stories.show',$story)}}"><h2>{{$story->title}}</h2></a>
                                     <p>{{$story->text_short}}</p>
                                     <a href="{{route('stories.show',$story)}}" class="blog_btn">View More</a>
                                 </div>

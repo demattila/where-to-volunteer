@@ -10,7 +10,6 @@ class UserComposer
     protected $user;
     protected $volunteerSignedIn = false;
     protected $organizationSignedIn = false;
-    protected $adminSignedIn = false;
     protected $user_type;
 
     public function __construct()

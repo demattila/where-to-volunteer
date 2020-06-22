@@ -22,7 +22,6 @@
 </section>
 <!--================ End Home Banner Area =================-->
 
-<!--================ Start About Us Area =================-->
 <section class="about_area section_gap">
     <div class="container">
         <div class="row">
@@ -36,7 +35,7 @@
                     <div class="about_content">
                         <h2>
                             We are nonprofit team <br>
-                            and work worldwide
+                            to help in connecting organizations with volunteers
                         </h2>
                         <p>
                             Their multiply doesn't behold shall appear living heaven second
@@ -55,7 +54,16 @@
         </div>
     </div>
 </section>
-<!--================ End About Us Area =================-->
+<section>
+    <div class="container">
+        <div class="container cellsmoke mb-5">
+            <h3>Contact us if you have any ideas, problems or questions</h3>
+            <p>support@wtvolunteer.test</p>
+            <p>info@wtvolunteer.test</p>
+        </div>
+
+    </div>
+</section>
 <section >
     <div class="container">
         <div class="row">

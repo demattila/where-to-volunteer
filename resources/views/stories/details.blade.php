@@ -78,9 +78,9 @@
                                 </div>
                             @endforeach
 
-                            <div class="col-6">
-                                <img class="img-fluid" src="img/blog/post-img2.jpg" alt="">
-                            </div>
+                            {{--<div class="col-6">--}}
+                                {{--<img class="img-fluid" src="img/blog/post-img2.jpg" alt="">--}}
+                            {{--</div>--}}
                             {{--<div class="col-lg-12 mt-25">--}}
                                 {{--<p>--}}
                                     {{--MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower.--}}

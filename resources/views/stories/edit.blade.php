@@ -69,7 +69,7 @@
                             <div class="form-group row">
                                 <div class="col-md-9 offset-md-4 mt-5">
                                     <button type="submit" class="genric-btn primary">
-                                        {{ __('Update Profile') }}
+                                        {{ __('Update Story') }}
                                     </button>
                                     <a href= "{{ route('stories.index') }}" class="genric-btn danger mr-3 ">Cancel</a>
                                 </div>

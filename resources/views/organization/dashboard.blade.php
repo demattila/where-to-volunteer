@@ -142,7 +142,7 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item">
                 <a class="genric-btn primary medium mr-1 nav-link " id="history-tab" data-toggle="tab" href="#history" role="tab" aria-controls="history" aria-selected="true">
-                    <i class="fas fa-history fa-2x mr-2"></i> History Events
+                    <i class="fas fa-history fa-2x mr-2"></i> Expired Events
                 </a>
             </li>
 
@@ -154,7 +154,7 @@
 
             <li class="nav-item">
                 <a class="genric-btn primary medium mr-1 nav-link show active" id="ongoing-tab" data-toggle="tab" href="#ongoing" role="tab" aria-controls="ongoing" aria-selected="false">
-                    <i class="fas fa-tasks fa-2x mr-2"></i> Ongoing Events
+                    <i class="fas fa-tasks fa-2x mr-2"></i> Upcoming Events
                 </a>
             </li>
         </ul>

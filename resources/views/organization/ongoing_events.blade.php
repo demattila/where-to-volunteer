@@ -15,7 +15,8 @@
                         <a href="#"  title="Delete" onclick="showEventDeleteModal3({{$event->id}});" class="mr-3 text-dark" style="padding: 6px"><i class="fas fa-trash-alt"></i></a>
                     </div>
                 </div>
-                <div class="single_event cellsmoke ongoing_event">
+                {{--ongoing_event--}}
+                <div class="single_event cellsmoke ">
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-6">
                             {{--<div class="content_wrapper">--}}

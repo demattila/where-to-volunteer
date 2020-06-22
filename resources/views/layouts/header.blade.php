@@ -45,7 +45,7 @@
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{__('Admin')}}</a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item "><a class="nav-link" href="{{ route('terms.index') }}">{{ __('Manage terms') }}</a></li>
-                                        {{--<li class="nav-item"><a class="nav-link" href="{{ route('user.management.index') }}">{{ __('Manage users') }}</a></li>--}}
+                                        <li class="nav-item "><a class="nav-link" href="{{ route('users.index') }}">{{ __('Manage users') }}</a></li>
                                     </ul>
                                 </li>
                             @endif

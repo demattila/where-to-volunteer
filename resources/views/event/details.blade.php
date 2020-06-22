@@ -95,12 +95,22 @@
                 <div class="container cellsmoke" style="margin-top: 20px">
                     <h3 class="mb-4">Options</h3>
                     @if($event->starts_at <= now() )
-                        <p><strong><i class="far fa-frown"></i>  Sorry, You can no longer apply!</strong></p>
+                        <p><strong><i class="far fa-frown"></i>  Sorry, this event has been ended.</strong></p>
                         <p>Find other events <a href="{{route('events.index')}}" >here</a>! </p>
                     @elseif($user->isApplied($event))
+                        @if($user->applyStatus($event) == 0)
                         <p>
-                            <strong><i class="far fa-smile-wink"></i>  You applied to this event!</strong>
+                            <strong><i class="far fa-smile-wink"></i>  You applied to this event! Waiting for the response..</strong>
                         </p>
+                        @endif
+                        @if($user->applyStatus($event) == 1)
+                            <p>
+                                <strong><i class="far fa-smile-wink"></i> Your apply has been accepted. Good luck!</strong>
+                            </p>
+                        @endif
+                            @if($user->applyStatus($event) == 2)
+                                <p><strong><i class="far fa-frown"></i>  Sorry, your apply has been rejected. Find an other event! </strong></p>
+                            @endif
                         <a href="{{ route('apply.cancel', $event) }}" class="genric-btn danger" onclick="event.preventDefault();
                                                                    document.getElementById('cancel-form').submit();">
                             Cancel the apply
@@ -120,7 +130,7 @@
                         @method('delete')
                     </form>
                 </div>
-                @if($user->isApplied($event))
+                @if($user->isApplied($event) && $user->applyStatus($event) == 1)
                 <div class="container cellsmoke" style="margin-top: 20px">
                     <h3 class="mb-4">Event owner information</h3>
                     <div style="margin-bottom: 20px">
@@ -153,6 +163,10 @@
                     </div>
                 </div>
                 @endif
+            @elseif(!$organizationSignedIn)
+                <div class="container cellsmoke" style="margin-top: 20px">
+                <p>Login required to apply to the event. <a href="{{route('index')}}">Click here to log in!</a></p>
+                </div>
             @endif
     </div>
 </section>

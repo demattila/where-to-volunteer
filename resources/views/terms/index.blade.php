@@ -30,7 +30,7 @@
                 <h2 class="my-5">Terms of Service</h2>
             </div>
             <div class="col-md-6 text-right">
-                <a href="{{route('terms.create')}}" class="btn btn-success my-5">New Term</a>
+                <a href="{{route('terms.create')}}" class="btn btn-success my-5">Create new</a>
                 <a href="#" class="btn btn-danger my-5" onclick="event.preventDefault();
                         document.getElementById('deleteAll-form').submit();">
                     Delete Old Terms

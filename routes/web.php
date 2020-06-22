@@ -101,7 +101,7 @@ Route::post('/applies/{event}/accept/{volunteer}', 'ApplyController@accept')->na
 Route::post('applies/{event}/reject/{volunteer}', 'ApplyController@reject')->name('apply.reject')->middleware('auth:web_organization');
 
 
-Route::get('/organization/events/ongoing/{event}','EventController@orgOngoingDetails')->name('events.ongoing_show');
+Route::get('/organization/events/ongoing/{event}','EventController@orgOngoingDetails')->name('events.ongoing_show')->middleware('auth:web_organization')->middleware('guest:web');
 //Organization
 Route::prefix('/organization')->name('organization.')->namespace('Organization')->group(function(){
     Route::get('/', 'OrganizationController@index')->name('index')->middleware('guest:web_organization')->middleware('guest:web');
@@ -138,9 +138,14 @@ Route::get('/register/terms', 'TermController@terms')->name('terms.latest');
 //Route::post('/admin/terms', 'TermController@store')->name('terms.store')->middleware('auth')->middleware('verified');
 //Route::delete('/admin/terms/{term}', 'TermController@destroy')->name('terms.destroy')->middleware('auth')->middleware('verified');
 Route::prefix('/admin')->group(function() {
-    Route::resource('terms', 'TermController');
-//    Route::resource('user.management', 'UserManagementController');
+    Route::resource('terms', 'TermController')->middleware('admin');
+    Route::get('/users', 'AdminController@index')->name('users.index')->middleware('auth')->middleware('verified')->middleware('admin');
+    Route::delete('users/{type}/{id}', 'AdminController@destroy')->name('users.destroy')->middleware('auth')->middleware('verified')->middleware('admin');
+
 });
-Route::post('/admin/terms/{term}/publish', 'TermController@publish')->name('terms.publish');
+Route::post('/admin/terms/{term}/publish', 'TermController@publish')->name('terms.publish')->middleware('admin');
 Route::post('terms/accept', 'TermController@accept')->name('terms.accept');
 Route::post('/admin/terms/delete-old', 'TermController@deleteOldTerms')->name('terms.delete.old');
+
+
+

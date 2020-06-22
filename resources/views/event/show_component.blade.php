@@ -40,20 +40,7 @@
                                         <a href="{{route('events.show',$event)}}">{{$event->title}}</a>
                                     </h3>
                                     <p style="overflow: hidden; max-height: 5rem">{{$event->description}}</p>
-                                    <div class="d-flex count_time" id="clockdiv1">
-                                        <div class="mr-25">
-                                            <h4 class="days">552</h4>
-                                            <p>Days</p>
-                                        </div>
-                                        <div class="mr-25">
-                                            <h4 class="hours">08</h4>
-                                            <p>Hours</p>
-                                        </div>
-                                        <div class="mr-25">
-                                            <h4 class="minutes">45</h4>
-                                            <p>Minutes</p>
-                                        </div>
-                                    </div>
+
                                         <a href="{{route('events.show',$event)}}" class="genric-btn primary">More</a>
                                         {{--<a href="{{route('event.image.edit',$event)}}" class="primary_btn">Edit</a>--}}
                                 </div>
