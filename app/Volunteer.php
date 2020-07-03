@@ -23,9 +23,6 @@ class Volunteer extends Authenticatable implements HasMedia
      *
      * @var array
      */
-//    protected $fillable = [
-//        'name','email','password','posy','mobile','city','region','works_at','birth','image_id','sex','driving_licence','terms_accepted_at'
-//    ];
 
     protected $guarded = [];
 

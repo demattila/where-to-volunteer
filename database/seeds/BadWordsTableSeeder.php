@@ -20,7 +20,7 @@ class BadWordsTableSeeder extends Seeder
         ]);
         DB::table('bad_words')->insert([
             'id' => 2,
-            'word' => "suck",
+            'word' => "shit",
             'replacement' => "....",
             'created_at' =>now(),
             'updated_at' =>now()

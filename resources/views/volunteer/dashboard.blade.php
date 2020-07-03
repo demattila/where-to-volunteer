@@ -15,7 +15,6 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Volunteer dashboard</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
@@ -56,7 +55,6 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="{{route('profile.edit')}}">Edit profile data</a>
-                                    <a class="dropdown-item" href="#">Change password</a>
                                     <a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>
                                     <a class="dropdown-item" style="cursor: pointer" onclick="showDeleteModal();">Delete profile</a>
 
@@ -175,7 +173,7 @@
     <div class="modal-dialog modal-lg" role="document" style="padding-top: 80px">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="messagesModalTitle">Messages</h5>
+                <h5 class="modal-title" id="messagesModalTitle">Üzenetek</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

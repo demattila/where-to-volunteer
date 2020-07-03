@@ -13,7 +13,6 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Edit event</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
@@ -144,9 +143,6 @@
                     @include('layouts.errors')
                 </div>
             </div>
-            {{--<div class="col-md-4">--}}
-
-            {{--</div>--}}
         </div>
     </div>
 

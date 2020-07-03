@@ -5,9 +5,7 @@
     @include('layouts.head')
     <link rel="stylesheet" href="{{asset('css/fav.css')}}">
     <link rel="stylesheet" href="{{asset('css/limit-chars.css')}}">
-
 </head>
-
 <body onload="scrolll()">
 
 <!--================ Start Header Menu Area =================-->
@@ -21,29 +19,24 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Events</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
 </section>
 <!--================ End Home Banner Area =================-->
 
-{{--{{dump($volunteerSignedIn)}}--}}
-{{--{{dump($organizationSignedIn)}}--}}
-
 <!--================ Start Recent Event Area =================-->
 <section class="event_area section_gap_top">
     <div class="container">
         <div class="main_title">
-            <h2 >Upcoming events</h2>
-            <p class="mb-5">Creepeth called face upon face yielding midst is after moveth </p>
+            <h2 class="mb-10">@lang('Upcoming events')</h2>
 
             <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
                     {{--<form class="form-inline justify-content-center" method="get" action="{{ route('events.index') }}" >--}}
                         <div class="form-group">
-                            <input type="text" name="event_name" id="event_name" class="form-control single-input" data-url="{{route('events.fetch')}}" placeholder="Search" />
+                            <input type="text" name="event_name" id="event_name" class="form-control single-input" data-url="{{route('events.fetch')}}" placeholder="@lang('Search')" />
                             <div style="position: absolute">
                                 <ul id="eventList" id class="dropdown-menu list">
                                 </ul>
@@ -55,10 +48,6 @@
                 <div class="col-lg-4"></div>
             </div>
 
-            {{--@include('event.filter',[--}}
-              {{--'regions' => $regions,--}}
-              {{--'categories' =>$categories,--}}
-              {{--])--}}
             <div class="cellsmoke" style="position: relative;">
                 @include('event.filter',['filters' => $filters])
 
@@ -108,7 +97,7 @@
                             {{$event->description}}
                         </div>
                         <div>
-                            <a href="{{route('events.show',$event)}}" class="genric-btn primary medium mt-2">Learn More</a>
+                            <a href="{{route('events.show',$event)}}" class="genric-btn primary medium mt-2">@lang('Learn More')</a>
                         </div>
                     </div>
                 </div>
@@ -120,28 +109,6 @@
     </div>
 </section>
 <!--================ End Recent Event Area =================-->
-<!--================ Start Subscribe Area =================-->
-{{--<div class="container">--}}
-    {{--<div class="subscribe_area">--}}
-        {{--<div class="row">--}}
-            {{--<div class="col-lg-12">--}}
-                {{--<div class="d-flex align-items-center">--}}
-                    {{--<h1 class="text-white">Do you have a question?</h1>--}}
-                    {{--<div id="mc_embed_signup">--}}
-                        {{--<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscribe_form relative">--}}
-                            {{--<div class="input-group d-flex flex-row">--}}
-                                {{--<input name="EMAIL" placeholder="Your email address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">--}}
-                                {{--<button class="ml-10 primary_btn yellow_btn btn sub-btn rounded">SUBSCRIBE</button>--}}
-                            {{--</div>--}}
-                            {{--<div class="info"></div>--}}
-                        {{--</form>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
-<!--================ End Subscribe Area =================-->
 
 <div id="dialog">
     <h6><a href="/dashboard" id="mess"></a></h6>
@@ -152,126 +119,6 @@
 <!--================ End footer Area  =================-->
 
 @include('layouts.scripts')
-{{--<script src="https://js.pusher.com/5.0/pusher.min.js"></script>--}}
-{{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
-
-{{--<style>--}}
-    {{--.no-close .ui-dialog-titlebar-close {--}}
-        {{--display: none;--}}
-    {{--}--}}
-    {{--.noTitleStuff .ui-dialog-titlebar {display:none}--}}
-    {{--.fixed-dialog {position: fixed;}--}}
-
-     {{--.ui-dialog .ui-dialog-content {--}}
-         {{--padding: 20px;--}}
-         {{--font-size:14px;--}}
-         {{--color:#CAAD75;--}}
-         {{--background-color: #FDF8E4;--}}
-         {{--overflow: auto;--}}
-     {{--}--}}
-{{--</style>--}}
-{{--<script>--}}
-
-    {{--// Enable pusher logging - don't include this in production--}}
-    {{--Pusher.logToConsole = true;--}}
-
-    {{--var pusher = new Pusher('8fa3cad6dcc20526ad09', {--}}
-        {{--cluster: 'eu',--}}
-        {{--forceTLS: true--}}
-    {{--});--}}
-
-    {{--var channel = pusher.subscribe('my-channel');--}}
-
-    {{--// channel.bind('apply_response', function(data) {--}}
-    {{--//     // alert(JSON.stringify(data));--}}
-    {{--//     // alert(JSON.stringify(data));--}}
-    {{--// });--}}
-    {{--channel.bind('apply_response',notify);--}}
-    {{--var heightCounter = 0;--}}
-    {{--function notify(data) {--}}
-        {{--// var listItem = $("<li class='list-group-item'></li>");--}}
-        {{--// listItem.html(data.message);--}}
-        {{--// $('#messages').prepend(listItem);--}}
-        {{--// var isOpen = $( ".dialog" ).dialog( "isOpen" );--}}
-        {{--// if(isOpen){--}}
-        {{--//     $( "#dialog" ).dialog( "close" );--}}
-        {{--// }--}}
-
-
-        {{--var yourPosition = {--}}
-            {{--my: "left bottom",--}}
-            {{--at: "left+5 bottom-"+heightCounter--}}
-        {{--};--}}
-        {{--var elem = $('<div></div>');--}}
-        {{--// elem.html();--}}
-        {{--$('<a href="/dashboard" style="font-size: 16px;font-family: Poppins"></a>', {--}}
-            {{--class : 'inner'--}}
-        {{--}).html(data.message).appendTo( elem );--}}
-        {{--// $('<a href="/dasbhoard"></a>').html(data.message)--}}
-        {{--elem.dialog({--}}
-            {{--dialogClass: "no-close noTitleStuff fixed-dialog",--}}
-            {{--autoOpen: true,--}}
-            {{--// title: "Notification",--}}
-            {{--// modal: true,--}}
-            {{--// position: {--}}
-            {{--//     my: "left+5 bottom-5",--}}
-            {{--//     at: "left bottom",--}}
-            {{--//     of: window--}}
-            {{--// },--}}
-            {{--position:yourPosition,--}}
-            {{--minWidth: 350,--}}
-            {{--draggable:false,--}}
-            {{--resizable: false,--}}
-            {{--show : { effect: "fade", duration: 1000},--}}
-            {{--hide: { effect: "fade", duration: 1000 },--}}
-            {{--buttons: [--}}
-                {{--{--}}
-                    {{--text: "Close",--}}
-                    {{--click: function() {--}}
-                        {{--$( this ).dialog( "close" );--}}
-                        {{--heightCounter-=20;--}}
-                    {{--}--}}
-                {{--}--}}
-            {{--]--}}
-        {{--});--}}
-        {{--heightCounter+=20;--}}
-        {{--// $("#mess").text(data.message);--}}
-        {{--// $("#dialog").dialog({--}}
-        {{--//     dialogClass: "no-close noTitleStuff fixed-dialog padding",--}}
-        {{--//     autoOpen: true,--}}
-        {{--//     // title: "Notification",--}}
-        {{--//     // modal: true,--}}
-        {{--//     position: {--}}
-        {{--//         my: "left+5 bottom+5",--}}
-        {{--//         at: "left bottom",--}}
-        {{--//         of: window--}}
-        {{--//     },--}}
-        {{--//     minWidth: 400,--}}
-        {{--//     draggable:false,--}}
-        {{--//     resizable: false,--}}
-        {{--//     show : { effect: "fade", duration: 1000},--}}
-        {{--//     hide: { effect: "fade", duration: 1000 },--}}
-        {{--//     buttons: [--}}
-        {{--//         {--}}
-        {{--//             text: "OK",--}}
-        {{--//             click: function() {--}}
-        {{--//                 $( this ).dialog( "close" );--}}
-        {{--//             }--}}
-        {{--//         }--}}
-        {{--//     ]--}}
-        {{--// });--}}
-
-
-    {{--}--}}
-{{--</script>--}}
-
-{{--<script src="https://js.pusher.com/5.0/pusher.min.js"></script>--}}
-{{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
-{{--@if($volunteerSignedIn)--}}
-    {{--<script type="text/javascript" src="{{ asset('js/pusherNotifyVolunteer.js') }}"></script>--}}
-{{--@elseif($organizationSignedIn)--}}
-    {{--<script type="text/javascript" src="{{ asset('js/pusherNotifyOrganization.js') }}"></script>--}}
-{{--@endif--}}
 
 <script>
     function addToFavourites(itemid) {

@@ -15,7 +15,6 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Terms of Service</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
@@ -76,9 +75,6 @@
                         </div>
                     </div>
                 </div>
-                {{--<a href="#" class="btn btn-primary m-1">Publish</a>--}}
-                {{--<a href="#" class="btn btn-secondary m-1">Edit</a>--}}
-                {{--<a href="#" class="btn btn-danger m-1">Delete</a>--}}
             </div>
         @endforeach
         <h4 class="mt-5 mb-3">Published </h4>

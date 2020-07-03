@@ -12,28 +12,11 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Edit</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
 </section>
 
-{{--<section class="home_banner_area">--}}
-    {{--<div class="banner_inner">--}}
-        {{--<div class="container">--}}
-            {{--<div class="banner_content">--}}
-                {{--<p class="upper_text">Give a hand</p>--}}
-                {{--<h2>to make the better world</h2>--}}
-                {{--<p>--}}
-                    {{--That don't lights. Blessed land spirit creature divide our made two--}}
-                    {{--itself upon you'll dominion waters man second good you they're divided upon winged were replenish night--}}
-                {{--</p>--}}
-                {{--<a class="primary_btn yellow_btn text-white"  href={{route('register')}}>Register</a>--}}
-                {{--<a class="primary_btn mr-20" href={{route('login')}}>Log in<span class="lnr lnr-arrow-right"></span></a>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</section>--}}
 
 <section class="section-top-border">
     <div class="container">
@@ -160,9 +143,6 @@
                     @include('layouts.errors')
                 </div>
             </div>
-            {{--<div class="col-md-4">--}}
-
-            {{--</div>--}}
         </div>
     </div>
 

@@ -12,10 +12,6 @@ use Spatie\MediaLibrary\Models\Media;
 class Event extends Model implements HasMedia
 {
     use HasMediaTrait;
-//    protected $fillable = [
-//        'id','owner_id','title','description','starts_at','ends_at','reward'
-//    ];
-//
     protected $guarded = [];
 
     protected $dates = [

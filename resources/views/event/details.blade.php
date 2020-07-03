@@ -16,7 +16,6 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Event Details</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
@@ -50,34 +49,6 @@
                         <li><b>{{$event->address}}</b></li>
                         <li><b>{{$event->city}}, {{$event->region}}</b></li>
                     </ul>
-
-                    {{--<a href="{{route('events.index')}}" class="genric-btn primary">Back!</a>--}}
-
-                    {{--@if(Auth::guard('web')->check())--}}
-                        {{--@if(auth()->user()->isApplied($event))--}}
-                            {{--<a href="{{ route('apply.cancel', $event) }}" class="genric-btn danger" onclick="event.preventDefault();--}}
-                                                                   {{--document.getElementById('cancel-form').submit();">--}}
-                                {{--Cancel the apply--}}
-                            {{--</a>--}}
-                            {{--<div class="alert alert-success">--}}
-                                {{--You applied!--}}
-                            {{--</div>--}}
-                        {{--@else--}}
-                            {{--<a href="{{ route('apply', $event) }}" class="genric-btn success" onclick="event.preventDefault();--}}
-                                                                   {{--document.getElementById('apply-form').submit();">--}}
-                                {{--Apply to event--}}
-                            {{--</a>--}}
-                        {{--@endif--}}
-                        {{--<form id="apply-form" method="POST" action="{{ route('apply', $event) }}" style="display: none;">--}}
-                            {{--@csrf--}}
-                        {{--</form>--}}
-                        {{--<form id="cancel-form" method="POST" action="{{ route('apply.cancel', $event) }}" style="display: none;">--}}
-                            {{--@csrf--}}
-                            {{--@method('delete')--}}
-                        {{--</form>--}}
-                    {{--@endif--}}
-
-
                 </div>
             </div>
         </div>
@@ -170,12 +141,6 @@
             @endif
     </div>
 </section>
-
-<section>
-
-
-</section>
-<!--================ End Recent Event Area =================-->
 
 @include('layouts.footer')
 

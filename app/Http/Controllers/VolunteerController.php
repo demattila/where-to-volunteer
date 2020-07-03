@@ -10,22 +10,10 @@ use Illuminate\Support\Facades\Validator;
 
 class VolunteerController extends Controller
 {
-
     public function index()
     {
-//        dump('User vol: '.Auth::guard('web')->user());
-//        dump('User org: '.Auth::guard('web_organization')->user());
-//        dump(Auth::guard('web')->check());
-//        if(Auth::guard('web')->check() ){
-////            redirect()->;
-//            return redirect()->route('dashboard');
-//        }
-//        else{
-//            return view('index');
-//        }
-
         $latestStories = Story::orderBy('created_at','desc')->limit(3)->get();
-//        dd($latestEvents);
+
         return view('volunteer.index',[
             'latestStories' => $latestStories
         ]);
@@ -34,24 +22,7 @@ class VolunteerController extends Controller
 
     public function dashboard()
     {
-//        if(auth()->guard('web')->check()){
-//            $user = auth()->guard('web')->user();
-//        }else{
-//            $user = null;
-//        }
         return view('volunteer.dashboard' );
-    }
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Volunteer  $volunteer
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Volunteer $volunteer)
-    {
-        //
     }
 
     /**
@@ -63,7 +34,6 @@ class VolunteerController extends Controller
     public function edit()
     {
         $volunteer = Auth::guard('web')->user();
-//        dump(Auth::guard('web')->user());
         return view('volunteer.edit',['user' => $volunteer]);
     }
 
@@ -74,12 +44,8 @@ class VolunteerController extends Controller
      * @param  \App\Volunteer  $volunteer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-//        $request->validate([
-//            'name' => 'required|min:3|max:255',
-//            'description' => 'required|min:3|max:255',
-//        ]);
+        public function update(Request $request){
+
         $update = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'posy' => ['nullable','string', 'max:255'],

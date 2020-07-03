@@ -32,8 +32,6 @@ class CreateVolunteersTable extends Migration
             $table->unsignedBigInteger('image_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
-
-//            $table->foreign('image_id')->references('id')->on('media')->onDelete('cascade');
         });
     }
 

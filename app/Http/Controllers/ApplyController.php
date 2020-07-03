@@ -19,12 +19,6 @@ class ApplyController extends Controller
 //        return view('applies', ['applies' => $applies]);
     }
 
-    public function store(Request $request)
-    {
-
-
-    }
-
     public function apply(Request $request,Event $event)
     {
 

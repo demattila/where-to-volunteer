@@ -13,7 +13,6 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Create Story</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
@@ -84,12 +83,6 @@
 </section>
 
 @include('layouts.footer')
-
-{{--<script>--}}
-    {{--function scroll() {--}}
-        {{--window.scrollTo(0,450);--}}
-    {{--}--}}
-{{--</script>--}}
 @include('layouts.scripts')
 
 </body>

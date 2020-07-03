@@ -13,7 +13,6 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Organization dashboard</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
@@ -37,7 +36,6 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                     <a class="dropdown-item" href="{{route('organization.profile.edit')}}">Edit profile data</a>
-                                    <a class="dropdown-item" href="#">Change password</a>
                                     <a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>
                                     <a class="dropdown-item" style="cursor: pointer" onclick="showDeleteModal();">Delete profile</a>
                                 </div>
@@ -52,24 +50,7 @@
                             <h6 class=" mt-3">{{$user->name}} </h6>
                             <p>{{$user->email}}</p>
                             <p class="card-text"><i>{{$user->founded_at}}</i></p>
-                            {{--<a href="#" class="genric-btn info medium">Editf</a>--}}
-                            {{--<div class="row justify-content-center">--}}
-                                {{--<div class="dropdown">--}}
-                                    {{--<a class=" dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                                        {{--<i class="fas fa-edit"></i>--}}
-                                    {{--</a>--}}
-                                    {{--<div class="dropdown-menu" aria-labelledby="dropdownMenuLink">--}}
-                                        {{--<a class="dropdown-item" href="{{route('organization.profile.edit')}}">Edit profile data</a>--}}
-                                        {{--<a class="dropdown-item" href="#">Change password</a>--}}
-                                        {{--<a class="dropdown-item" href="{{route('image.edit')}}">Edit profile image</a>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                                {{--<a href="#" class="genric-btn danger medium" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>--}}
-                            {{--</div>--}}
                         </div>
-                        {{--<form id="logout-form" action="{{ route('organization.logout') }}" method="POST" style="display: none;">--}}
-                            {{--@csrf--}}
-                        {{--</form>--}}
                     </div>
                 </div>
             </div>
@@ -241,60 +222,6 @@
     showMessageBox();
 </script>
 @endif
-{{--<script src="https://js.pusher.com/5.0/pusher.min.js"></script>--}}
-{{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>--}}
-{{--<style>--}}
-{{--/*.fixed-dialog {position: fixed;}*/--}}
-{{--</style>--}}
-{{--<script>--}}
-    {{--// Enable pusher logging - don't include this in production--}}
-    {{--Pusher.logToConsole = true;--}}
 
-    {{--var pusher = new Pusher('8fa3cad6dcc20526ad09', {--}}
-        {{--cluster: 'eu',--}}
-        {{--forceTLS: true--}}
-    {{--});--}}
-
-    {{--var channel = pusher.subscribe('my-channel');--}}
-
-    {{--// channel.bind('apply_response', function(data) {--}}
-    {{--//     // alert(JSON.stringify(data));--}}
-    {{--//     // alert(JSON.stringify(data));--}}
-    {{--//     $("#myModal").modal();--}}
-    {{--// });--}}
-    {{--channel.bind('apply_request',notify);--}}
-
-    {{--var heightCounter = 10;--}}
-    {{--function notify(data) {--}}
-        {{--var yourPosition = {--}}
-            {{--my: "left bottom",--}}
-            {{--at: "left+10 bottom-"+heightCounter--}}
-        {{--};--}}
-        {{--var elem = $('<div></div>');--}}
-        {{--// elem.html();--}}
-        {{--$('<a href="/organization/dashboard" style="font-size: 16px"></a>', {--}}
-            {{--class : 'inner'--}}
-        {{--}).html(data.message).appendTo( elem );--}}
-        {{--elem.dialog({--}}
-            {{--create: function(event) {--}}
-                {{--$(event.target).parent().css('position', 'fixed');--}}
-            {{--},--}}
-            {{--dialogClass: "no-close noTitleStuff fixed-dialog",--}}
-            {{--autoOpen: true,--}}
-            {{--title: data.event,--}}
-            {{--// modal: true,--}}
-            {{--position:yourPosition,--}}
-            {{--minWidth: 300,--}}
-            {{--draggable:false,--}}
-            {{--resizable: false,--}}
-            {{--show : { effect: "fade", duration: 1000},--}}
-            {{--hide: { effect: "fade", duration: 1000 },--}}
-            {{--close: function() { heightCounter-=20; }--}}
-
-        {{--});--}}
-        {{--// .prev(".ui-dialog-titlebar").css("background","#7FFF00")--}}
-        {{--heightCounter+=20;--}}
-    {{--}--}}
-{{--</script>--}}
 </body>
 </html>

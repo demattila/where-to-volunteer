@@ -15,9 +15,6 @@ class Organization extends Authenticatable implements HasMedia
 {
     use Notifiable, HasMediaTrait;
 
-//    protected $fillable = [
-//        'name', 'email', 'password',
-//    ];
     protected $guarded = [];
 
     protected $hidden = [
@@ -45,7 +42,6 @@ class Organization extends Authenticatable implements HasMedia
     }
     public function ongoingEvents(){
         $events = $this->events()->where('ends_at','>',now())->get();
-//        dd($applies);
         return $events;
     }
 

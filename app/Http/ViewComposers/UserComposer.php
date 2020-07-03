@@ -24,25 +24,15 @@ class UserComposer
             $this->user = auth()->guard('web_organization')->user();
             $this->user_type = "App\Organization";
         }
-//        if(auth()->guard('web_admin')->check()){
-//            $this->adminSignedIn = true;
-//            $this->user = auth()->guard('web_admin')->user();
-//            $this->user_type = "App\Admin";
-//        }
     }
 
-    /**
-     * Bind data to the view.
-     *
-     * @param  View  $view
-     * @return void
-     */
     public function compose(View $view)
     {
         $view->with('user', $this->user);
         $view->with('volunteerSignedIn', $this->volunteerSignedIn);
         $view->with('organizationSignedIn', $this->organizationSignedIn);
-//        $view->with('adminSignedIn', $this->adminSignedIn);
         $view->with('user_type', $this->user_type);
     }
 }
+
+

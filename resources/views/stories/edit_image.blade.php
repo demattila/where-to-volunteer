@@ -16,7 +16,6 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Edit story image</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
@@ -77,7 +76,6 @@
                         </div>
                     </div>
                 </form>
-                {{--{{dump($story->getMedia('story_image'))}}--}}
                 @if(! $story->getMedia('story_additional_images')->isEmpty())
                     <form action="{{route('story.additionalImages.destroy',$story)}}" method="post" enctype="multipart/form-data">
                         @csrf

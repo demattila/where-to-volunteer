@@ -1,5 +1,3 @@
-
-// Enable pusher logging - don't include this in production
 Pusher.logToConsole = true;
 
 var pusher = new Pusher('8fa3cad6dcc20526ad09', {
@@ -11,7 +9,6 @@ var userId;
 $.ajax({
     type: "GET",
     url: "/GetCurrentUserId",
-    // dataType: "text",
     async: false,
     success: function(data){
         userId = data;
@@ -20,11 +17,6 @@ $.ajax({
 
 var channel = pusher.subscribe('my-channel' + userId);
 
-// channel.bind('apply_response', function(data) {
-//     // alert(JSON.stringify(data));
-//     // alert(JSON.stringify(data));
-//     $("#myModal").modal();
-// });
 channel.bind('apply_request',notify);
 
 var heightCounter = 10;
@@ -34,7 +26,7 @@ function notify(data) {
         at: "left+10 bottom-"+heightCounter
     };
     var elem = $('<div></div>');
-    // elem.html();
+
     $('<a href="/organization/dashboard" style="font-size: 16px"></a>', {
         class : 'inner'
     }).html(data.message).appendTo( elem );
@@ -45,7 +37,6 @@ function notify(data) {
         dialogClass: "no-close noTitleStuff fixed-dialog",
         autoOpen: true,
         title: data.eventName,
-        // modal: true,
         position:yourPosition,
         minWidth: 300,
         draggable:false,
@@ -55,6 +46,5 @@ function notify(data) {
         close: function() { heightCounter-=20; }
 
     });
-    // .prev(".ui-dialog-titlebar").css("background","#7FFF00")
     heightCounter+=20;
 }

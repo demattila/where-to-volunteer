@@ -25,13 +25,6 @@ class EventController extends Controller
      */
     public function index(Request $request, Event $event)
     {
-//        if(auth()->guard('web')->check()){
-//            $user = auth()->guard('web')->user();
-//        }
-//        if(auth()->guard('web_organization')->check()){
-//            $user = auth()->guard('web_organization')->user();
-//        }
-//        $events = Event::all();
         $event = $event->newQuery();
         $perPage = 6;
         $filters = new Collection([]);
@@ -67,7 +60,6 @@ class EventController extends Controller
 
     public function fetch(Request $request)
     {
-//        dd($request->get('query'));
         if($request->get('query'))
         {
 
@@ -230,21 +222,13 @@ class EventController extends Controller
             'region' => 'required|string|max:255',
             'starts_at' => 'required|date|date_format:Y-m-d',
             'ends_at' => 'required|date|date_format:Y-m-d',
-            'mission' => 'nullable|string|max:255',
+            'mission' => 'required|nullable|string|max:255',
             'reward' => 'nullable|string|max:255',
             'info' => 'nullable|string|max:255',
         ]);
 
         $categories =$request->validate(['categoriesArray' => 'required']);
         $categories = $categories['categoriesArray'];
-
-//        $id = $event->id;
-//        foreach ($categories as $category){
-//            EventCategory::create([
-//                'event_id' => $id ,
-//                'category_id' => $category
-//            ]);
-//        }
         $event->categories()->syncWithoutDetaching($categories);
 
         $event->update($parameters);

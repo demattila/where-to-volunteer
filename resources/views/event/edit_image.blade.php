@@ -16,7 +16,6 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Edit event image</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>

@@ -1,11 +1,10 @@
-{{--@extends('layouts.app')--}}
 <html>
     <head>
         <title>Login</title>
         @include('layouts.head')
     </head>
 
-    <body onload="scroll()">
+    <body onload="scrolll()">
         @include('layouts.header')
 
          <section class="banner_area">
@@ -14,7 +13,6 @@
                 <div class="container">
                     <div class="banner_content text-center">
                         <h2>Volunteer log in</h2>
-                        <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
                     </div>
                 </div>
             </div>
@@ -76,11 +74,7 @@
                                                 {{ __('Login') }}
                                             </button>
 
-                                            @if (Route::has('password.request'))
-                                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                                    {{ __('Forgot Your Password?') }}
-                                                </a>
-                                            @endif
+
                                         </div>
                                     </div>
                                 </form>
@@ -93,12 +87,6 @@
 
 
         @include('layouts.footer')
-
-        <script>
-            function scroll() {
-                window.scrollTo(0,450);
-            }
-        </script>
         @include('layouts.scripts')
 
     </body>

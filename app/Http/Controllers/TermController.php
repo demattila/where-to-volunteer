@@ -111,10 +111,6 @@ class TermController extends Controller
         $term->published_at = now();
         $term->save();
 
-//        foreach (User::all() as $user){
-//            Notification::send($user, new TermsChanged($user));
-//        }
-
         return redirect()->back();
     }
 

@@ -1,8 +1,8 @@
 <div class="justify-content-center">
     @if(!$filters->isEmpty())
-        Filtered by: @foreach($filters as $filter)<b>#{{$filter}}  </b>@endforeach <span><a class="ml-2 remove_filters" href="{{route('events.index')}}"><i class="fas fa-times"></i></a></span>
+        @lang('Filtered by:') @foreach($filters as $filter)<b>#{{$filter}}  </b>@endforeach <span><a class="ml-2 remove_filters" href="{{route('events.index')}}"><i class="fas fa-times"></i></a></span>
     @else
-        Filtered by: <b>none</b>
+        @lang('Filtered by:') <b>none</b>
     @endif
 
 </div>
@@ -14,7 +14,7 @@
             @csrf
             <label class="m-2" for="region">{{ __('Region') }}:</label>
             <select class="m-2" id="region" name="region">
-                <option disabled selected value> -- select -- </option>
+                <option disabled selected value> -- @lang('select') -- </option>
                 @foreach($regions as $region)
                     <option value="{{$region->name}}">{{$region->name}}</option>
                 @endforeach
@@ -22,7 +22,7 @@
 
             <label class="m-2" for="category">{{ __('Category') }}:</label>
             <select class="m-2" id="category" name="category" >
-                <option disabled selected value> -- select -- </option>
+                <option disabled selected value> -- @lang('select') -- </option>
                 @foreach($categories as $category)
                     <option value="{{$category->name}}">{{$category->name}}</option>
                 @endforeach

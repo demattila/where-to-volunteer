@@ -13,7 +13,6 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>Volunteer register</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
@@ -45,7 +44,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address*') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" autocomplete="email">
@@ -59,7 +58,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password*') }}</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password">
@@ -73,7 +72,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password*') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password">
@@ -95,14 +94,14 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City*') }}</label>
+                                <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" autocomplete="city">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="region" class="col-md-4 col-form-label text-md-right">{{ __('Region*') }}</label>
+                                <label for="region" class="col-md-4 col-form-label text-md-right">{{ __('Region') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="region" type="text" class="form-control @error('region') is-invalid @enderror" name="region" value="{{ old('region') }}" autocomplete="region">
@@ -116,7 +115,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="birth" class="col-md-4 col-form-label text-md-right">{{ __('Birthday*') }}</label>
+                                <label for="birth" class="col-md-4 col-form-label text-md-right">{{ __('Birthday') }}*</label>
 
                                 <div class="col-md-6">
                                     <input id="birth" type="date" class="form-control @error('birth') is-invalid @enderror" name="birth" value="{{ old('birth') }}" autocomplete="date">
@@ -130,18 +129,18 @@
                                 {{--</div>--}}
                             {{--</div>--}}
                             <div class="form-group row">
-                                <label for="sex1" class="col-md-4 col-form-label text-md-right">{{ __('Gender*') }}</label>
+                                <label for="sex1" class="col-md-4 col-form-label text-md-right">{{ __('Gender') }}*</label>
                                 <div class="col-md-6">
                                     <div class="form-check mr-2">
                                         <input class="form-check-input @error('sex') is-invalid @enderror" type="radio" name="sex" id="sex1" value="M" @if(old('sex') == 'M') checked @endif>
                                         <label class="form-check-label" for="sex1">
-                                            Male
+                                            @lang('Male')
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input @error('sex') is-invalid @enderror" type="radio" name="sex" id="sex2" value="F" @if(old('sex') == 'F') checked @endif>
                                         <label class="form-check-label" for="sex2">
-                                            Female
+                                            @lang('Female')
                                         </label>
                                     </div>
                                 </div>
@@ -154,13 +153,13 @@
                                     <div class="form-check mr-2">
                                         <input class="form-check-input @error('driving_licence') is-invalid @enderror" type="radio" name="driving_licence" id="driving_licence1" value="true" @if(old('driving_licence') == 'true') checked @endif>
                                         <label class="form-check-label" for="driving_licence1">
-                                            Yes
+                                            @lang('Yes')
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input @error('driving_licence') is-invalid @enderror"  type="radio" name="driving_licence" id="driving_licence2" value="false" @if(old('sex') == 'false') checked @endif>
                                         <label class="form-check-label" for="driving_licence2">
-                                            No
+                                            @lang('No')
                                         </label>
                                     </div>
                                 </div>
@@ -171,7 +170,7 @@
                                 <div class="col-md-4"></div>
                                 <div class="col-md-6">
                                     <input id="terms" type="checkbox" name="terms">
-                                    <label for="terms">Accept our <a href="{{route('terms.latest')}}">Terms of Service</a></label>
+                                    <label for="terms">@lang('Accept our') <a href="{{route('terms.latest')}}">@lang('Terms of Service ')</a></label>
 
                                     @error('terms')
                                     <span class="invalid-feedback" role="alert">

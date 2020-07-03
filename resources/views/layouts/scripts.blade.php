@@ -12,11 +12,11 @@
 <script src="{{asset('js/jquery.ajaxchimp.min.js')}}"></script>
 <script src="{{asset('js/mail-script.js')}}"></script>
 
-<!-- contact js -->
+
 <script src="{{asset('js/jquery.form.js')}}"></script>
 <script src="{{asset('js/jquery.validate.min.js')}}"></script>
 <script src="{{asset('js/contact.js')}}"></script>
-<!--gmaps Js-->
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCjCGmQ0Uq4exrzdcL6rvxywDDOvfAu6eE"> </script>
 <script src="{{asset('js/gmaps.min.js')}}"></script>
 <script src="{{asset('js/theme.js')}}"></script>

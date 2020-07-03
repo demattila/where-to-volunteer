@@ -15,14 +15,53 @@
         <div class="container">
             <div class="banner_content text-center">
                 <h2>About Us</h2>
-                <p>Platea nullam nostra laoreet potenti hendrerit laoreet enim nisl</p>
             </div>
         </div>
     </div>
 </section>
 <!--================ End Home Banner Area =================-->
+<section >
+    <div class="container mt-10 mb-30">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card  text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">@lang('Volunteers')</h4>
+                        <p class="counter">{{$volunteers_count}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  text-center" >
+                    <div class="card-body">
+                        <h4 class="card-title">@lang('Organizations')</h4>
+                        <p class="counter">{{$organizations_count}}</p>
 
-<section class="about_area section_gap">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">@lang('Events ')</h4>
+                        <p class="counter">{{$events_count}}</p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card  text-center">
+                    <div class="card-body">
+                        <h4 class="card-title">@lang('Applies')</h4>
+                        <p class="counter">{{$applies_count}}</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="about_area">
     <div class="container">
         <div class="row">
             <div class="single_about row">
@@ -34,20 +73,13 @@
                 <div class="col-lg-6 col-md-12 about_right">
                     <div class="about_content">
                         <h2>
-                            We are nonprofit team <br>
-                            to help in connecting organizations with volunteers
+                            Nonprofit csapat vagyunk. <br>
+                            Célunk a szervezetek és az önkéntesek kapcsolatának elősegítése.
                         </h2>
                         <p>
-                            Their multiply doesn't behold shall appear living heaven second
-                            roo lights. Itself hath thing for won't herb forth gathered good
-                            bear fowl kind give fly form winged for reason
+                            Hogy kiből és mikor lesz önkéntes, sok tényezőn múlik. Meghatározó szerepe van a belső motivációnak, a jóra és a jobbra való késztetésnek, a változtatásra való hajlandóságnak, a családi háttérnek és ide sorolható kulturális beállítottságunk is. Önkéntes bárkiből, bármikor, bárhol lehet, amennyiben belső indíttatást érez a jó cselekvésre.
                         </p>
-                        <p>
-                            Land their given the seasons herb lights fowl beast whales it
-                            after multiply fifth under to it waters waters created heaven
-                            very fill agenc to. Dry creepeth subdue them kind night behold
-                            rule stars him grass waters our without
-                        </p>
+
                     </div>
                 </div>
             </div>
@@ -64,47 +96,7 @@
 
     </div>
 </section>
-<section >
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card  text-center">
-                    <div class="card-body">
-                        <h4 class="card-title">Volunteers</h4>
-                        <p class="counter">{{$volunteers_count}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card  text-center" >
-                    <div class="card-body">
-                        <h4 class="card-title">Organizations</h4>
-                        <p class="counter">{{$organizations_count}}</p>
 
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card  text-center">
-                    <div class="card-body">
-                        <h4 class="card-title">Events</h4>
-                        <p class="counter">{{$events_count}}</p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card  text-center">
-                    <div class="card-body">
-                        <h4 class="card-title">Applies</h4>
-                        <p class="counter">{{$applies_count}}</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
 
 
 <!--================ Start footer Area  =================-->

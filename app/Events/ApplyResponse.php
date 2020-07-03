@@ -25,9 +25,6 @@ class ApplyResponse implements ShouldBroadcast
      */
     public function __construct($eventname,$isAccepted,$volunteerId)
     {
-//        if(auth()->guard('web')->check()){
-//            $user = auth()->guard('web')->user();
-//        }
         $this->volunteerId = $volunteerId;
         $this->event = $eventname;
         if($isAccepted === true){
